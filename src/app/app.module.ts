@@ -27,17 +27,18 @@ import { AccountService } from './services/account.service';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    MatButtonModule,
     HttpClientModule,
-    // ToastrModule.forRoot({
-    //   progressBar: true,
-    //   timeOut: 3000,
-    //   positionClass: 'toast-bottom-right',
-    //   preventDuplicates: true,
-    // }),
+    ToastrModule.forRoot({
+      progressBar: true,
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     NgxSpinnerModule,
   ],
   providers: [
-   // ToastrService,
+   ToastrService,
     NgxSpinnerService,
     AccountService
   ],

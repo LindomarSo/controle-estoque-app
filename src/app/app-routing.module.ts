@@ -6,6 +6,11 @@ import { UserComponent } from './components/user/user.component';
 const routes: Routes = [
   { path:'', redirectTo:'user/login', pathMatch: 'full' },
   { path:'user/login', component: LoginComponent },
+  // {
+  //   path: '',
+  //   runGuardsAndResolvers: 'always',
+
+  // }
 ];
 
 @NgModule({
