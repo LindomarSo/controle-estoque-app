@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
   {
     this.spinner.show();
     this.account.login(this.model).subscribe(
-      (response) => {
-
+      () => {
+        this.route.navigate(['/home']);
       },
       (erro: any) => {
         this.toastr.error('Usuário ou senha inválidos');
