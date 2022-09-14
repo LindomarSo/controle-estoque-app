@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,22 +13,24 @@ import { UserComponent } from './components/user/user.component';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { AccountService } from './services/account.service';
+import { HomeComponent } from './components/home/home.component';
+import { JwtInterceptor } from './interceptor/jwt.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    MatButtonModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
       progressBar: true,
       timeOut: 3000,
@@ -40,7 +42,8 @@ import { AccountService } from './services/account.service';
   providers: [
    ToastrService,
     NgxSpinnerService,
-    AccountService
+    AccountService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

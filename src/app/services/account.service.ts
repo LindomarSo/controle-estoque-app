@@ -38,4 +38,9 @@ export class AccountService {
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
+
+  public getUser(): Observable<User>
+  {
+    return this.http.get<User>(`${this.urlBase}getuser`).pipe(take(1));
+  }
 }
