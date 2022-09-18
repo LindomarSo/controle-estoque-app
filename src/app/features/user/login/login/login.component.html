@@ -1,0 +1,50 @@
+<div class="login">
+  <div class="left-section">
+    <div class="logo">
+      <h1>Casa Azul</h1>
+    </div>
+    <div class="form-login">
+      <h1>Entrar</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field class="field" appearance="outline">
+          <mat-label>Usuário</mat-label>
+          <input formControlName="email" type="text" matInput />
+          <mat-error>Usuário inválido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field password" appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input
+            [type]="passwordVisible ? 'text' : 'password'"
+            formControlName="password"
+            matInput
+          />
+          <mat-icon
+            class="icon-password material-icons-outlined"
+            (click)="passwordVisible = !passwordVisible"
+          >
+            {{ passwordVisible ? "visibility" : "visibility_off" }}</mat-icon
+          >
+          <mat-error>Informe uma senha</mat-error>
+        </mat-form-field>
+
+        <button
+          class="login-button"
+          color="primary"
+          mat-raised-button
+          type="submit"
+        >
+          Entrar
+        </button>
+      </form>
+
+      <div class="register">
+        <mat-label>Não tem usuário? </mat-label>
+        <a href="/cadastro">Cadastre-se</a>
+      </div>
+    </div>
+  </div>
+  <div class="right-section">
+    <div class="background"></div>
+  </div>
+</div>

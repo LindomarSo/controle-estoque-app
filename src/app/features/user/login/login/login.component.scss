@@ -1,0 +1,121 @@
+.login {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+
+  .left-section,
+  .right-section {
+    height: 100%;
+    width: 50%;
+  }
+
+  .right-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .background {
+      mask-image: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 1) 65%,
+        rgba(0, 0, 0, 0)
+      );
+      background: url("../../../../../assets/imgs/login/login.jpg") 30% 60%
+        no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 0;
+      opacity: 0.8;
+    }
+  }
+
+  .left-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      margin-bottom: 60px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      h1 {
+        margin-left: 20px;
+        margin-top: 6px;
+        font-weight: 600;
+        font-size: 70px;
+
+        text-align: center;
+        color: #1a3972;
+      }
+
+      img {
+        width: 150px;
+      }
+    }
+
+    .form-login {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      width: 50%;
+
+      h1 {
+        font-weight: 500;
+      }
+
+      .field {
+        width: 100%;
+
+        &.password {
+          position: relative;
+          z-index: 0;
+
+          .icon-password {
+            position: absolute;
+            right: 5px;
+            top: 6px;
+            transition: all 0.3s;
+            cursor: pointer;
+            z-index: 1;
+          }
+        }
+      }
+
+      .checkbox {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 10px 0px;
+        font-size: 14px;
+      }
+
+      .login-button {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+
+    .register {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 30px;
+
+      a {
+        text-decoration: none;
+        margin-left: 5px;
+        color: #1a3972;
+      }
+    }
+  }
+}
