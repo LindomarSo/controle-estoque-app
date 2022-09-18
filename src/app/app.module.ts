@@ -1,50 +1,36 @@
-import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { CommonModule } from '@angular/common';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/user/login/login.component';
-import { RegisterComponent } from './components/user/register/register.component';
-import { UserComponent } from './components/user/user.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 
-import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { AccountService } from './services/account.service';
-import { HomeComponent } from './components/home/home.component';
-import { JwtInterceptor } from './interceptor/jwt.interceptor';
+import { CoreModule } from './core/core.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent],
   imports: [
+    BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    CoreModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot({
       progressBar: true,
       timeOut: 3000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-bottom-center',
       preventDuplicates: true,
     }),
     NgxSpinnerModule,
+    BrowserAnimationsModule,
   ],
-  providers: [
-   ToastrService,
-    NgxSpinnerService,
-    AccountService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent]
+  providers: [ToastrService, NgxSpinnerService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
