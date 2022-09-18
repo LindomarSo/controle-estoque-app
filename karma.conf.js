@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/CasaAzulApp'),
+      dir: require('path').join(__dirname, './coverage/controle-estoque'),
       subdir: '.',
       reporters: [
         { type: 'html' },

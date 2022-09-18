@@ -1,0 +1,36 @@
+.main {
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+
+  .content-section {
+    height: 100%;
+
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+
+    .header {
+      width: 100%;
+
+      .page-title {
+        color: #1a3972;
+        font-size: 30px;
+        font-weight: 500;
+      }
+    }
+
+    .content {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 20px 26px;
+
+      &.full-page {
+        padding: 0;
+        height: 100%;
+      }
+    }
+  }
+}
