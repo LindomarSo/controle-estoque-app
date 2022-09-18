@@ -1,0 +1,57 @@
+// Material Customization
+@import "@angular/material/theming";
+@include mat-core();
+
+// Mudança da fonte do Material
+$custom-typography: mat-typography-config(
+  $font-family: "Poppins",
+);
+
+@include angular-material-typography($custom-typography);
+
+// Mudança do tema do Material
+/* For use in src/lib/core/theming/_palette.scss */
+$md-mcgpalette0: (
+  50: #e4e7ee,
+  100: #bac4d5,
+  200: #8d9cb9,
+  300: #5f749c,
+  400: #3c5787,
+  500: #1a3972,
+  600: #17336a,
+  700: #132c5f,
+  800: #0f2455,
+  900: #081742,
+  A100: #7995ff,
+  A200: #466cff,
+  A400: #1344ff,
+  A700: #0034f8,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$custom-blue-app-primary: mat-palette($md-mcgpalette0);
+$custom-blue-app-secondary: mat-palette($mat-indigo);
+$custom-blue-app-warn: mat-palette($mat-red);
+
+$custom-blue-theme: mat-light-theme(
+  $custom-blue-app-primary,
+  $custom-blue-app-secondary,
+  $custom-blue-app-warn
+);
+
+@include angular-material-theme($custom-blue-theme);
