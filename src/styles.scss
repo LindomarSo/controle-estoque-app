@@ -11,9 +11,14 @@ body {
 
 body {
   margin: 0;
-  font-family: Poppins, sans-serif !important;
+  font-family: Inter, sans-serif !important;
 
   input {
-    font-family: Poppins, sans-serif !important;
+    font-family: Inter, sans-serif !important;
   }
+}
+
+:root {
+  --primary-color: #1A3972;
+  --font-color: white;
 }

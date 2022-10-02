@@ -1,11 +1,12 @@
 <div class="login">
   <div class="left-section">
     <div class="logo">
-      <h1>Casa Azul</h1>
+      <img src="../../../../../assets/imgs/logo.png" alt="logo do sistema" />
+      <!-- <h1>Casa Azul</h1> -->
     </div>
     <div class="form-login">
-      <h1>Entrar</h1>
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <h1>Login</h1>
+      <form class="form-content" [formGroup]="loginForm" (ngSubmit)="login()">
         <mat-form-field class="field" appearance="outline">
           <mat-label>Usuário</mat-label>
           <input formControlName="email" type="text" matInput />
@@ -28,14 +29,16 @@
           <mat-error>Informe uma senha</mat-error>
         </mat-form-field>
 
-        <button
-          class="login-button"
-          color="primary"
-          mat-raised-button
-          type="submit"
-        >
-          Entrar
-        </button>
+        <div class="action-button">
+          <button
+            class="login-button"
+            color="primary"
+            mat-raised-button
+            type="submit"
+          >
+            Entrar
+          </button>
+        </div>
       </form>
 
       <div class="register">
