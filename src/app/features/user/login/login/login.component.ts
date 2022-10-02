@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   });
 
   public passwordVisible = false;
-  public load = false;
 
   constructor(
     private account: AccountService,

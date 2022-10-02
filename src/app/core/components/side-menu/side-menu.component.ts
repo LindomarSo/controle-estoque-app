@@ -18,6 +18,21 @@ export class SideMenuComponent implements OnInit {
       icon: 'volunteer_activism',
       link: 'doacoes',
     },
+    {
+      label: 'Voluntários',
+      icon: 'person_add',
+      link: 'doacoes',
+    },
+    {
+      label: 'Parceiros',
+      icon: 'group_work',
+      link: 'doacoes',
+    },
+    {
+      label: 'Admin',
+      icon: 'settings',
+      link: 'doacoes',
+    }
   ];
 
   constructor(public router: Router) {

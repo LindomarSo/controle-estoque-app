@@ -1,2 +1,23 @@
 .home {
+  .img-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    // .background {
+    //   mask-image: linear-gradient(
+    //     to left,
+    //     rgba(0, 0, 0, 1) 65%,
+    //     rgba(0, 0, 0, 0)
+    //   );
+      background: url("../../../../assets/imgs/home/Casa\ Azul.png") 30% 60%;
+      background-size: cover;
+      width: 76%;
+      height: 400px;
+      position: absolute;
+      // z-index: 99;
+      // opacity: 0.8;
+    }
+ //}
 }
