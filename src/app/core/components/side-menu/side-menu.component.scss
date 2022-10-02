@@ -4,10 +4,12 @@ $border-config: 1px solid #e5eaee;
   width: 220px;
   height: 100%;
   border-right: $border-config;
+  background-color: var(--primary-color);
+
 
   .side-header {
     box-sizing: border-box;
-    height: 80px;
+    height: 165px;
     border-bottom: $border-config;
     display: flex;
     justify-content: center;
@@ -18,15 +20,7 @@ $border-config: 1px solid #e5eaee;
       flex-direction: row;
 
       img {
-        width: 50px;
-        margin-right: 5px;
-      }
-
-      h1 {
-        font-size: 25px;
-        margin: 0;
-        font-weight: 700;
-        color: #1a3972;
+        width: 81px;
       }
     }
   }
@@ -41,7 +35,7 @@ $border-config: 1px solid #e5eaee;
       cursor: pointer;
 
       .selector {
-        background: #3f6cbf;
+        background: var(--font-color);
         width: 5px;
         height: 24px;
         border-top-right-radius: 4px;
@@ -56,11 +50,11 @@ $border-config: 1px solid #e5eaee;
         margin-left: 25px;
 
         .icon {
-          color: white;
+          color: var(--font-color);
           cursor: pointer;
 
           &.active {
-            color: #252525;
+            color: var(--font-color);
           }
           &.inactive {
             color: #858585;
@@ -70,6 +64,7 @@ $border-config: 1px solid #e5eaee;
         .label {
           margin-left: 10px;
           padding-top: 2px;
+          color: var(--font-color);
         }
       }
 

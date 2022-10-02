@@ -4,7 +4,7 @@
 
 // Mudança da fonte do Material
 $custom-typography: mat-typography-config(
-  $font-family: "Poppins",
+  $font-family: "Inter",
 );
 
 @include angular-material-typography($custom-typography);

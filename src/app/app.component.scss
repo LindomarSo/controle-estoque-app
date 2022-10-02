@@ -6,7 +6,6 @@
 
   .content-section {
     height: 100%;
-
     box-sizing: border-box;
     width: 100%;
     overflow: hidden;
@@ -15,7 +14,7 @@
       width: 100%;
 
       .page-title {
-        color: #1a3972;
+        color: var(--font-color);
         font-size: 30px;
         font-weight: 500;
       }
@@ -26,6 +25,7 @@
       height: 100%;
       box-sizing: border-box;
       padding: 20px 26px;
+      background-color: var(--primary-color);
 
       &.full-page {
         padding: 0;
