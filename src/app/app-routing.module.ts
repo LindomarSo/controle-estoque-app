@@ -5,7 +5,17 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'login',
+    redirectTo: 'bem-vindo',
+  },
+  {
+    path: 'bem-vindo',
+    loadChildren: () =>
+      import('src/app/core/pages/welcome/welcome.module').then(
+        (m) => m.WelcomeModule
+      ),
+    data: {
+      fullPage: true,
+    },
   },
   {
     path: 'inicio',
