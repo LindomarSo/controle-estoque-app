@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './register/register/register.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: RegisterComponent,
+    path: 'cadastro',
+    loadChildren: () =>
+      import('./register/register.module').then((m) => m.RegisterModule),
     data: {
       fullPage: true,
     },
@@ -16,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class RegisterRoutingModule {}
+export class UserRoutingModule {}

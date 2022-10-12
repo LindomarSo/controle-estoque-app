@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
-      import('src/app/features/user/login/login.module').then(
+      import('src/app/core/pages/login/login.module').then(
         (m) => m.LoginModule
       ),
     data: {
@@ -37,7 +37,12 @@ const routes: Routes = [
     },
   },
   {
-    path: 'cadastro',
+    path: 'usuarios',
+    loadChildren: () =>
+      import('src/app/features/user/user.module').then((m) => m.UserModule),
+  },
+  {
+    path: 'cadastro-usuario',
     loadChildren: () =>
       import('src/app/features/user/register/register.module').then(
         (m) => m.RegisterModule
