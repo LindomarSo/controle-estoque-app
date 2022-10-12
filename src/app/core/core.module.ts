@@ -9,7 +9,6 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { HeaderNavComponent } from './components/header-nav/header-nav.component';
 import { MatIconModule } from '@angular/material/icon';
-
 @NgModule({
   declarations: [
     HeaderNavComponent,
