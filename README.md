@@ -1,27 +1,31 @@
-# ControleEstoque
+# Controle de Doações / Estoque
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
+## Pré-requisitos
 
-## Development server
+Para rodar a plataforma é pré-requisito ter o Node.js instalado e o seu gerenciador de pacote favorito na versão mais atual. Caso você ainda não tenha instalado o pacote @angular/cli, instale-o via npm ou yarn.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Instalando com npm:
 
-## Code scaffolding
+> npm i -g @angular/cli@^14
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Instalando com yarn:
 
-## Build
+> yarn global add @angular/cli@^14
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Iniciando
+- Para iniciar, clone o projeto com o seguinte comando: 
 
-## Running unit tests
+> $ git clone https://github.com/LindomarSo/controle-estoque-app.git
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Instale os pacotes NPM utilizando:
 
-## Running end-to-end tests
+> $ npm install
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Rode o projeto
 
-## Further help
+> $ ng serve -o
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Tecnologias
+- [Angular 14](https://angular.io/)
+- [Material Design 14](https://material.angular.io/)
