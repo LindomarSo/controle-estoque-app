@@ -24,7 +24,7 @@ const routes: Routes = [
       ),
     data: {
       fullPage: true,
-    },
+    }, 
   },
   {
     path: 'cadastro',

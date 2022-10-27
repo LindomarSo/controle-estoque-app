@@ -42,14 +42,14 @@ export class LoginComponent implements OnInit {
 
     this.account
       .login(login)
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           this.router.navigate(['/inicio']);
         },
-        (erro: any) => {
+        error: (erro: any) => {
           this.toastr.error('Usuário ou senha inválidos');
         }
-      )
+      })
       .add(() => this.spinner.hide());
   }
 }
