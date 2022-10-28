@@ -15,28 +15,20 @@
 
         <mat-form-field class="field password" appearance="outline">
           <mat-label>Senha</mat-label>
-          <input
-            [type]="passwordVisible ? 'text' : 'password'"
-            formControlName="password"
-            matInput
-          />
-          <mat-icon
-            class="icon-password material-icons-outlined"
-            (click)="passwordVisible = !passwordVisible"
-          >
-            {{ passwordVisible ? "visibility" : "visibility_off" }}</mat-icon
-          >
+          <input [type]="passwordVisible ? 'text' : 'password'" formControlName="password" matInput />
+          <mat-icon class="icon-password material-icons-outlined" (click)="passwordVisible = !passwordVisible">
+            {{ passwordVisible ? "visibility" : "visibility_off" }}</mat-icon>
           <mat-error>Informe uma senha</mat-error>
         </mat-form-field>
 
         <div class="action-button">
-          <button
-            class="login-button"
-            color="primary"
-            mat-raised-button
-            type="submit"
-          >
-            Entrar
+          <button class="login-button" color="primary" mat-raised-button type="submit">
+            <div class="button-group">
+              <mat-icon class="material-icons-outlined">
+                login
+              </mat-icon>
+              <span>Entrar</span>
+            </div>
           </button>
         </div>
       </form>

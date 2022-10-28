@@ -7,6 +7,7 @@ import { RegisterRoutingModule } from './register-routing.module';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { LogoModule } from 'src/app/core/components/logo/logo.module';
@@ -20,6 +21,7 @@ import { LogoModule } from 'src/app/core/components/logo/logo.module';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatSelectModule,
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     RegisterRoutingModule,
