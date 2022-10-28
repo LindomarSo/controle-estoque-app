@@ -116,3 +116,35 @@
     }
   }
 }
+
+@media screen and (max-width: 1445px) {
+  .welcome {
+
+    .images {
+      @keyframes person-appear {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+          left: 65%;
+        }
+      }
+    }
+
+    .message {
+      .logo {
+        margin-bottom: 70px;
+      }
+
+      .title {
+        font-size: 38px;
+        margin-bottom: 30px;
+      }
+
+      .call {
+        font-size: 20px;
+      }
+    }
+  }
+}

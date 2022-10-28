@@ -5,11 +5,7 @@
       de usuário
     </div>
 
-    <form
-      class="form-content"
-      [formGroup]="registerUserForm"
-      (ngSubmit)="onSubmit()"
-    >
+    <form class="form-content" [formGroup]="registerUserForm" (ngSubmit)="onSubmit()">
       <mat-form-field class="field" appearance="outline">
         <mat-label>Nome completo</mat-label>
         <input formControlName="name" type="text" matInput />
@@ -24,17 +20,19 @@
         </mat-form-field>
         <mat-form-field class="field" appearance="outline">
           <mat-label>Telefone</mat-label>
-          <input
-            type="tel"
-            mask="(00) 00000-0000"
-            formControlName="phone"
-            matInput
-          />
+          <input type="tel" mask="(00) 00000-0000" formControlName="phone" matInput />
           <mat-error>Informe um telefone válido</mat-error>
         </mat-form-field>
       </div>
 
-      <mat-form-field class="field" appearance="outline">
+      <mat-form-field appearance="outline">
+        <mat-label>Selecione uma permissão</mat-label>
+        <mat-select name="food">
+          <mat-option>Gerente </mat-option>
+          <mat-option>Administrador </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field class="field" appearance="outline">
         <mat-label>Habilidades</mat-label>
         <textarea
           type="text"
@@ -45,25 +43,22 @@
           formControlName="skills"
           matInput
         ></textarea>
-      </mat-form-field>
+      </mat-form-field> -->
 
-      <mat-form-field class="field" appearance="outline">
-        <mat-label>Senha</mat-label>
-        <input formControlName="password" type="password" matInput />
-      </mat-form-field>
+      <div class="contact">
+        <mat-form-field class="field" appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input formControlName="password" type="password" matInput />
+        </mat-form-field>
 
-      <mat-form-field class="field" appearance="outline">
-        <mat-label>Confirmar senha</mat-label>
-        <input formControlName="confirmPassword" type="password" matInput />
-      </mat-form-field>
+        <mat-form-field class="field" appearance="outline">
+          <mat-label>Confirmar senha</mat-label>
+          <input formControlName="confirmPassword" type="password" matInput />
+        </mat-form-field>
+      </div>
 
       <div class="action-button">
-        <button
-          class="login-button"
-          color="primary"
-          mat-raised-button
-          type="submit"
-        >
+        <button class="login-button" color="primary" mat-raised-button type="submit">
           Cadastrar
         </button>
         <button color="primary" (click)="resetForm()" mat-button type="button">
@@ -74,7 +69,13 @@
   </div>
 
   <div class="right-section">
-    <app-logo></app-logo>
+    <!-- <app-logo></app-logo> -->
+    <button mat-stroked-button color="primary" routerLink="/inicio">
+      <mat-icon class="material-icons-outlined">
+        arrow_back
+      </mat-icon>
+      Página anterior
+    </button>
 
     <div class="page-image">
       <div class="image"></div>
