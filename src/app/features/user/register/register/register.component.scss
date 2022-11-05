@@ -2,10 +2,10 @@
   display: flex;
   box-sizing: border-box;
   flex-direction: row;
-  padding: 110px 140px;
+  padding: 40px 120px;
   width: 100%;
   height: 100%;
-  gap: 270px;
+  gap: 190px;
   overflow: auto;
 
   .left-section {
@@ -53,25 +53,34 @@
     .page-image {
       width: 100%;
       height: 500px;
-      margin-top: 55px;
+      margin-top: 110px;
 
       .image {
         background: url("../../../../../assets/imgs/user/1.jpg") 30% 30%
           no-repeat;
         background-size: cover;
         border-radius: 6px;
-        height: 85%;
+        height: 60%;
         width: 100%;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
       }
     }
+
+    button {
+      height: 50px;
+    }
+  }
+  .mat-stroked-button {
+    border: 2px solid var(--primary-color);
   }
 }
 
 @media screen and (max-width: 1670px) {
   .register {
+    padding: 0;
     height: 100%;
     gap: 50px;
+    transform: scale(0.95);
 
     .left-section {
 
@@ -88,33 +97,26 @@
     .right-section {
 
       .page-image {
-        margin-top: 90px;
+        margin-top: 85px;
 
         .image {
-          height: 90%;
+          height: 57%;
         }
       }
     }
   }
 }
 
-@media screen and (max-width: 1367px) {
+@media screen and (max-width: 1445px) {
   .register {
-    max-width: 1200px;
-    margin: auto;
-    padding: 30px 0 0 0;
+    padding: 0px;
     height: 100%;
-    gap: 50px;
 
     .left-section {
 
       .title {
         font-size: 38px;
         line-height: 50px;
-      }
-
-      .form-content {
-        margin-top: 30px;
       }
     }
   }

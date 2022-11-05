@@ -48,7 +48,7 @@ const routes: Routes = [
         (m) => m.RegisterModule
       ),
     data: {
-      fullPage: true,
+      fullPage: false,
     },
   },
   {
@@ -60,6 +60,17 @@ const routes: Routes = [
     data: {
       fullPage: false,
       title: 'Doações',
+    },
+  },
+  {
+    path: 'voluntarios',
+    loadChildren: () =>
+      import('src/app/features/voluntary/voluntary.module').then(
+        (m) => m.VoluntaryModule
+      ),
+    data: {
+      fullPage: false,
+      title: 'Volunatariado',
     },
   },
 ];

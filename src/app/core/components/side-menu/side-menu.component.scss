@@ -5,7 +5,7 @@ $border-config: 1px solid #e5eaee;
   height: 100%;
   border-right: $border-config;
   background-color: var(--primary-color);
-
+  position: sticky;
 
   .side-header {
     box-sizing: border-box;
@@ -85,6 +85,13 @@ $border-config: 1px solid #e5eaee;
           width: 8px;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 1445px) {
+    .side-header {
+      box-sizing: border-box;
+      height: 130px;
     }
   }
 

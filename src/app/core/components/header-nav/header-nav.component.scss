@@ -6,10 +6,10 @@ $border-config: 1px solid #e5eaee;
   border-bottom: 1px solid var(--primary-color);
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
   padding: 0px 26px 30px 26px;
   box-sizing: border-box;
-  //background-color: var(--font-color);
-  background-color: #e9ecef;
+  background-color: var(--background-color);
 
   .user-info {
     display: flex;
@@ -32,5 +32,24 @@ $border-config: 1px solid #e5eaee;
       font-weight: 400;
       font-size: 18px;
     }
+  }
+
+  .button-logout {
+    width: 100px;
+    height: 45px;
+    font-size: 15px;
+
+    .button-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+}
+
+@media  screen and (max-width: 1445px) {
+  .header-nav {
+    height: 130px;
   }
 }

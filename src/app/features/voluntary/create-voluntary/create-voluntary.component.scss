@@ -1,0 +1,117 @@
+.create-voluntary {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px 50px 20px 30px;
+
+  .add-user {
+    width: 125px;
+    height: 45px;
+    font-size: 15px;
+
+    .button-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+
+  .address-contact {
+    display: flex;
+    width: 100%;
+    padding-top: 20px;
+
+    .section-left {
+      width: 100%;
+      padding-right: 10px;
+
+      .form-group {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 30px;
+
+        .mat-form-field-appearance-outline .mat-form-field-infix {
+          /* padding: 1em 0 1em 0; */
+          /* padding: 0px; */
+          font-size: 15px;
+          padding: 11px;
+        }
+
+        .form-control,
+        .form-control-level {
+          flex-grow: 1;
+          flex-basis: 300px;
+        }
+
+        .wrapper-form {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          column-gap: 30px;
+
+          .form-control-custom {
+            flex-grow: 2;
+            flex-basis: 200px;
+          }
+        }
+
+        .form-control-textarea {
+          flex-grow: 2;
+          flex-basis: 600px;
+        }
+      }
+    }
+
+    .section-right {
+      width: 100%;
+      padding-left: 10px;
+
+      .form-group {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 30px;
+
+        .wrapper-form {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          column-gap: 30px;
+
+          .form-control-custom {
+            flex-grow: 2;
+            flex-basis: 200px;
+          }
+        }
+
+        .form-control {
+          flex-grow: 1;
+          flex-basis: 300px;
+        }
+
+        .form-control-textarea {
+          flex-grow: 2;
+          flex-basis: 600px;
+        }
+      }
+    }
+
+  }
+
+  .mat-stroked-button {
+    border: 2px solid var(--primary-color);
+  }
+
+  input.mat-input-element {
+    margin-top: -4.0625em;
+    font-size: 15px;
+  }
+
+  .edit-button-group {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+  }
+}
+
