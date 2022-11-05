@@ -21,12 +21,7 @@ export class SideMenuComponent implements OnInit {
     {
       label: 'Voluntários',
       icon: 'person_add',
-      link: 'doacoes',
-    },
-    {
-      label: 'Parceiros',
-      icon: 'group_work',
-      link: 'doacoes',
+      link: 'voluntarios',
     },
     {
       label: 'Admin',

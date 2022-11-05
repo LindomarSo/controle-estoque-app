@@ -1,0 +1,138 @@
+<section class="create-voluntary">
+  <button routerLink="/voluntarios" class="add-user" mat-stroked-button color="primary">
+    <div class="button-group">
+      <mat-icon class="material-icons-outlined">arrow_back</mat-icon>
+      <span>Voltar</span>
+    </div>
+  </button>
+  <div class="address-contact">
+    <div class="section-left">
+      <!-- <h1 class="title">
+        Dados do voluntário
+      </h1> -->
+      <form [formGroup]="form">
+        <div class="form-group">
+          <mat-form-field class="form-control" appearance="outline">
+            <mat-label>{{name}}</mat-label>
+            <input matInput formControlName="nome" placeholder="Placeholder">
+            <mat-error
+              *ngIf="form?.get('nome')?.hasError('required')">
+              {{name}} é obrigatório
+            </mat-error>
+          </mat-form-field>
+
+          <div class="wrapper-form">
+            <mat-form-field class="form-control-custom" appearance="outline">
+              <mat-label>Data de Nascimento</mat-label>
+              <input matInput formControlName="dtNascimento" placeholder="Placeholder">
+              <mat-error *ngIf="form?.get('dtNascimento')?.hasError('required')">
+                Data de nascimento é obrigatória
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-control-custom" appearance="outline">
+              <mat-label>{{documentType}}</mat-label>
+              <input matInput formControlName="documento" placeholder="Placeholder">
+              <mat-error *ngIf="form?.get('documento')?.hasError('required')">
+                {{documentType}} é obrigatório
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="wrapper-form">
+            <mat-form-field class="form-control form-control-custom" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" placeholder="exemplo@exemplo.com">
+              <mat-error *ngIf="form?.get('email')?.hasError('required')">
+                Email é obrigatório
+              </mat-error>
+              <mat-error *ngIf="form?.get('email')?.hasError('email')">
+                Email invalido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-control form-control-custom" appearance="outline">
+              <mat-label>Telefone</mat-label>
+              <input matInput formControlName="telefone" placeholder="Placeholder">
+              <mat-error *ngIf="form?.get('telefone')?.hasError('required')">
+                Telefone é obrigatório
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field *ngIf="isPersonFisic" class="form-control-level" appearance="outline">
+            <mat-label>Escolaridade</mat-label>
+            <mat-select formControlName="escolaridade">
+              <mat-option value="one">Ensino médio</mat-option>
+              <mat-option value="two">Superior concluído</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="wrapper-form">
+            <mat-form-field *ngIf="isPersonFisic" class="form-control-textarea" appearance="outline">
+              <mat-label>Habilidades</mat-label>
+              <textarea type="text" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="4"
+                cdkAutosizeMaxRows="4" formControlName="habilidade" matInput></textarea>
+            </mat-form-field>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="section-right">
+      <!-- <h1 class="title">
+        Endereço
+      </h1> -->
+      <form class="form-group" [formGroup]="enderecos">
+        <mat-form-field class="form-control" appearance="outline">
+          <mat-label>Endereço</mat-label>
+          <input matInput formControlName="logradouro" placeholder="Quadra 900 Rua 30...">
+        </mat-form-field>
+
+        <mat-form-field class="form-control" appearance="outline">
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="cidade" placeholder="exemplo@exemplo.com">
+        </mat-form-field>
+
+        <div class="wrapper-form">
+          <mat-form-field class="form-control form-control-custom" appearance="outline">
+            <mat-label>Estado</mat-label>
+            <input class="input-form" matInput formControlName="estado" placeholder="Placeholder">
+            <mat-error *ngIf=""></mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="form-control form-control-custom" appearance="outline">
+            <mat-label>CEP</mat-label>
+            <input matInput formControlName="cEP" placeholder="Placeholder">
+          </mat-form-field>
+        </div>
+
+        <div class="wrapper-form">
+          <mat-form-field class="form-control form-control-custom" appearance="outline">
+            <mat-label>Complemento</mat-label>
+            <input matInput formControlName="complemento" placeholder="Placeholder">
+          </mat-form-field>
+
+          <mat-form-field class="form-control form-control-custom" appearance="outline">
+            <mat-label>Numero</mat-label>
+            <input matInput formControlName="numero" placeholder="Placeholder">
+          </mat-form-field>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <div class="edit-button-group">
+    <button [disabled]="form.invalid" (click)="send()" class="add-user" mat-raised-button color="primary">
+      <div class="button-group">
+        <span>Cadastrar</span>
+      </div>
+    </button>
+
+    <button (click)="resetForm()" class="add-user" mat-button color="primary">
+      <div class="button-group">
+        <span>Limpar</span>
+      </div>
+    </button>
+  </div>
+</section>

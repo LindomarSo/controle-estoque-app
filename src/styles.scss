@@ -7,7 +7,7 @@
 html,
 body {
   height: 100%;
-  background-color: #e9ecef;
+  background-color: var(--background-color);
 }
 
 body {
@@ -19,8 +19,12 @@ body {
   }
 }
 
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #ccc;
+}
+
 :root {
   --primary-color: #1A3972;
   --font-color: white;
-  --background-color: #e9ecef;
+  --background-color: white;
 }
