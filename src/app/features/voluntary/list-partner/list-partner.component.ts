@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Pagination } from 'src/app/shared/models/pagination/pagination.model';
 import { Address } from 'src/app/shared/models/voluntary/address.model';
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
-import { Voluntary } from 'src/app/shared/models/voluntary/voluntary.model.ts';
+import { Voluntary } from 'src/app/shared/models/voluntary/voluntary.model';
 
 @Component({
   selector: 'app-list-partner',

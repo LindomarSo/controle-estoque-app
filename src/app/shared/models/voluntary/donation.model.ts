@@ -1,3 +1,6 @@
+import { UserInfo } from "../user.info";
+import { EntidadeInfo } from "./voluntary.info";
+
 export interface Donation {
   id: number;
   materialDoado: string;
@@ -10,4 +13,6 @@ export interface Donation {
   disponibilidade: string;
   habilidade: string;
   unidade: string;
+  entidade: EntidadeInfo;
+  user: UserInfo;
 }

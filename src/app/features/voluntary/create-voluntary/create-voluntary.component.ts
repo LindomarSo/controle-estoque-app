@@ -12,6 +12,9 @@ export class CreateVoluntaryComponent implements OnInit {
   form!: FormGroup;
   typePersson!: string;
   isPersonFisic:boolean = true;
+  voluntaryId!: number;
+  method = 'post';
+  isEditMode = true;
   documentType = 'CPF';
   name = 'Nome Completo';
 
@@ -35,7 +38,7 @@ export class CreateVoluntaryComponent implements OnInit {
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       documento: ['', Validators.required],
-      dtNascimento: ['', Validators.required],
+      dtNascimento: [''],
       tipoEntidade: [''],
       escolaridade: [''],
       endereco: this.ValidateAddress(),

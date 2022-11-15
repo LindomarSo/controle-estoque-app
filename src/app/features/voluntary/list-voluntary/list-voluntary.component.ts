@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
+import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.service';
 import { Pagination } from 'src/app/shared/models/pagination/pagination.model';
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
-import { Voluntary } from 'src/app/shared/models/voluntary/voluntary.model.ts';
+import { Voluntary } from 'src/app/shared/models/voluntary/voluntary.model';
 import { Address } from '../../../shared/models/voluntary/address.model';
 
 @Component({
@@ -17,78 +19,41 @@ export class ListVoluntaryComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true})
   paginator!: MatPaginator;
   pagination = { } as Pagination;
-
-  constructor() { }
-
-
+  voluntary!: Voluntary[];
   displayedColumns: string[] = [
     'Nome',
     'Telefone',
     'CPF_CNPJ',
     'Endereco',
-    'Doacoes',
-    'Qtd',
-    'Preco',
+    'escolaridade',
+    'quemCadastrou',
     'acoes'
   ];
 
-  ngOnInit(): void {
-    this.dataSource.data = this.voluntary;
-    this.pagination.totalItems = this.voluntary.length;
+  constructor(private voluntaryService: VoluntaryService,
+              private toastr: ToastrService) { }
 
+  ngOnInit(): void {
+    this.pagination = { currentPage: 1, itemsPerPage: 3 } as Pagination;
+    this.getAll();
+    this.pagination.totalItems = this.voluntary?.length;
+    console.log(this.dataSource.data)
     this.configPagination();
   }
 
-  voluntary: Voluntary[] = [
-    {
-      id: 1,
-      nome: 'Fernando Silva',
-      telefone: '61986587552',
-      documento: '35422815068',
-      endereco: { cidade: 'Brasilia', estado: 'DF'} as Address,
-      doacoes: [{ materialDoado: 'Violão', quantidade: 1, preco: '500,00' }] as Donation[]
-    } as Voluntary,
-    {
-      id: 1,
-      nome: 'Lara Isabela Jaqueline Souza',
-      telefone: '8337121649',
-      documento: '77073721235',
-      endereco: { cidade: 'João Pessoa', estado: 'PB'} as Address,
-      doacoes: [{ materialDoado: 'Uma Sexta', quantidade: 1, preco: '60,00' }] as Donation[]
-    } as Voluntary,
-    {
-      id: 1,
-      nome: 'Julia Benedita',
-      telefone: '8929038257',
-      documento: '30901043699',
-      endereco: { cidade: 'Picos', estado: 'PI'} as Address,
-      doacoes: [{ materialDoado: 'Um Computador', quantidade: 1, preco: '2500,00' }] as Donation[]
-    } as Voluntary,
-    {
-      id: 1,
-      nome: 'Fernando Silva',
-      telefone: '61986587552',
-      documento: '35422815068',
-      endereco: { cidade: 'Brasilia', estado: 'DF'} as Address,
-      doacoes: [{ materialDoado: 'Violão', quantidade: 1, preco: '500,00' }] as Donation[]
-    } as Voluntary,
-    {
-      id: 1,
-      nome: 'Lara Isabela Jaqueline Souza',
-      telefone: '8337121649',
-      documento: '77073721235',
-      endereco: { cidade: 'João Pessoa', estado: 'PB'} as Address,
-      doacoes: [{ materialDoado: 'Uma Sexta', quantidade: 1, preco: '60,00' }] as Donation[]
-    } as Voluntary,
-    {
-      id: 1,
-      nome: 'Julia Benedita',
-      telefone: '8929038257',
-      documento: '30901043699',
-      endereco: { cidade: 'Picos', estado: 'PI'} as Address,
-      doacoes: [{ materialDoado: 'Um Computador', quantidade: 1, preco: '2500,00' }] as Donation[]
-    } as Voluntary,
-  ]
+  getAll(): void{
+    this.voluntaryService.getAll().subscribe({
+      next: (voluntary: Voluntary[]) => {
+        this.dataSource.data = voluntary;
+        console.log(this.dataSource.data)
+        this.toastr.success('voluntários carregados!');
+      },
+      error: (error: any) => {
+        console.error(error);
+        this.toastr.error('Não foi possível carregar voluntários');
+      }
+    }).add();
+  }
 
   getAddress(address: Address): string{
     return `${address.cidade}-${address.estado}`;

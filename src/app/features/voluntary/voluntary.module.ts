@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreatePersonLegalComponent } from './create-person-legal/create-person-legal.component';
 import { DefaultComponent } from './default/default.component';
 import { ListPartnerComponent } from './list-partner/list-partner.component';
+import { DoacoesModule } from '../doacoes/doacoes.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ListPartnerComponent } from './list-partner/list-partner.component';
     MatPaginatorModule,
     MatSelectModule,
     MatTabsModule,
+    DoacoesModule,
     FormsModule,
     ReactiveFormsModule
   ],

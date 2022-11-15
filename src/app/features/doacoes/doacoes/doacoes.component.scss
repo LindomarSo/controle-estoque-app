@@ -1,0 +1,93 @@
+.donation-table {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10px 50px 20px 30px;
+
+  .section-search {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+    .form-group {
+      display: flex;
+      align-items: center;
+
+      .input-search{
+        width: 100%;
+      }
+    }
+
+    .filter-column {
+      width: 155px;
+      height: 53px;
+      position: relative;
+      right: 0;
+      top: -8px;
+      font-size: 15px;
+    }
+
+    .add-user {
+      width: 155px;
+
+      .button-group {
+        display: flex;
+        padding-left: 10px;
+        column-gap: 10px;
+      }
+    }
+  }
+
+  .table {
+    .mat-elevation-z8 {
+      border-radius: 6px;
+    }
+
+    table {
+      width: 100%;
+
+      th:last-child {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+
+      th:first-child {
+        border-bottom-left-radius: 6px;
+        border-top-left-radius: 6px;
+      }
+
+      th {
+        font-size: 15px;
+        font-weight: 600;
+        background-color: var(--primary-color);
+        color: var(--font-color);
+      }
+
+      .mat-cell:not(:last-of-type) {
+        font-size: 14px;
+        border-right: 1px solid rgba(0, 0, 0, 0.12);
+      }
+
+      .mat-cell:not(:first-of-type) {
+        text-align: center !important;
+        justify-content: center !important;
+      }
+
+      td.mat-cell {
+        &.center-content {
+          text-align: center !important;
+        }
+      }
+
+      th.mat-header-cell {
+        &.center-content {
+          text-align: center !important;
+        }
+      }
+    }
+  }
+
+  ::ng-deep mat-form-field span.mat-form-field-label-wrapper label {
+    color: var(--primary-color) !important;
+    font-weight: 500;
+  }
+}
