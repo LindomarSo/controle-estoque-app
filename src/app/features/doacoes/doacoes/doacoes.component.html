@@ -1,1 +1,66 @@
-<div class="doacoes">Página de doações</div>
+<section class="donation-table">
+  <div id="scrollTitle">
+    <div class="section-search">
+      <div class="form-group">
+        <mat-form-field class="input-search" appearance="outline">
+          <mat-label>Procurar</mat-label>
+          <input matInput placeholder="Buscar">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <button class="filter-column" mat-button color="primary">
+          <div class="button-group">
+            <span>Limpar</span>
+          </div>
+        </button>
+      </div>
+      <mat-form-field class="add-user" appearance="outline">
+        <mat-label class="button-group">
+          <mat-icon class="material-icons-outlined">person_add_alt</mat-icon>
+          <span>Adicionar</span>
+        </mat-label>
+        <mat-select>
+          <mat-option [routerLink]="['criar-voluntario','fisica']" value="one">Pessoa Física</mat-option>
+          <mat-option [routerLink]="['criar-voluntario','juridica']" value="two">Pessoa Jurídica</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="table">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="doador">
+          <th mat-header-cell *matHeaderCellDef>Doador </th>
+          <td mat-cell *matCellDef="let element"> {{element.materialDoado}} </td>
+        </ng-container>
+        <ng-container matColumnDef="doacao">
+          <th class="center-content" mat-header-cell *matHeaderCellDef>Material Doado </th>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{element.materialDoado}} </td>
+        </ng-container>
+        <ng-container matColumnDef="destino">
+          <th class="center-content" mat-header-cell *matHeaderCellDef>Destino </th>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{element.destino}} </td>
+        </ng-container>
+        <ng-container matColumnDef="dataEntrada">
+          <th class="center-content" mat-header-cell *matHeaderCellDef>Data Entrada</th>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{element.dtEntrada}} </td>
+        </ng-container>
+        <ng-container matColumnDef="unidade">
+          <th class="center-content" mat-header-cell *matHeaderCellDef>Unidade </th>
+          <td class="center-content" mat-cell *matCellDef="let element">{{element.unidade}} </td>
+        </ng-container>
+        <ng-container matColumnDef="acoes">
+          <th class="center-content" mat-header-cell *matHeaderCellDef></th>
+          <td class="center-content" mat-cell *matCellDef="let element">
+            <mat-icon style="cursor: pointer;" class="material-icons-outlined">
+              more_vert
+            </mat-icon>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [length]="pagination.totalItems" [pageSize]="3" [pageSizeOptions]="[2, 3, 5]"
+        (page)="setPagination($event)">
+      </mat-paginator>
+    </div>
+  </div>
+</section>

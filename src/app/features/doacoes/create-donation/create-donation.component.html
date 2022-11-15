@@ -1,0 +1,119 @@
+<section class="create-donation">
+  <mat-card>
+    <mat-card-title class="card-title">
+      <span>Doações</span>
+      <mat-icon class="material-icons-outlined">volunteer_activism</mat-icon>
+    </mat-card-title>
+    <mat-card-content>
+      <div class="donation-data">
+        <form [formGroup]="form">
+          <div formArrayName="donations" *ngFor="let doacao of donations.controls; let i = index">
+            <div class="button-group-remove">
+              <h3 class="donation-name">
+                Doação
+              </h3>
+              <button mat-raised-button (click)="cancel(i)" color="warn">Cancelar</button>
+            </div>
+            <mat-divider></mat-divider>
+
+            <fieldset class="form-group" [formGroupName]="i">
+
+
+              <div class="wrapper-form-textarea">
+                <mat-form-field class="form-control-custom" appearance="outline">
+                  <mat-label>Material doado</mat-label>
+                  <textarea
+                    type="text"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="11"
+                    cdkAutosizeMaxRows="11"
+                    formControlName="materialDoado"
+                    matInput></textarea>
+                  <mat-error *ngIf="form?.get('materialDoado')?.hasError('required')">
+                    Material doado é obrigatório
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="wrapper-form-input">
+                <div class="wrapper-form">
+
+                  <mat-form-field class="form-control-custom" appearance="outline">
+                    <mat-label>Preço</mat-label>
+                    <input matInput formControlName="preco" placeholder="Preço">
+                    <mat-error *ngIf="form?.get('preco')?.hasError('required')">
+                      Preço é obrigatória
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="form-control-custom" appearance="outline">
+                    <mat-label>Quantidade</mat-label>
+                    <input matInput formControlName="quantidade" placeholder="Quantidade">
+                    <mat-error *ngIf="form?.get('quantidade')?.hasError('required')">
+                      Quantidade é obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="wrapper-form">
+                  <mat-form-field class="form-control-custom" appearance="outline">
+                    <mat-label>Destino</mat-label>
+                    <input matInput formControlName="destino" placeholder="Destino">
+                    <mat-error *ngIf="form?.get('destino')?.hasError('required')">
+                      Destino é obrigatório
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="form-control-custom" appearance="outline">
+                    <mat-label>Data de entrada</mat-label>
+                    <input matInput formControlName="dtEntrada" placeholder="Data de entrada">
+                    <mat-error *ngIf="form?.get('dtEntrada')?.hasError('required')">
+                      Data de entrada é obrigatória
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="wrapper-form">
+                  <mat-form-field class="form-control-custom" appearance="outline">
+                    <mat-label>Unidade</mat-label>
+                    <mat-select formControlName="unidade">
+                      <mat-option value="one">Riacho Fundo II</mat-option>
+                      <mat-option value="two">Samambaia Sul</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                </div>
+            </fieldset>
+
+          </div>
+        </form>
+        <div class="new-donation">
+          <button (click)="addDonation()" class="add-donation" mat-raised-button color="primary">
+            <div class="button-group">
+              <mat-icon class="material-icons-outlined">add_circle_outline</mat-icon>
+              <span>Adicionar</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="button-group-donation">
+        <div>
+          <button [disabled]="form.invalid" (click)="send()" class="add-donation" mat-raised-button color="primary">
+            <div class="button-group">
+              <span>Cadastrar</span>
+            </div>
+          </button>
+
+          <button (click)="resetForm()" class="add-donation" mat-button color="primary">
+            <div class="button-group">
+              <span>Limpar</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</section>

@@ -7,9 +7,6 @@
   </button>
   <div class="address-contact">
     <div class="section-left">
-      <!-- <h1 class="title">
-        Dados do voluntário
-      </h1> -->
       <form [formGroup]="form">
         <div class="form-group">
           <mat-form-field class="form-control" appearance="outline">
@@ -22,7 +19,7 @@
           </mat-form-field>
 
           <div class="wrapper-form">
-            <mat-form-field class="form-control-custom" appearance="outline">
+            <mat-form-field *ngIf="isPersonFisic" class="form-control-custom" appearance="outline">
               <mat-label>Data de Nascimento</mat-label>
               <input matInput formControlName="dtNascimento" placeholder="Placeholder">
               <mat-error *ngIf="form?.get('dtNascimento')?.hasError('required')">
@@ -136,3 +133,11 @@
     </button>
   </div>
 </section>
+
+<!-- CRIAÇÃO DE DOAÇÃO -->
+
+<div>
+  <app-create-donation [voluntaryId]="voluntaryId"></app-create-donation>
+</div>
+
+<!-- CRIAÇÃO DE DOAÇÃO -->

@@ -17,9 +17,10 @@
   }
 
   .address-contact {
-    display: flex;
     width: 100%;
     padding-top: 20px;
+    display: flex;
+    column-gap: 50px;
 
     .section-left {
       width: 100%;
@@ -32,8 +33,6 @@
         column-gap: 30px;
 
         .mat-form-field-appearance-outline .mat-form-field-infix {
-          /* padding: 1em 0 1em 0; */
-          /* padding: 0px; */
           font-size: 15px;
           padding: 11px;
         }

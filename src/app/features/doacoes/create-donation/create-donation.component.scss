@@ -1,0 +1,101 @@
+.create-donation {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px 50px 20px 30px;
+
+  .card-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+
+  .donation-data{
+    padding-top: 10px;
+
+    .button-group-remove{
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+
+      .donation-name{
+        position: relative;
+        top: 9px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .form-group {
+    width: 100%;
+    padding-top: 15px;
+    border: 0;
+    display: flex;
+    column-gap: 25px;
+
+    .wrapper-form-textarea{
+      width: 100%;
+
+      .form-control-custom {
+        width: 100%;
+      }
+    }
+
+    .wrapper-form-input{
+      width: 100%;
+      padding-right: 20px;
+
+      .wrapper-form {
+        width: 100%;
+        display: flex;
+        column-gap: 30px;
+
+        .form-control-custom {
+          flex-grow: 1;
+          flex-basis: 200px;
+        }
+      }
+
+    }
+  }
+
+  .add-donation {
+    width: 150px;
+    height: 45px;
+    font-size: 15px;
+
+    .button-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+
+  .button-group-donation {
+    display: flex;
+    justify-content: end;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+  }
+
+
+  .new-donation{
+    padding-top: 15px;
+    margin-left: -5px;
+  }
+
+  .mat-card-footer {
+    display: block;
+    margin: 0 -16px -16px -16px;
+    background: #f7f7f7;
+    padding: 0;
+
+    .mat-raised-button {
+      border: 2px solid #026902;
+      background-color: #008000;
+    }
+  }
+}

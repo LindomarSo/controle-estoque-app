@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PagesService } from '../../domains/pages.service';
+import { Router } from '@angular/router';
+import { AccountService } from '../../services/account/account.service';
 
 @Component({
   selector: 'header-nav',
@@ -9,7 +10,13 @@ import { PagesService } from '../../domains/pages.service';
 export class HeaderNavComponent implements OnInit {
   @Input('title') title: string = '';
 
-  constructor() {}
+  constructor(public accountService: AccountService,
+              private router: Router) {}
 
   ngOnInit(): void {}
+
+  logout(): void{
+    this.accountService.logout();
+    this.router.navigate(['/login']);
+  }
 }

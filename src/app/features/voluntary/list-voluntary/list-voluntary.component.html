@@ -43,18 +43,18 @@
           <th class="center-content" mat-header-cell *matHeaderCellDef>Endereço </th>
           <td class="center-content" mat-cell *matCellDef="let element"> {{getAddress(element.endereco)}} </td>
         </ng-container>
-        <ng-container matColumnDef="Doacoes">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Doacoes </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.doacoes[0].materialDoado}} </td>
+        <ng-container matColumnDef="escolaridade">
+          <th class="center-content" mat-header-cell *matHeaderCellDef>Escolaridade</th>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{element.escolaridade}} </td>
         </ng-container>
-        <ng-container matColumnDef="Qtd">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Qtd </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.doacoes[0].quantidade}} </td>
+        <ng-container matColumnDef="quemCadastrou">
+          <th class="center-content" mat-header-cell *matHeaderCellDef>Quem cadastrou </th>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{element.user.nomeCompleto}} </td>
         </ng-container>
-        <ng-container matColumnDef="Preco">
+        <!-- <ng-container matColumnDef="Preco">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Preco </th>
           <td class="center-content" mat-cell *matCellDef="let element"> {{element.doacoes[0].preco}} </td>
-        </ng-container>
+        </ng-container> -->
         <ng-container matColumnDef="acoes">
           <th class="center-content" mat-header-cell *matHeaderCellDef></th>
           <td class="center-content" mat-cell *matCellDef="let element">
