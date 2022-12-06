@@ -19,8 +19,8 @@
           <span>Adicionar</span>
         </mat-label>
         <mat-select>
-          <mat-option [routerLink]="['criar-voluntario','fisica']" value="one">Pessoa Física</mat-option>
-          <mat-option [routerLink]="['criar-voluntario','juridica']" value="two">Pessoa Jurídica</mat-option>
+          <mat-option [routerLink]="['criar-voluntario','fisica']">Pessoa Física</mat-option>
+          <mat-option [routerLink]="['criar-voluntario','juridica']">Pessoa Jurídica</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -33,11 +33,11 @@
         </ng-container>
         <ng-container matColumnDef="Telefone">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Telefone </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.telefone}} </td>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{element.telefone | PhoneFormatPipe}} </td>
         </ng-container>
         <ng-container matColumnDef="CPF_CNPJ">
           <th class="center-content" mat-header-cell *matHeaderCellDef>CPF</th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.documento}} </td>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{element.documento | cpfFormat}} </td>
         </ng-container>
         <ng-container matColumnDef="Endereco">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Endereço </th>
@@ -51,22 +51,19 @@
           <th class="center-content" mat-header-cell *matHeaderCellDef>Quem cadastrou </th>
           <td class="center-content" mat-cell *matCellDef="let element"> {{element.user.nomeCompleto}} </td>
         </ng-container>
-        <!-- <ng-container matColumnDef="Preco">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Preco </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.doacoes[0].preco}} </td>
-        </ng-container> -->
         <ng-container matColumnDef="acoes">
           <th class="center-content" mat-header-cell *matHeaderCellDef></th>
-          <td class="center-content" mat-cell *matCellDef="let element">
-            <mat-icon style="cursor: pointer;" class="material-icons-outlined">
+          <td matTooltip="Detalhes"  matTooltipPosition="after" class="center-content" mat-cell *matCellDef="let element">
+            <button class="button-btn" [routerLink]="['detalhe', element.id]">
+              <mat-icon style="cursor: pointer;" class="material-icons-outlined">
               more_vert
-            </mat-icon>
+            </mat-icon></button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator [length]="pagination.totalItems" [pageSize]="3" [pageSizeOptions]="[2, 3, 5]"
+      <mat-paginator [length]="pagination.totalItems" [pageSize]="pagination.itemsPerPage" [pageSizeOptions]="[2, 3, 5]"
         (page)="setPagination($event)">
       </mat-paginator>
     </div>

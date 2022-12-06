@@ -3,8 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.service';
-import { Pagination } from 'src/app/shared/models/pagination/pagination.model';
-import { Donation } from 'src/app/shared/models/voluntary/donation.model';
+import { Pagination, PaginationResult } from 'src/app/shared/models/pagination/pagination.model';
 import { Voluntary } from 'src/app/shared/models/voluntary/voluntary.model';
 import { Address } from '../../../shared/models/voluntary/address.model';
 
@@ -36,16 +35,14 @@ export class ListVoluntaryComponent implements OnInit {
   ngOnInit(): void {
     this.pagination = { currentPage: 1, itemsPerPage: 3 } as Pagination;
     this.getAll();
-    this.pagination.totalItems = this.voluntary?.length;
-    console.log(this.dataSource.data)
     this.configPagination();
   }
 
   getAll(): void{
-    this.voluntaryService.getAll().subscribe({
-      next: (voluntary: Voluntary[]) => {
-        this.dataSource.data = voluntary;
-        console.log(this.dataSource.data)
+    this.voluntaryService.getAll('fisica', this.pagination.currentPage, this.pagination.itemsPerPage).subscribe({
+      next: (paginationResult: PaginationResult<Voluntary[]>) => {
+        this.dataSource.data = paginationResult.result;
+        this.pagination = paginationResult.pagination;
         this.toastr.success('voluntários carregados!');
       },
       error: (error: any) => {
@@ -62,6 +59,7 @@ export class ListVoluntaryComponent implements OnInit {
   setPagination(evento: PageEvent){
     this.pagination.itemsPerPage = evento.pageSize;
     this.pagination.currentPage = evento.pageIndex + 1;
+    this.getAll();
   }
 
   configPagination(): void {

@@ -13,6 +13,7 @@ export interface Donation {
   disponibilidade: string;
   habilidade: string;
   unidade: string;
+  entidadeId: number;
   entidade: EntidadeInfo;
   user: UserInfo;
 }

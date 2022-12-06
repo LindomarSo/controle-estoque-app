@@ -33,27 +33,19 @@
         </ng-container>
         <ng-container matColumnDef="Telefone">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Telefone </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.telefone}} </td>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{element.telefone | PhoneFormatPipe}} </td>
         </ng-container>
         <ng-container matColumnDef="CNPJ">
           <th class="center-content" mat-header-cell *matHeaderCellDef>CNPJ </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.documento}} </td>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{element.documento | cnpjFormat}} </td>
         </ng-container>
         <ng-container matColumnDef="Endereco">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Endereço </th>
           <td class="center-content" mat-cell *matCellDef="let element"> {{getAddress(element.endereco)}} </td>
         </ng-container>
-        <ng-container matColumnDef="Doacoes">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Doacoes </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.doacoes[0].materialDoado}} </td>
-        </ng-container>
-        <ng-container matColumnDef="Qtd">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Qtd </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.doacoes[0].quantidade}} </td>
-        </ng-container>
-        <ng-container matColumnDef="Preco">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Preco </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.doacoes[0].preco}} </td>
+        <ng-container matColumnDef="quem_cadastrou">
+          <th class="center-content" mat-header-cell *matHeaderCellDef>Quem Cadastrou </th>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{element.user.nomeCompleto}} </td>
         </ng-container>
         <ng-container matColumnDef="acoes">
           <th class="center-content" mat-header-cell *matHeaderCellDef></th>
@@ -66,7 +58,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator [length]="pagination.totalItems" [pageSize]="3" [pageSizeOptions]="[2, 3, 5]"
+      <mat-paginator [length]="pagination.totalItems" [pageSize]="pagination.itemsPerPage" [pageSizeOptions]="[2, 3, 5]"
         (page)="setPagination($event)">
       </mat-paginator>
     </div>

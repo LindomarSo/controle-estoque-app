@@ -29,7 +29,7 @@
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="doador">
           <th mat-header-cell *matHeaderCellDef>Doador </th>
-          <td mat-cell *matCellDef="let element"> {{element.materialDoado}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.entidade.nome}} </td>
         </ng-container>
         <ng-container matColumnDef="doacao">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Material Doado </th>
@@ -41,7 +41,11 @@
         </ng-container>
         <ng-container matColumnDef="dataEntrada">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Data Entrada</th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.dtEntrada}} </td>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{ getDate(element.dtEntrada) }} </td>
+        </ng-container>
+        <ng-container matColumnDef="qtd">
+          <th class="center-content" mat-header-cell *matHeaderCellDef>Quantidade</th>
+          <td class="center-content" mat-cell *matCellDef="let element">{{element.quantidade}} </td>
         </ng-container>
         <ng-container matColumnDef="unidade">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Unidade </th>
@@ -50,15 +54,21 @@
         <ng-container matColumnDef="acoes">
           <th class="center-content" mat-header-cell *matHeaderCellDef></th>
           <td class="center-content" mat-cell *matCellDef="let element">
-            <mat-icon style="cursor: pointer;" class="material-icons-outlined">
+
+            <span style="cursor: pointer;" [matMenuTriggerFor]="menu">
+              <mat-icon class="material-icons-outlined">
               more_vert
-            </mat-icon>
+            </mat-icon></span>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Editar</button>
+              <button mat-menu-item>Visualizar</button>
+            </mat-menu>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator [length]="pagination.totalItems" [pageSize]="3" [pageSizeOptions]="[2, 3, 5]"
+      <mat-paginator [length]="pagination.totalItems" [pageSize]="pagination.itemsPerPage" [pageSizeOptions]="[2, 3, 5]"
         (page)="setPagination($event)">
       </mat-paginator>
     </div>

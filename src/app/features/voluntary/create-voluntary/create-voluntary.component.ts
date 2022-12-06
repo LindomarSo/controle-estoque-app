@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.service';
 
 @Component({
   selector: 'app-create-voluntary',
@@ -10,26 +13,40 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CreateVoluntaryComponent implements OnInit {
 
   form!: FormGroup;
-  typePersson!: string;
-  isPersonFisic:boolean = true;
+  types!: string[];
+  schooling!: any[];
+  typePerson!: string;
+  isPersonFisic: boolean = true;
   voluntaryId!: number;
   method = 'post';
   isEditMode = true;
   documentType = 'CPF';
+  documentMask = 'CPF';
   name = 'Nome Completo';
 
-  constructor(private formBuilder: FormBuilder,
-              private route: ActivatedRoute) { }
+  dateFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
+
+  constructor(private voluntaryService: VoluntaryService,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService,
+  ) { }
 
   get enderecos() {
     return this.form.get('endereco') as FormGroup;
   }
 
   ngOnInit(): void {
-    this.typePersson = this.route.snapshot.params['pessoa'];
-    console.log(this.typePersson);
-    this.getTypePerson();
     this.validator();
+    this.typePerson = this.route.snapshot.params['pessoa'];
+    this.getPersonType();
+    this.getSchooling();
   }
 
   validator(): void {
@@ -38,11 +55,11 @@ export class CreateVoluntaryComponent implements OnInit {
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       documento: ['', Validators.required],
-      dtNascimento: [''],
-      tipoEntidade: [''],
-      escolaridade: [''],
+      dtNascimento: [null],
+      tipoEntidade: [],
+      escolaridade: [],
       endereco: this.ValidateAddress(),
-      habilidade: ['']
+      habilidade: []
     });
   }
 
@@ -52,8 +69,8 @@ export class CreateVoluntaryComponent implements OnInit {
       cEP: ['', Validators.required],
       cidade: ['', Validators.required],
       estado: ['', Validators.required],
-      complemento: [''],
-      numero: [''],
+      complemento: [],
+      numero: [],
     })
   }
 
@@ -62,15 +79,62 @@ export class CreateVoluntaryComponent implements OnInit {
   }
 
   send(): void {
-    if (!this.form.invalid)
-      console.log(this.form.value)
+    if (this.form.valid) {
+      this.spinner.show();
+      this.voluntaryService.post(this.form.value).subscribe({
+        next: () => {
+          this.toastr.success('Voluntário adicionado com sucesso!');
+          this.router.navigate(['/voluntarios']);
+        },
+        error: () => {
+          this.toastr.error('Erro ao adicionar voluntário');
+        }
+      }).add(() => this.spinner.hide());
+    }
   }
 
-  getTypePerson(): void{
-    if(this.typePersson === 'juridica'){
-      this.isPersonFisic =  false;
+  getSchooling(): void {
+    this.spinner.show();
+    this.voluntaryService.getSchooling().subscribe({
+      next: (response: any) => {
+        this.schooling = response;
+      },
+      error: () => {
+        this.toastr.error('Não foi possível carregar escolaridade');
+      }
+    }).add(() => this.spinner.hide());
+  }
+
+  getPersonType(): void {
+    this.spinner.show();
+    this.voluntaryService.getPersonType().subscribe({
+      next: (response: any) => {
+        this.types = response;
+        this.getTypePerson();
+      },
+      error: () => {
+        this.toastr.error('Não foi possível carregar tipos');
+      }
+    }).add(() => this.spinner.hide());
+  }
+
+  getTypePerson(): void {
+    let type = '';
+
+    if (this.typePerson === 'juridica') {
+      this.isPersonFisic = false;
       this.documentType = 'CNPJ';
       this.name = 'Nome da Empresa';
+      this.documentMask = '00.000.000/0000-00';
+      this.types.forEach(tipo => {
+        if (tipo === 'Pessoa Jurídica') {
+          type = tipo;
+        }
+      });
+    } else {
+      type = 'Pessoa Física'
+      this.documentMask = '000.000.000-00';
     }
+    this.form.controls['tipoEntidade'].setValue(type);
   }
 }

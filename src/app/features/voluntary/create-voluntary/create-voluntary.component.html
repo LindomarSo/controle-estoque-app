@@ -21,7 +21,7 @@
           <div class="wrapper-form">
             <mat-form-field *ngIf="isPersonFisic" class="form-control-custom" appearance="outline">
               <mat-label>Data de Nascimento</mat-label>
-              <input matInput formControlName="dtNascimento" placeholder="Placeholder">
+              <input mask="d0/M0/0000" matInput formControlName="dtNascimento" placeholder="Placeholder">
               <mat-error *ngIf="form?.get('dtNascimento')?.hasError('required')">
                 Data de nascimento é obrigatória
               </mat-error>
@@ -29,7 +29,7 @@
 
             <mat-form-field class="form-control-custom" appearance="outline">
               <mat-label>{{documentType}}</mat-label>
-              <input matInput formControlName="documento" placeholder="Placeholder">
+              <input [mask]="documentMask" matInput formControlName="documento" placeholder="Placeholder">
               <mat-error *ngIf="form?.get('documento')?.hasError('required')">
                 {{documentType}} é obrigatório
               </mat-error>
@@ -50,7 +50,7 @@
 
             <mat-form-field class="form-control form-control-custom" appearance="outline">
               <mat-label>Telefone</mat-label>
-              <input matInput formControlName="telefone" placeholder="Placeholder">
+              <input mask="(00) 00000-0000" matInput formControlName="telefone" placeholder="Placeholder">
               <mat-error *ngIf="form?.get('telefone')?.hasError('required')">
                 Telefone é obrigatório
               </mat-error>
@@ -60,8 +60,7 @@
           <mat-form-field *ngIf="isPersonFisic" class="form-control-level" appearance="outline">
             <mat-label>Escolaridade</mat-label>
             <mat-select formControlName="escolaridade">
-              <mat-option value="one">Ensino médio</mat-option>
-              <mat-option value="two">Superior concluído</mat-option>
+              <mat-option *ngFor="let school of schooling" value="{{school}}">{{school}}</mat-option>
             </mat-select>
           </mat-form-field>
 
@@ -77,9 +76,6 @@
       </form>
     </div>
     <div class="section-right">
-      <!-- <h1 class="title">
-        Endereço
-      </h1> -->
       <form class="form-group" [formGroup]="enderecos">
         <mat-form-field class="form-control" appearance="outline">
           <mat-label>Endereço</mat-label>
@@ -100,7 +96,7 @@
 
           <mat-form-field class="form-control form-control-custom" appearance="outline">
             <mat-label>CEP</mat-label>
-            <input matInput formControlName="cEP" placeholder="Placeholder">
+            <input mask="00.000-000" matInput formControlName="cEP" placeholder="Placeholder">
           </mat-form-field>
         </div>
 
@@ -133,11 +129,3 @@
     </button>
   </div>
 </section>
-
-<!-- CRIAÇÃO DE DOAÇÃO -->
-
-<div>
-  <app-create-donation [voluntaryId]="voluntaryId"></app-create-donation>
-</div>
-
-<!-- CRIAÇÃO DE DOAÇÃO -->

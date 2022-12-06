@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Pagination } from 'src/app/shared/models/pagination/pagination.model';
+import { ToastrService } from 'ngx-toastr';
+import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.service';
+import { Pagination, PaginationResult } from 'src/app/shared/models/pagination/pagination.model';
 import { Address } from 'src/app/shared/models/voluntary/address.model';
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 import { Voluntary } from 'src/app/shared/models/voluntary/voluntary.model';
@@ -13,105 +15,66 @@ import { Voluntary } from 'src/app/shared/models/voluntary/voluntary.model';
 })
 export class ListPartnerComponent implements OnInit {
   dataSource = new MatTableDataSource<Voluntary>();
-  @ViewChild(MatPaginator, {static: true})
+  @ViewChild(MatPaginator, { static: true })
   paginator!: MatPaginator;
-  pagination = { } as Pagination;
-
-  constructor() { }
-
-
+  pagination = {} as Pagination;
+  voluntary: Voluntary[] = [];
   displayedColumns: string[] = [
     'Empresa',
     'Telefone',
     'CNPJ',
     'Endereco',
-    'Doacoes',
-    'Qtd',
-    'Preco',
+    'quem_cadastrou',
     'acoes'
   ];
 
-  ngOnInit(): void {
-    this.dataSource.data = this.voluntary;
-    this.pagination.totalItems = this.voluntary.length;
+  constructor(private voluntaryService: VoluntaryService,
+    private toastr: ToastrService) { }
 
+  ngOnInit(): void {
+    this.pagination = { currentPage: 1, itemsPerPage: 2 } as Pagination;
+    this.getAllPartners();
     this.configPagination();
   }
 
-  voluntary: Voluntary[] = [
-    {
-      id: 1,
-      nome: 'Fernando Silva',
-      telefone: '61986587552',
-      documento: '35422815068',
-      endereco: { cidade: 'Brasilia', estado: 'DF'} as Address,
-      doacoes: [{ materialDoado: 'Violão', quantidade: 1, preco: '500,00' }] as Donation[]
-    } as Voluntary,
-    {
-      id: 1,
-      nome: 'Lara Isabela Jaqueline Souza',
-      telefone: '8337121649',
-      documento: '77073721235',
-      endereco: { cidade: 'João Pessoa', estado: 'PB'} as Address,
-      doacoes: [{ materialDoado: 'Uma Sexta', quantidade: 1, preco: '60,00' }] as Donation[]
-    } as Voluntary,
-    {
-      id: 1,
-      nome: 'Julia Benedita',
-      telefone: '8929038257',
-      documento: '30901043699',
-      endereco: { cidade: 'Picos', estado: 'PI'} as Address,
-      doacoes: [{ materialDoado: 'Um Computador', quantidade: 1, preco: '2500,00' }] as Donation[]
-    } as Voluntary,
-    {
-      id: 1,
-      nome: 'Fernando Silva',
-      telefone: '61986587552',
-      documento: '35422815068',
-      endereco: { cidade: 'Brasilia', estado: 'DF'} as Address,
-      doacoes: [{ materialDoado: 'Violão', quantidade: 1, preco: '500,00' }] as Donation[]
-    } as Voluntary,
-    {
-      id: 1,
-      nome: 'Lara Isabela Jaqueline Souza',
-      telefone: '8337121649',
-      documento: '77073721235',
-      endereco: { cidade: 'João Pessoa', estado: 'PB'} as Address,
-      doacoes: [{ materialDoado: 'Uma Sexta', quantidade: 1, preco: '60,00' }] as Donation[]
-    } as Voluntary,
-    {
-      id: 1,
-      nome: 'Julia Benedita',
-      telefone: '8929038257',
-      documento: '30901043699',
-      endereco: { cidade: 'Picos', estado: 'PI'} as Address,
-      doacoes: [{ materialDoado: 'Um Computador', quantidade: 1, preco: '2500,00' }] as Donation[]
-    } as Voluntary,
-  ]
+  getAllPartners(): void {
+    this.voluntaryService.getAll('juridica', this.pagination.currentPage, this.pagination.itemsPerPage).subscribe({
+      next: (response: PaginationResult<Voluntary[]>) => {
+        this.voluntary = response.result;
+        this.dataSource.data = this.voluntary;
+        this.pagination = response.pagination;
+      },
+      error: (error: any) => {
+        console.error(error);
+        this.toastr.error('Erro ao carregar empresas');
+       }
+    })
+  }
 
-  getAddress(address: Address): string{
+  getAddress(address: Address): string {
     return `${address.cidade}-${address.estado}`;
   }
 
-  setPagination(evento: PageEvent){
+  setPagination(evento: PageEvent) {
     this.pagination.itemsPerPage = evento.pageSize;
     this.pagination.currentPage = evento.pageIndex + 1;
+    this.getAllPartners();
   }
 
   configPagination(): void {
     const portuguesRangeLabel = (page: number, pageSize: number, length: number) => {
-      if(length === 0 || pageSize === 0){
+      if (length === 0 || pageSize === 0) {
         return `0 de ${length}`;
       }
 
       length = Math.max(length, 0);
       const startIndex = page * pageSize;
       const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length)
-                                           : startIndex + pageSize;
+        : startIndex + pageSize;
 
       return `${startIndex + 1} - ${endIndex} de ${length}`;
     }
-    this.paginator._intl.itemsPerPageLabel = "Voluntários por página";
+    this.paginator._intl.itemsPerPageLabel = "Itens por página";
     this.paginator._intl.nextPageLabel = "Próxima página"
     this.paginator._intl.previousPageLabel = "Página anterior"
     this.paginator._intl.getRangeLabel = portuguesRangeLabel;

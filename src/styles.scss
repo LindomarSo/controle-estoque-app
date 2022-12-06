@@ -23,6 +23,12 @@ body {
   color: #ccc;
 }
 
+.mat-dialog-container {
+  display: block;
+  padding: 0px !important;
+  border-radius: 4px;
+}
+
 :root {
   --primary-color: #1A3972;
   --font-color: white;

@@ -18,18 +18,11 @@
 
             <fieldset class="form-group" [formGroupName]="i">
 
-
               <div class="wrapper-form-textarea">
                 <mat-form-field class="form-control-custom" appearance="outline">
                   <mat-label>Material doado</mat-label>
-                  <textarea
-                    type="text"
-                    cdkTextareaAutosize
-                    #autosize="cdkTextareaAutosize"
-                    cdkAutosizeMinRows="11"
-                    cdkAutosizeMaxRows="11"
-                    formControlName="materialDoado"
-                    matInput></textarea>
+                  <textarea type="text" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="11"
+                    cdkAutosizeMaxRows="11" formControlName="materialDoado" matInput></textarea>
                   <mat-error *ngIf="form?.get('materialDoado')?.hasError('required')">
                     Material doado é obrigatório
                   </mat-error>
@@ -41,15 +34,15 @@
 
                   <mat-form-field class="form-control-custom" appearance="outline">
                     <mat-label>Preço</mat-label>
-                    <input matInput formControlName="preco" placeholder="Preço">
+                    <input currencyMask matInput formControlName="preco" placeholder="R$ 0,00">
                     <mat-error *ngIf="form?.get('preco')?.hasError('required')">
-                      Preço é obrigatória
+                      Preço é obrigatório
                     </mat-error>
                   </mat-form-field>
 
                   <mat-form-field class="form-control-custom" appearance="outline">
                     <mat-label>Quantidade</mat-label>
-                    <input matInput formControlName="quantidade" placeholder="Quantidade">
+                    <input type="number" matInput formControlName="quantidade" placeholder="Quantidade">
                     <mat-error *ngIf="form?.get('quantidade')?.hasError('required')">
                       Quantidade é obrigatório
                     </mat-error>
@@ -65,27 +58,30 @@
                     </mat-error>
                   </mat-form-field>
 
-                  <mat-form-field class="form-control-custom" appearance="outline">
-                    <mat-label>Data de entrada</mat-label>
-                    <input matInput formControlName="dtEntrada" placeholder="Data de entrada">
-                    <mat-error *ngIf="form?.get('dtEntrada')?.hasError('required')">
-                      Data de entrada é obrigatória
-                    </mat-error>
-                  </mat-form-field>
+                  <div class="form-control-custom">
+                    <mat-form-field class="date-picker-form" appearance="outline">
+                      <mat-label>Data de entrada</mat-label>
+                      <input matInput [matDatepicker]="picker"
+                       formControlName="dtEntrada" placeholder="Data de entrada">
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-error *ngIf="form?.get('dtEntrada')?.hasError('required')">
+                        Data de entrada é obrigatória
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-datepicker-toggle class="date-picker-toggle" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  </div>
                 </div>
 
                 <div class="wrapper-form">
                   <mat-form-field class="form-control-custom" appearance="outline">
                     <mat-label>Unidade</mat-label>
                     <mat-select formControlName="unidade">
-                      <mat-option value="one">Riacho Fundo II</mat-option>
-                      <mat-option value="two">Samambaia Sul</mat-option>
+                      <mat-option *ngFor="let unity of unities" [value]="unity"> {{unity}} </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-                </div>
+              </div>
             </fieldset>
-
           </div>
         </form>
         <div class="new-donation">

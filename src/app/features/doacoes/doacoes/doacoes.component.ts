@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { DonationService } from 'src/app/core/services/donation/donation.service';
 import { Pagination, PaginationResult } from 'src/app/shared/models/pagination/pagination.model';
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 
@@ -14,54 +17,55 @@ export class DoacoesComponent implements OnInit {
   dataSource = new MatTableDataSource<Donation>();
   pagination: Pagination = new Pagination();
   @ViewChild(MatPaginator, { static: true })
-  paginator!: MatPaginator
+  paginator!: MatPaginator;
+  donation: Donation[] = [];
 
   displayedColumns: string[] = [
     'doador',
     'doacao',
     'destino',
     'dataEntrada',
-    'unidade'
+    'qtd',
+    'unidade',
+    'acoes'
   ];
 
-  ngOnInit(): void {
-    this.dataSource.data = this.donation;
-    this.pagination.totalItems = this.donation.length;
+  constructor(private donationService: DonationService,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService) { }
 
+  ngOnInit(): void {
+    this.pagination = { currentPage: 1, itemsPerPage: 5 } as Pagination;
+    this.getAll();
     this.configPagination();
   }
 
-  donation: Donation[] = [
-    {
-      id: 1,
-      materialDoado: "Um Violão",
-      preco: "350,00",
-      quantidade: 1,
-      destino: "Crianças",
-      dtEntrada: "2022-11-05T00:00:00",
-      dtRetirada: "",
-      retiradaPor: "",
-      disponibilidade: "",
-      habilidade: "",
-      entidadeId: 1,
-      userId: 1,
-      unidade: "Samambaia Sul",
-      user: {
-        id: 1,
-        nomeCompleto: "Lindomar Dias",
-        email: "lindomar"
+  getAll(): void {
+    this.spinner.show();
+    this.donationService.getAll(this.pagination.currentPage, this.pagination.itemsPerPage).subscribe({
+      next: (response: PaginationResult<Donation[]>) => {
+        this.donation = response.result;
+        this.dataSource.data = this.donation;
+        this.pagination = response.pagination;
       },
-      entidade: {
-        id: 1,
-        nome: "Laura Catarina Luna da Luz",
-        telefone: "6939273913"
+      error: (error: any) => {
+        console.error(error);
+        this.toastr.error('Error ao carregar doações');
       }
-    }as Donation,
-  ];
+    }).add(() => this.spinner.hide());
+  }
 
   setPagination(evento: PageEvent) {
     this.pagination.itemsPerPage = evento.pageSize;
     this.pagination.currentPage = evento.pageIndex + 1;
+    this.getAll();
+  }
+
+  getDate(date: string): string{
+    let data = date.substring(0, 10);
+    let dateArray = data.split('-');
+
+    return `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
   }
 
   configPagination(): void {

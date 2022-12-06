@@ -1,0 +1,56 @@
+.voluntary-detail{
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 50px 20px 30px;
+  display: flex;
+  column-gap: 20px;
+
+  .voluntary-card{
+    max-width: 400px;
+    position: sticky !important;
+    top: 175px;
+
+    .paragraph{
+      padding-top: 10px !important;
+    }
+  }
+
+  .donation-section{
+    width: 100%;
+
+    .mat-mdc-form-field + .mat-mdc-form-field {
+      margin-left: 8px;
+    }
+
+    .open-panel-section{
+      padding-bottom: 20px;
+
+      .title-donation{
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      .content-section{
+        width: 100%;
+        display: flex;
+
+        .content{
+          width: 80%;
+        }
+
+        .content-actions{
+          width: 20%;
+          display: flex;
+          justify-content: end;
+        }
+      }
+    }
+  }
+}
+
+@media  screen and (max-width: 1445px) {
+  .voluntary-card{
+    top: 140px !important;
+  }
+}

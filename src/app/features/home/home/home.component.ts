@@ -21,23 +21,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUser();
-  }
-
-  getUser(): void {
-    this.spinner.show();
-    this.accountService
-      .getUser()
-      .subscribe(
-        (response: User) => {
-          this.user = response;
-        },
-        (erro: any) => {
-          console.error(erro);
-          this.toastr.error('Erro ao carregar usuário logado.', 'Erro');
-        }
-      )
-      .add(() => this.spinner.hide());
   }
 
   logout(): void {
