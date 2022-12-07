@@ -14,10 +14,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { CreateDonationComponent } from './create-donation/create-donation.component';
+import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DonationDetailComponent } from './donation-detail/donation-detail.component';
+import { DonationViewComponent } from './donation-view/donation-view.component';
 export const customCurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -37,6 +39,7 @@ export const customCurrencyMaskConfig = {
     MatIconModule,
     MatPaginatorModule,
     MatTableModule,
+    MatDialogModule,
     MatButtonModule,
     FormsModule,
     MatMenuModule,
@@ -49,7 +52,7 @@ export const customCurrencyMaskConfig = {
     CommonModule,
     DoacoesRoutingModule
   ],
-  declarations: [DoacoesComponent, CreateDonationComponent, DonationDetailComponent],
+  declarations: [DoacoesComponent, CreateDonationComponent, DonationDetailComponent, DonationViewComponent],
   exports: [DoacoesComponent, CreateDonationComponent],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

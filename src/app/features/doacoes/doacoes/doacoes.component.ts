@@ -5,7 +5,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { DonationService } from 'src/app/core/services/donation/donation.service';
 import { Pagination, PaginationResult } from 'src/app/shared/models/pagination/pagination.model';
+import { MatDialog } from '@angular/material/dialog'
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
+import { DonationViewComponent } from '../donation-view/donation-view.component';
 
 @Component({
   selector: 'app-doacoes',
@@ -32,6 +34,7 @@ export class DoacoesComponent implements OnInit {
 
   constructor(private donationService: DonationService,
     private toastr: ToastrService,
+    public dialog: MatDialog,
     private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
@@ -61,7 +64,7 @@ export class DoacoesComponent implements OnInit {
     this.getAll();
   }
 
-  getDate(date: string): string{
+  getDate(date: string): string {
     let data = date.substring(0, 10);
     let dateArray = data.split('-');
 
@@ -85,5 +88,9 @@ export class DoacoesComponent implements OnInit {
     this.paginator._intl.nextPageLabel = "Próxima página"
     this.paginator._intl.previousPageLabel = "Página anterior"
     this.paginator._intl.getRangeLabel = portuguesRangeLabel;
+  }
+
+  openView(donation: Donation): void {
+    this.dialog.open(DonationViewComponent, { data: donation });
   }
 }
