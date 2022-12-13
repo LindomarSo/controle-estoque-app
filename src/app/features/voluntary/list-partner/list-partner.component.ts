@@ -32,7 +32,7 @@ export class ListPartnerComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.pagination = { currentPage: 1, itemsPerPage: 2 } as Pagination;
+    this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
     this.getAllPartners();
     this.configPagination();
   }

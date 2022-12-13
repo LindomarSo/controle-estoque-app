@@ -1,0 +1,22 @@
+<section class="donation-default">
+    <mat-stepper class="stepper-container">
+        <mat-step label="Visualizar" state="phone">
+
+            <app-donation-view></app-donation-view>
+
+        </mat-step>
+        <mat-step label="Editar doação" state="chat">
+
+            <app-donation-detail [donation]="data" (donationUpdated)="onDonationUpdated($event)"></app-donation-detail>
+
+        </mat-step>
+
+        <ng-template matStepperIcon="phone">
+            <mat-icon>visibility</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="chat">
+            <mat-icon>mode_edit</mat-icon>
+        </ng-template>
+    </mat-stepper>
+
+</section>

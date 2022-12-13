@@ -61,7 +61,7 @@
                   <div class="form-control-custom">
                     <mat-form-field class="date-picker-form" appearance="outline">
                       <mat-label>Data de entrada</mat-label>
-                      <input matInput [matDatepicker]="picker"
+                      <input (click)="picker.open()" matInput [matDatepicker]="picker"
                        formControlName="dtEntrada" placeholder="Data de entrada">
                       <mat-datepicker #picker></mat-datepicker>
                       <mat-error *ngIf="form?.get('dtEntrada')?.hasError('required')">

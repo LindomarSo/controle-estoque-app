@@ -38,4 +38,4 @@ import { JwtInterceptor } from './core/interceptors/jwt/jwt.interceptor';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

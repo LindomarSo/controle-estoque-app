@@ -53,22 +53,18 @@
         </ng-container>
         <ng-container matColumnDef="acoes">
           <th class="center-content" mat-header-cell *matHeaderCellDef></th>
-          <td class="center-content" mat-cell *matCellDef="let element">
-
-            <span style="cursor: pointer;" [matMenuTriggerFor]="menu">
-              <mat-icon class="material-icons-outlined">
-              more_vert
-            </mat-icon></span>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>Editar</button>
-              <button mat-button (click)="openView(element)">Visualizar</button>
-            </mat-menu>
+          <td class="center-content" mat-cell *matCellDef="let element">              
+              <span style="cursor: pointer;" (click)="openView(element)">
+                <mat-icon class="material-icons-outlined">
+                  more_vert
+                </mat-icon>
+              </span>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator [length]="pagination.totalItems" [pageSize]="pagination.itemsPerPage" [pageSizeOptions]="[2, 3, 5]"
+      <mat-paginator [length]="pagination.totalItems" [pageSize]="pagination.itemsPerPage" [pageSizeOptions]="[5, 10, 15]"
         (page)="setPagination($event)">
       </mat-paginator>
     </div>

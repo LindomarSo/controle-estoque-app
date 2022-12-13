@@ -50,4 +50,17 @@ export class VoluntaryDetailComponent implements OnInit {
   openDialog(donation: Donation) {
     this.dialog.open(DonationDetailComponent, { data: { donate: donation, voluntaryId: this.voluntaryId }});
   }
+
+  getDate(date: string): string {
+    let data = date.substring(0, 10);
+    let dateArray = data.split('-');
+
+    return `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
+  }
+
+  getTitle(title: string): string{
+    let length = title.length;
+
+    return length > 30 ? title.substring(0, 30)+'...' : title;
+  }
 }

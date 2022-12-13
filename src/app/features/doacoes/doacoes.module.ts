@@ -17,9 +17,13 @@ import { CreateDonationComponent } from './create-donation/create-donation.compo
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCurrencyModule } from 'ngx-currency';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DonationDetailComponent } from './donation-detail/donation-detail.component';
 import { DonationViewComponent } from './donation-view/donation-view.component';
+import { PhoneFormatPipe } from 'src/app/utils/phone-format.pipe';
+import { VoluntaryModule } from '../voluntary/voluntary.module';
+import { UtilsModule } from 'src/app/utils/utils.module';
+import { DonationDefaultComponent } from './donation-default/donation-default.component';
 export const customCurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -43,6 +47,7 @@ export const customCurrencyMaskConfig = {
     MatButtonModule,
     FormsModule,
     MatMenuModule,
+    MatNativeDateModule,
     MatStepperModule,
     ReactiveFormsModule,
     MatCardModule,
@@ -50,9 +55,15 @@ export const customCurrencyMaskConfig = {
     MatDividerModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     CommonModule,
+    UtilsModule,
     DoacoesRoutingModule
   ],
-  declarations: [DoacoesComponent, CreateDonationComponent, DonationDetailComponent, DonationViewComponent],
+  declarations: [
+    DoacoesComponent, 
+    CreateDonationComponent, 
+    DonationDetailComponent, 
+    DonationViewComponent, DonationDefaultComponent,
+  ],
   exports: [DoacoesComponent, CreateDonationComponent],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

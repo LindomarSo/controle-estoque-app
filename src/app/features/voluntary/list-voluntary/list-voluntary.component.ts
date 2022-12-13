@@ -33,7 +33,7 @@ export class ListVoluntaryComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.pagination = { currentPage: 1, itemsPerPage: 3 } as Pagination;
+    this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
     this.getAll();
     this.configPagination();
   }
@@ -60,7 +60,7 @@ export class ListVoluntaryComponent implements OnInit {
     this.pagination.itemsPerPage = evento.pageSize;
     this.pagination.currentPage = evento.pageIndex + 1;
     this.getAll();
-  }
+  }  
 
   configPagination(): void {
     const portuguesRangeLabel = (page: number, pageSize: number, length: number) => {

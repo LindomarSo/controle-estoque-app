@@ -8,6 +8,7 @@ import { Pagination, PaginationResult } from 'src/app/shared/models/pagination/p
 import { MatDialog } from '@angular/material/dialog'
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 import { DonationViewComponent } from '../donation-view/donation-view.component';
+import { DonationDefaultComponent } from '../donation-default/donation-default.component';
 
 @Component({
   selector: 'app-doacoes',
@@ -38,7 +39,7 @@ export class DoacoesComponent implements OnInit {
     private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.pagination = { currentPage: 1, itemsPerPage: 5 } as Pagination;
+    this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
     this.getAll();
     this.configPagination();
   }
@@ -91,6 +92,6 @@ export class DoacoesComponent implements OnInit {
   }
 
   openView(donation: Donation): void {
-    this.dialog.open(DonationViewComponent, { data: donation });
+    this.dialog.open(DonationDefaultComponent, { data: donation });
   }
 }

@@ -10,6 +10,8 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { HeaderNavComponent } from './components/header-nav/header-nav.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [
     HeaderNavComponent,
@@ -25,6 +27,6 @@ import { MatButtonModule } from '@angular/material/button';
     SideMenuComponent,
     SideNavComponent,
   ],
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, MatTooltipModule],
 })
 export class CoreModule { }

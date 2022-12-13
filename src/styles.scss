@@ -20,7 +20,7 @@ body {
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: #ccc;
+  color: var(--secondary-color);
 }
 
 .mat-dialog-container {
@@ -29,8 +29,26 @@ body {
   border-radius: 4px;
 }
 
+.mat-horizontal-stepper-header-container {
+  padding: 24px;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: var(--secondary-color);
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle, 
+.mat-radio-button.mat-accent .mat-radio-ripple 
+.mat-ripple-element:not(.mat-radio-persistent-ripple), 
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, 
+.mat-radio-button.mat-accent:active 
+.mat-radio-persistent-ripple {
+  background-color: var(--secondary-color);
+}
+
 :root {
   --primary-color: #1A3972;
+  --secondary-color: #009AA9;
   --font-color: white;
-  --background-color: white;
+  --background-color: #f5f5f5;
 }

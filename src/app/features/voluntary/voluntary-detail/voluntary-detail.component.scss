@@ -7,9 +7,25 @@
   column-gap: 20px;
 
   .voluntary-card{
-    max-width: 400px;
+    max-width: 450px;
     position: sticky !important;
     top: 175px;
+
+    .voluntary-header{
+      margin-left: -30px;
+    }
+
+    .content-container{
+
+      p{
+        font-size: 15px;
+        font-weight: 500;
+
+        b{
+          font-weight: 700;
+        }
+      }
+    }
 
     .paragraph{
       padding-top: 10px !important;
@@ -26,7 +42,12 @@
     .open-panel-section{
       padding-bottom: 20px;
 
+      .panel-expanded{
+        // background-color: #f0f8f7;
+      }
+
       .title-donation{
+        font-size: 16px;
         color: var(--primary-color);
         font-weight: 600;
       }
@@ -43,6 +64,15 @@
           width: 20%;
           display: flex;
           justify-content: end;
+        }
+
+        .paragraph-section{
+          font-size: 16px;
+          font-weight: 500;
+
+          span{
+            font-weight: 700;
+          }
         }
       }
     }

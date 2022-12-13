@@ -1,4 +1,4 @@
-<section class="create-voluntary">
+<!-- <section class="create-voluntary">
   <button routerLink="/voluntarios" class="add-user" mat-stroked-button color="primary">
     <div class="button-group">
       <mat-icon class="material-icons-outlined">arrow_back</mat-icon>
@@ -128,4 +128,165 @@
       </div>
     </button>
   </div>
+</section> -->
+
+<section class="create-voluntary">
+  <mat-stepper #stepper>
+    <mat-step [stepControl]="form" errorMessage="Os dados do voluntário são obrigatórios">
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Preencha os dados do voluntário</ng-template>
+
+        <form class="section-form" [formGroup]="form">
+          <div class="form-group">
+
+            <div class="wrapper-form">
+              <mat-form-field class="form-control-custom" appearance="outline">
+                <mat-label>{{name}}</mat-label>
+                <input matInput formControlName="nome" placeholder="Placeholder">
+                <mat-error *ngIf="form?.get('nome')?.hasError('required')">
+                  {{name}} é obrigatório
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="wrapper-form">
+              <mat-form-field class="form-control-custom" appearance="outline">
+                <mat-label>{{documentType}}</mat-label>
+                <input [mask]="documentMask" matInput formControlName="documento" placeholder="Placeholder">
+                <mat-error *ngIf="form?.get('documento')?.hasError('required')">
+                  {{documentType}} é obrigatório
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="form-control form-control-custom" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" placeholder="exemplo@exemplo.com">
+                <mat-error *ngIf="form?.get('email')?.hasError('required')">
+                  Email é obrigatório
+                </mat-error>
+                <mat-error *ngIf="form?.get('email')?.hasError('email')">
+                  Email invalido
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="form-control form-control-custom" appearance="outline">
+                <mat-label>Telefone</mat-label>
+                <input mask="(00) 00000-0000" matInput formControlName="telefone" placeholder="Placeholder">
+                <mat-error *ngIf="form?.get('telefone')?.hasError('required')">
+                  Telefone é obrigatório
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="wrapper-form">
+              <mat-form-field *ngIf="isPersonFisic" class="form-control-custom" appearance="outline">
+                <mat-label>Data de Nascimento</mat-label>
+                <input mask="d0/M0/0000" matInput formControlName="dtNascimento" placeholder="Placeholder">
+                <mat-error *ngIf="form?.get('dtNascimento')?.hasError('required')">
+                  Data de nascimento é obrigatória
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field *ngIf="isPersonFisic" class="form-control-custom" appearance="outline">
+                <mat-label>Escolaridade</mat-label>
+                <mat-select formControlName="escolaridade">
+                  <mat-option *ngFor="let school of schooling" value="{{school}}">{{school}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="wrapper-form">
+              <mat-form-field *ngIf="isPersonFisic" class="form-control-textarea" appearance="outline">
+                <mat-label>Habilidades</mat-label>
+                <textarea type="text" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="4"
+                  cdkAutosizeMaxRows="4" formControlName="habilidade" matInput></textarea>
+              </mat-form-field>
+            </div>
+
+          </div>
+        </form>
+
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="form" errorMessage="Endereço é obrigatório">
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Preencha o endereço</ng-template>
+
+        <div class="section-form">
+          <form class="form-group" [formGroup]="enderecos">
+            <mat-form-field class="form-control-custom" appearance="outline">
+              <mat-label>Endereço</mat-label>
+              <input matInput formControlName="logradouro" placeholder="Quadra 900 Rua 30...">
+            </mat-form-field>
+
+            <mat-form-field class="form-control-custom" appearance="outline">
+              <mat-label>Cidade</mat-label>
+              <input matInput formControlName="cidade" placeholder="exemplo@exemplo.com">
+            </mat-form-field>
+
+            <div class="wrapper-form">
+              <mat-form-field class="form-control-custom" appearance="outline">
+                <mat-label>Estado</mat-label>
+                <input class="input-form" matInput formControlName="estado" placeholder="Placeholder">
+                <mat-error *ngIf=""></mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="form-control-custom" appearance="outline">
+                <mat-label>CEP</mat-label>
+                <input mask="00.000-000" matInput formControlName="cEP" placeholder="Placeholder">
+              </mat-form-field>
+
+              <mat-form-field class="form-control-custom" appearance="outline">
+                <mat-label>Complemento</mat-label>
+                <input matInput formControlName="complemento" placeholder="Placeholder">
+              </mat-form-field>
+
+              <mat-form-field class="form-control-custom" appearance="outline">
+                <mat-label>Numero</mat-label>
+                <input matInput formControlName="numero" placeholder="Placeholder">
+              </mat-form-field>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="button-group">
+          <button mat-raised-button color="primary" matStepperPrevious>Voltar</button>
+          <button mat-raised-button color="primary" matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Enviar</ng-template>   
+        <div [formGroup]="availableForm" class="form-check-available" *ngIf="isPersonFisic">
+          <div class="form-check-control">
+            <div class="check-group">
+              <h4 class="check-group-title">Disponibilidade</h4>
+              <mat-checkbox formControlName="segunda">Segunda</mat-checkbox>
+              <mat-checkbox formControlName="terca">Terça</mat-checkbox>
+              <mat-checkbox formControlName="quarta">Quarta</mat-checkbox>
+              <mat-checkbox formControlName="quinta">Quinta</mat-checkbox>
+              <mat-checkbox formControlName="sexta">Sexta</mat-checkbox>
+            </div>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="turno-group">
+              <h4 class="check-group-title">Período</h4>
+              <mat-radio-button *ngFor="let option of turnoOptions" [value]="option"> {{option}} </mat-radio-button>
+            </mat-radio-group>
+          </div> {{availableForm.value | json}}
+        </div>
+      <div class="send-form">
+        <button mat-raised-button color="primary" matStepperPrevious>Voltar</button>
+        <div class="action-form">
+          <button [disabled]="form.invalid" (click)="send()" class="button-create" mat-raised-button color="primary">
+            <mat-icon>add_circle_outline</mat-icon>
+            <span>Cadastrar</span>
+          </button>
+          <button mat-button (click)="stepper.reset()">Limpar</button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-stepper>
 </section>
