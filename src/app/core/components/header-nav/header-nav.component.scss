@@ -2,12 +2,12 @@ $border-config: 1px solid #e5eaee;
 
 .header-nav {
   width: 100%;
-  height: 165px;
+  // height: 125px;
   border-bottom: 1px solid var(--primary-color);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 0px 26px 30px 26px;
+  padding: 30px 26px;
   box-sizing: border-box;
   background-color: var(--background-color);
 
@@ -52,8 +52,3 @@ $border-config: 1px solid #e5eaee;
   }
 }
 
-@media  screen and (max-width: 1445px) {
-  .header-nav {
-    height: 130px;
-  }
-}

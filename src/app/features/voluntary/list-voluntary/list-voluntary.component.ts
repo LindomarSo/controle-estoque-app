@@ -43,7 +43,6 @@ export class ListVoluntaryComponent implements OnInit {
       next: (paginationResult: PaginationResult<Voluntary[]>) => {
         this.dataSource.data = paginationResult.result;
         this.pagination = paginationResult.pagination;
-        this.toastr.success('voluntários carregados!');
       },
       error: (error: any) => {
         console.error(error);
