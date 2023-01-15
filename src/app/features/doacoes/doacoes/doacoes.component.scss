@@ -45,6 +45,14 @@
     table {
       width: 100%;
 
+      tr.donation-element-row:hover {
+        background: whitesmoke;
+      }
+
+      tr.donation-element-row:active {
+        background: #efefef;
+      }
+
       th:last-child {
         border-top-right-radius: 6px;
         border-bottom-right-radius: 6px;

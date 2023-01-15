@@ -20,7 +20,6 @@ import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.serv
 export class CreateVoluntaryComponent implements OnInit {
 
   form!: FormGroup;
-  availableForm!: FormGroup;
   types!: string[];
   schooling!: any[];
   typePerson!: string;
@@ -31,7 +30,6 @@ export class CreateVoluntaryComponent implements OnInit {
   documentType = 'CPF';
   documentMask = 'CPF';
   name = 'Nome Completo';
-  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno' ];
 
   dateFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
@@ -70,15 +68,6 @@ export class CreateVoluntaryComponent implements OnInit {
       endereco: this.ValidateAddress(),
       habilidade: []
     });
-
-    this.availableForm = this.formBuilder.group({
-      segunda: [false],
-      terca: [false],
-      quarta: [false],
-      quinta: [false],
-      sexta: [false],
-      turno: []
-    });
   }
 
   ValidateAddress(): FormGroup {
@@ -98,7 +87,6 @@ export class CreateVoluntaryComponent implements OnInit {
 
   send(): void {
     if (this.form.valid) {
-      console.log(this.availableForm.value); return;
       this.spinner.show();
       this.voluntaryService.post(this.form.value).subscribe({
         next: () => {

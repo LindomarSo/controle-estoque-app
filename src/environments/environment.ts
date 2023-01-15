@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlBase: 'https://localhost:44365/api/v1/'
+  urlBase: 'http://localhost:5197/api/v1/'
 };
 
 /*

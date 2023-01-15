@@ -10,7 +10,7 @@
       <mat-divider></mat-divider>
       <div class="content-container">
         <mat-card-content>
-          <div *ngIf="voluntary.tipoEntidade == 'Pessoa Física'" class="phifical-person">
+          <div *ngIf="isFisicPerson" class="phifical-person">
             <p class="paragraph"><b>CPF:</b> {{voluntary.documento | cpfFormat }} </p>
             <p><b>Escolaridade:</b> {{voluntary.escolaridade}} </p>
             <p><b>Idade:</b> {{voluntary.dtNascimento}} </p>
@@ -19,7 +19,7 @@
           </div>
         </mat-card-content>
         <mat-card-content>
-          <div *ngIf="voluntary.tipoEntidade == 'Pessoa Jurídica'" class="phifical-person">
+          <div *ngIf="!isFisicPerson" class="phifical-person">
             <p class="paragraph"><b>CNPJ:</b> {{voluntary.documento | cnpjFormat }} </p>
             <p><b>Tipo de voluntário:</b> {{voluntary.tipoEntidade}} </p>
           </div>
@@ -56,26 +56,49 @@
             <div class="content">
               <p class="paragraph-section"> <span>Material doado: </span> {{donation.materialDoado}} </p>
               <p class="paragraph-section"> <span>Destino: </span> {{donation.destino}} </p>
-              <p class="paragraph-section"> <span>Data  </span>de entrada: {{getDate(donation.dtEntrada)}} </p>
+              <p class="paragraph-section"> <span>Data de entrada: </span> {{getDate(donation.dtEntrada)}} </p>
               <p class="paragraph-section"> <span>Destino: </span> {{donation.destino}} </p>
-              <p class="paragraph-section"> <span>Preço: </span> {{donation.preco | number: '1.2-2'}} </p>
-              <p class="paragraph-section"> <span>Quantidade: </span> {{donation.quantidade}} </p>
-              <p class="paragraph-section" *ngIf="donation.disponibilidade"> <span>Disponibilidade: </span>{{donation.disponibilidade}} </p>
-              <p class="paragraph-section" *ngIf="donation.habilidade"> <span>Habilidade: </span>{{donation.habilidade}} </p>
-              <p class="paragraph-section" *ngIf="donation.dtRetirada"> <span> Data de retirada: </span>{{getDate(donation.dtRetirada)}} </p>
-              <p class="paragraph-section" *ngIf="donation.retiradaPor"> <span> Data de retirada: </span>{{donation.retiradaPor}} </p>
+              <p *ngIf="donation.preco" class="paragraph-section"> <span>Preço: </span> {{donation.preco | number: '1.2-2'}} </p>
+              <p *ngIf="donation.quantidade" class="paragraph-section"> <span>Quantidade: </span> {{donation.quantidade}} </p>
+              <p class="paragraph-section" *ngIf="donation.habilidade"> <span>Habilidade: </span>{{donation.habilidade}}
+              </p>
+              <p class="paragraph-section" *ngIf="donation.dtRetirada"> <span> Data de retirada:
+                </span>{{getDate(donation.dtRetirada)}} </p>
+              <p class="paragraph-section" *ngIf="donation.retiradaPor"> <span> Data de retirada:
+                </span>{{donation.retiradaPor}} </p>
+                <button (click)="openDialog(donation)" matTooltip="Editar" mat-raised-button color="warn">
+                  <mat-icon>mode_edit_outline</mat-icon> Editar 
+                </button>
             </div>
             <div class="content-actions">
-              <button (click)="openDialog(donation)" matTooltip="Editar" mat-mini-fab color="warn">
-                <mat-icon>mode_edit_outline</mat-icon>
-              </button>
+              <div *ngIf="donation.turno" class="form-check-available">
+                <div class="form-check-control">
+                  <div class="check-group">
+                    <h4 class="check-group-title"><b>Disponibilidade</b></h4>
+                    <mat-checkbox class="turno-group" [disabled]="true" [(ngModel)]="donation.segunda">Segunda</mat-checkbox>
+                    <mat-checkbox class="turno-group" [disabled]="true" [(ngModel)]="donation.terca">Terça</mat-checkbox>
+                    <mat-checkbox class="turno-group" [disabled]="true" [(ngModel)]="donation.quarta">Quarta</mat-checkbox>
+                    <mat-checkbox class="turno-group" [disabled]="true" [(ngModel)]="donation.quinta">Quinta</mat-checkbox>
+                    <mat-checkbox class="turno-group" [disabled]="true" [(ngModel)]="donation.sexta">Sexta</mat-checkbox>
+                  </div>
+                  <mat-radio-group [(ngModel)]="donation.turno" 
+                                  aria-labelledby="example-radio-group-label" 
+                                  [disabled]="true"
+                                  >
+                    <h4 class="check-group-title"><b>Período</b></h4>
+                    <mat-radio-button class="turno-group" *ngFor="let option of turnoOptions" [value]="option"> {{option}} </mat-radio-button>
+                  </mat-radio-group> 
+                </div> 
+              </div>
             </div>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
 
-    <app-create-donation [voluntaryId]="voluntaryId" (changeDonation)="onChangeDonations($event)"></app-create-donation>
+    <app-create-donation [isFisicPerson]="isFisicPerson" [voluntaryId]="voluntaryId"
+      (changeDonation)="onChangeDonations($event)">
+    </app-create-donation>
   </div>
 
   <!-- CRIAÇÃO DE DOAÇÃO -->

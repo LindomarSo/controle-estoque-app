@@ -25,6 +25,25 @@
         font-weight: 600;
       }
     }
+
+    .form-check-available{
+
+      .form-check-control{
+        display: flex;
+        flex-direction: row;
+        column-gap: 20px;
+
+        .check-group{
+          mat-checkbox{
+            margin-right: 10px;
+          }
+        }
+
+        mat-radio-group mat-radio-button{
+          margin-right: 10px;
+        }
+      }
+    }
   }
 
   .form-group {
