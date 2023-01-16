@@ -18,6 +18,8 @@ export class VoluntaryDetailComponent implements OnInit {
   voluntaryId!: number;
   voluntary: Voluntary = {} as Voluntary;
   panelOpenState = false;
+  checked = false;
+  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno' ];
 
   constructor(private route: ActivatedRoute,
               private voluntaryService: VoluntaryService,
@@ -28,6 +30,10 @@ export class VoluntaryDetailComponent implements OnInit {
   ngOnInit(): void {
     this.voluntaryId = +this.route.snapshot.params['id'];
     this.getVoluntaryById();
+  }
+
+  get isFisicPerson(): boolean{
+    return this.voluntary.tipoEntidade === 'Pessoa Física';
   }
 
   getVoluntaryById(): void {

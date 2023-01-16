@@ -13,12 +13,14 @@ import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 export class CreateDonationComponent implements OnInit {
 
   @Input('voluntaryId') voluntaryId!: number;
+  @Input('isFisicPerson') isFisicPerson: boolean = true;
   @Output('changeDonation') changeDonation: EventEmitter<Donation[]> = new EventEmitter();
   form!: FormGroup;
   donation!: Donation;
   unities!: string[];
   indices: number[] = [];
   indice: number = 0;
+  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno' ];
 
   constructor(private formBuilder: FormBuilder,
     private toastr: ToastrService,
@@ -49,7 +51,13 @@ export class CreateDonationComponent implements OnInit {
       destino: [donation.destino],
       dtEntrada: [donation.dtEntrada],
       entidadeId: [this.voluntaryId],
-      unidade: [donation.unidade]
+      unidade: [donation.unidade],
+      segunda: [false],
+      terca: [false],
+      quarta: [false],
+      quinta: [false],
+      sexta: [false],
+      turno: [donation.turno]
     });
   }
 

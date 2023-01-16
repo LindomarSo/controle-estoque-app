@@ -95,6 +95,23 @@
                   </div>
                 </div>
 
+                <div *ngIf="true" class="form-check-available">
+                  <div class="form-check-control">
+                    <div class="check-group">
+                      <h4 class="check-group-title"><b>Disponibilidade</b></h4>
+                      <mat-checkbox formControlName="segunda">Segunda</mat-checkbox>
+                      <mat-checkbox formControlName="terca">Terça</mat-checkbox>
+                      <mat-checkbox formControlName="quarta">Quarta</mat-checkbox>
+                      <mat-checkbox formControlName="quinta">Quinta</mat-checkbox>
+                      <mat-checkbox formControlName="sexta">Sexta</mat-checkbox>
+                    </div>
+                    <mat-radio-group formControlName="turno" aria-labelledby="example-radio-group-label" class="turno-group">
+                      <h4 class="check-group-title"><b>Período</b></h4>
+                      <mat-radio-button *ngFor="let option of turnoOptions" [value]="option"> {{option}} </mat-radio-button>
+                    </mat-radio-group> 
+                  </div> 
+                </div>
+
               </div>
             </form>
           </div>

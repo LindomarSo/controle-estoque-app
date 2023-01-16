@@ -14,7 +14,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -22,12 +21,13 @@ import { CreateVoluntaryComponent } from './create-voluntary/create-voluntary.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DefaultComponent } from './default/default.component';
 import { ListPartnerComponent } from './list-partner/list-partner.component';
-import {MatRadioModule} from '@angular/material/radio';
 import { DoacoesModule } from '../doacoes/doacoes.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaskModule } from 'ngx-mask'
 import { VoluntaryDetailComponent } from './voluntary-detail/voluntary-detail.component';
 import { UtilsModule } from 'src/app/utils/utils.module';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -43,15 +43,15 @@ import { UtilsModule } from 'src/app/utils/utils.module';
     VoluntaryRoutingModule,
     MatButtonModule,
     MatIconModule,
+    MatRadioModule,
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
     MatTableModule,
-    MatRadioModule,
     MatPaginatorModule,
     MatDividerModule,
-    MatCheckboxModule,
     MatSelectModule,
+    MatCheckboxModule,
     MatExpansionModule,
     MatStepperModule,
     MatTabsModule,

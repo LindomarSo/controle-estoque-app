@@ -17,6 +17,7 @@ export class DonationDetailComponent implements OnInit {
   isDonationDefault: boolean = true;
   unities: string[] = [];
   unidade = '';
+  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno' ];
   @Input('donation') donation!: Donation;
   @Output('donationUpdated') donationUpdated: EventEmitter<Donation> = new EventEmitter();
 
@@ -53,6 +54,12 @@ export class DonationDetailComponent implements OnInit {
       unidade: [],
       dtRetirada: [],
       retiradaPor: [],
+      segunda: [false],
+      terca: [false],
+      quarta: [false],
+      quinta: [false],
+      sexta: [false],
+      turno: []
     });
   }
 

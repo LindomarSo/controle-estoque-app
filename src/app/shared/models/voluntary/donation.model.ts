@@ -14,6 +14,12 @@ export interface Donation {
   habilidade: string;
   unidade: string;
   entidadeId: number;
+  segunda: boolean;
+  terca: boolean;
+  quarta: boolean;
+  quinta: boolean;
+  sexta: boolean;
+  turno: string;
   entidade: EntidadeInfo;
   user: UserInfo;
 }
