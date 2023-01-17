@@ -1,0 +1,145 @@
+.create-donation {
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .card-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+
+  .donation-data{
+    padding-top: 10px;
+
+    .button-group-remove{
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+
+      .donation-name{
+        position: relative;
+        top: 9px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+
+    .form-check-available{
+
+      .form-check-control{
+        display: flex;
+        flex-direction: row;
+        column-gap: 20px;
+
+        .check-group{
+          mat-checkbox{
+            margin-right: 10px;
+          }
+        }
+
+        mat-radio-group mat-radio-button{
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .form-group {
+    width: 100%;
+    padding-top: 15px;
+    border: 0;
+    display: flex;
+    column-gap: 15px;
+
+    .wrapper-form-textarea{
+      width: 100%;
+
+      .form-control-custom {
+        width: 100%;
+      }
+    }
+
+    .wrapper-form-input{
+      width: 100%;
+      padding-right: 20px;
+
+      .wrapper-form {
+        width: 100%;
+        display: flex;
+        column-gap: 10px;
+
+        .form-control-custom {
+          flex-grow: 1;
+          flex-basis: 200px;
+        }
+      }
+
+      .date-picker-form{
+        position: absolute;
+      }
+
+      .date-picker-toggle{
+        width: 100%;
+        position: relative;
+        right: -160px;
+        top: 8px;
+      }
+    }
+  }
+
+  .add-donation {
+    height: 40px;
+
+    .button-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+
+  .button-group-donation {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+  }
+
+
+  .new-donation{
+    padding-top: 15px;
+    margin-left: -5px;
+  }
+
+  .mat-card-footer {
+    display: block;
+    margin: 0 -16px -16px -16px;
+    background: #f7f7f7;
+    padding: 0;
+  }
+
+  .wrapper-date-of-withdrawal{
+    width: inherit;
+    display: flex;
+    column-gap: 15px;
+    padding: 0 10px;
+
+    .form-control-custom {
+      flex-grow: 1;
+      width: 100%;
+
+      .date-of-withdrawal{
+        width: 45.5%;
+        position: absolute;
+      }
+
+      .date-of-drawal-toggle{
+        position: relative;
+        right: -88%;
+        top: 9px;
+      }
+    }
+  }
+}

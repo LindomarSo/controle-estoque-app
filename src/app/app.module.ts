@@ -11,6 +11,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtInterceptor } from './core/interceptors/jwt/jwt.interceptor';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,11 +31,12 @@ import { JwtInterceptor } from './core/interceptors/jwt/jwt.interceptor';
     }),
     NgxSpinnerModule,
     BrowserAnimationsModule,
+    NgChartsModule,
   ],
   providers: [
     ToastrService,
     NgxSpinnerService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

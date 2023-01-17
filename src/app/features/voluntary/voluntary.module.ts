@@ -5,40 +5,64 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { VoluntaryRoutingModule } from './voluntary.routing.module';
 import { ListVoluntaryComponent } from './list-voluntary/list-voluntary.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CreateVoluntaryComponent } from './create-voluntary/create-voluntary.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreatePersonLegalComponent } from './create-person-legal/create-person-legal.component';
 import { DefaultComponent } from './default/default.component';
 import { ListPartnerComponent } from './list-partner/list-partner.component';
 import { DoacoesModule } from '../doacoes/doacoes.module';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgxMaskModule } from 'ngx-mask'
+import { VoluntaryDetailComponent } from './voluntary-detail/voluntary-detail.component';
+import { UtilsModule } from 'src/app/utils/utils.module';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
   declarations: [
     ListVoluntaryComponent,
     CreateVoluntaryComponent,
-    CreatePersonLegalComponent,
     DefaultComponent,
-    ListPartnerComponent
+    ListPartnerComponent,
+    VoluntaryDetailComponent,
   ],
   imports: [
     CommonModule,
     VoluntaryRoutingModule,
     MatButtonModule,
     MatIconModule,
+    MatRadioModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDividerModule,
     MatSelectModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatStepperModule,
     MatTabsModule,
+    MatTooltipModule,
+    MatNativeDateModule,
+    MatCardModule,
+    MatDatepickerModule,
+    NgxMaskModule.forRoot(),
     DoacoesModule,
     FormsModule,
+    UtilsModule,
     ReactiveFormsModule
   ],
   exports: [

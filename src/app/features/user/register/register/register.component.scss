@@ -13,7 +13,7 @@
 
     .title {
       font-weight: 700;
-      font-size: 48px;
+      font-size: 28px;
       line-height: 60px;
       color: var(--primary-color);
     }
@@ -21,7 +21,7 @@
     .form-content {
       display: flex;
       flex-direction: column;
-      margin-top: 45px;
+      margin-top: 14px;
 
       .field {
         width: 100%;
@@ -83,19 +83,12 @@
     transform: scale(0.95);
 
     .left-section {
-
       .title {
-        font-size: 38px;
         line-height: 50px;
-      }
-
-      .form-content {
-        margin-top: 30px;
       }
     }
 
     .right-section {
-
       .page-image {
         margin-top: 85px;
 
@@ -113,9 +106,7 @@
     height: 100%;
 
     .left-section {
-
       .title {
-        font-size: 38px;
         line-height: 50px;
       }
     }

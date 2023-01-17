@@ -1,7 +1,6 @@
 .create-donation {
-  height: 100%;
   box-sizing: border-box;
-  padding: 20px 50px 20px 30px;
+  border-radius: 4px;
 
   .card-title{
     display: flex;
@@ -28,43 +27,90 @@
     }
   }
 
-  .form-group {
-    width: 100%;
-    padding-top: 15px;
-    border: 0;
+  .form-field-group{
     display: flex;
-    column-gap: 25px;
+    border: 0;
+    flex-direction: column;
 
-    .wrapper-form-textarea{
+    .form-group {
       width: 100%;
-
-      .form-control-custom {
+      padding-top: 15px;
+      display: flex;
+      column-gap: 25px;
+  
+      .wrapper-form-textarea{
         width: 100%;
+  
+        .form-control-custom {
+          width: 100%;
+        }
+      }
+  
+      .wrapper-form-input{
+        width: 100%;
+  
+        .wrapper-form {
+          width: 100%;
+          display: flex;
+          column-gap: 20px;
+  
+          .form-control-custom {
+            flex-grow: 1;
+            flex-basis: 200px;
+          }
+        }
+  
+        .date-picker-form{
+          position: absolute;
+        }
+  
+        .date-picker-toggle{
+          width: 100%;
+          position: relative;
+          right: -160px;
+          top: 8px;
+        }
       }
     }
 
-    .wrapper-form-input{
+    .form-check-available{
       width: 100%;
-      padding-right: 20px;
-
-      .wrapper-form {
-        width: 100%;
+  
+      .form-check-control{
         display: flex;
-        column-gap: 30px;
-
-        .form-control-custom {
-          flex-grow: 1;
-          flex-basis: 200px;
+        column-gap: 150px;
+  
+        .check-group{
+          display: flex;
+          flex-direction: column; 
+          gap: 15px;  
+          padding-bottom: 30px;  
+          
+          .check-group-title{
+            width: 100%;
+            font-weight: 700;
+            font-size: 18px;
+          }
+        }
+  
+        .turno-group{
+          display: flex;
+          row-gap: 15px;  
+          flex-direction: column; 
+          
+          .check-group-title{
+            width: 100%;
+            font-weight: 700;
+            font-size: 18px;
+          }
         }
       }
-
     }
   }
 
+
   .add-donation {
-    width: 150px;
-    height: 45px;
-    font-size: 15px;
+    height: 40px;
 
     .button-group {
       display: flex;
@@ -94,8 +140,8 @@
     padding: 0;
 
     .mat-raised-button {
-      border: 2px solid #026902;
-      background-color: #008000;
+      border: 2px solid #009AA9;
+      background-color: #009AA9;
     }
   }
 }

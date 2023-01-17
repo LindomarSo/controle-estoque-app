@@ -58,7 +58,7 @@
       th {
         font-size: 15px;
         font-weight: 600;
-        background-color: var(--primary-color);
+        background-color: var(--secondary-color);
         color: var(--font-color);
       }
 
@@ -84,14 +84,17 @@
         }
       }
     }
+
+    .button-btn{
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background-color: #fff;
+    }
   }
 
   ::ng-deep mat-form-field span.mat-form-field-label-wrapper label {
     color: var(--primary-color) !important;
     font-weight: 500;
   }
-}
-
-.mat-tab-group {
-  // margin-bottom: 10px;
 }

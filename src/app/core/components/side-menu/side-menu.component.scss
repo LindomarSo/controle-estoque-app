@@ -9,8 +9,8 @@ $border-config: 1px solid #e5eaee;
 
   .side-header {
     box-sizing: border-box;
-    height: 165px;
-    border-bottom: $border-config;
+    height: 125px;
+    // border-bottom: $border-config;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,7 +82,7 @@ $border-config: 1px solid #e5eaee;
 
       &.selected {
         .selector {
-          width: 8px;
+          width: 10px;
         }
       }
     }
@@ -103,6 +103,7 @@ $border-config: 1px solid #e5eaee;
         img {
           margin-left: 5px;
           margin-right: 0px;
+          transform: scale(0.7);
         }
 
         h1 {

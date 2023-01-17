@@ -3,10 +3,9 @@
     <label class="welcome-phrase">Seja bem vindo(a),</label>
     <label class="user-name">{{user.nomeCompleto}}</label>
   </div>
-  <button (click)="logout()" class="button-logout" mat-raised-button color="primary">
-    <div class="button-group">
+  <button (click)="logout()" class="button-logout" mat-raised-button color="warn">
+    <div matTooltip="Sair do sistema" class="button-group">
       <mat-icon class="material-icons-outlined">logout</mat-icon>
-      <span>Sair</span>
     </div>
   </button>
 </div>

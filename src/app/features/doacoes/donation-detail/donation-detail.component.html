@@ -1,0 +1,137 @@
+<section class="donation-detail">
+  <!-- <div mat-dialog-content> -->
+    <section class="create-donation">
+      <mat-card>
+        <mat-card-title class="card-title">
+          <span>Doação</span>
+          <mat-icon class="material-icons-outlined">volunteer_activism</mat-icon>
+        </mat-card-title>
+        <mat-card-content>
+          <div class="donation-data">
+            <form [formGroup]="form">
+              <div>
+
+                <fieldset class="form-group">
+
+                  <div class="wrapper-form-textarea">
+                    <mat-form-field class="form-control-custom" appearance="outline">
+                      <mat-label>Material doado</mat-label>
+                      <textarea type="text" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="11"
+                        cdkAutosizeMaxRows="11" formControlName="materialDoado" matInput></textarea>
+                      <mat-error *ngIf="form?.get('materialDoado')?.hasError('required')">
+                        Material doado é obrigatório
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="wrapper-form-input">
+                    <div class="wrapper-form">
+
+                      <mat-form-field class="form-control-custom" appearance="outline">
+                        <mat-label>Preço</mat-label>
+                        <input currencyMask matInput formControlName="preco" placeholder="R$ 0,00">
+                        <mat-error *ngIf="form?.get('preco')?.hasError('required')">
+                          Preço é obrigatório
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field class="form-control-custom" appearance="outline">
+                        <mat-label>Quantidade</mat-label>
+                        <input type="number" matInput formControlName="quantidade" placeholder="Quantidade">
+                        <mat-error *ngIf="form?.get('quantidade')?.hasError('required')">
+                          Quantidade é obrigatório
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="wrapper-form">
+                      <mat-form-field class="form-control-custom" appearance="outline">
+                        <mat-label>Destino</mat-label>
+                        <input matInput formControlName="destino" placeholder="Destino">
+                        <mat-error *ngIf="form?.get('destino')?.hasError('required')">
+                          Destino é obrigatório
+                        </mat-error>
+                      </mat-form-field>
+
+                      <div class="form-control-custom">
+                        <mat-form-field class="date-picker-form" appearance="outline">
+                          <mat-label>Data de entrada</mat-label>
+                          <input (click)="picker.open()" matInput [matDatepicker]="picker"
+                           formControlName="dtEntrada" placeholder="Data de entrada">
+                          <mat-datepicker #picker></mat-datepicker>
+                          <mat-error *ngIf="form?.get('dtEntrada')?.hasError('required')">
+                            Data de entrada é obrigatória
+                          </mat-error>
+                        </mat-form-field>
+                        <mat-datepicker-toggle class="date-picker-toggle" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                      </div>
+                    </div>
+
+                    <div class="wrapper-form">
+                      <mat-form-field class="form-control-custom" appearance="outline">
+                        <mat-label>Unidade</mat-label>
+                        <mat-select formControlName="unidade">
+                          <mat-option *ngFor="let unity of unities" [value]="unity"> {{unity == unidade ? unity : unity}} </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <div class="wrapper-date-of-withdrawal">
+                  <mat-form-field class="form-control-custom" appearance="outline">
+                    <mat-label>Retirada por</mat-label>
+                    <input matInput formControlName="retiradaPor" placeholder="Destino">
+                  </mat-form-field>
+
+                  <div class="form-control-custom">
+                    <mat-form-field class="date-of-withdrawal" appearance="outline">
+                      <mat-label>Data de retirada</mat-label>
+                      <input (click)="whithdrawal.open()" matInput [matDatepicker]="whithdrawal"
+                       formControlName="dtRetirada" placeholder="Data de entrada">
+                      <mat-datepicker #whithdrawal></mat-datepicker>
+                    </mat-form-field>
+                    <mat-datepicker-toggle class="date-of-drawal-toggle" matIconSuffix [for]="whithdrawal"></mat-datepicker-toggle>
+                  </div>
+                </div>
+
+                <div *ngIf="true" class="form-check-available">
+                  <div class="form-check-control">
+                    <div class="check-group">
+                      <h4 class="check-group-title"><b>Disponibilidade</b></h4>
+                      <mat-checkbox formControlName="segunda">Segunda</mat-checkbox>
+                      <mat-checkbox formControlName="terca">Terça</mat-checkbox>
+                      <mat-checkbox formControlName="quarta">Quarta</mat-checkbox>
+                      <mat-checkbox formControlName="quinta">Quinta</mat-checkbox>
+                      <mat-checkbox formControlName="sexta">Sexta</mat-checkbox>
+                    </div>
+                    <mat-radio-group formControlName="turno" aria-labelledby="example-radio-group-label" class="turno-group">
+                      <h4 class="check-group-title"><b>Período</b></h4>
+                      <mat-radio-button *ngFor="let option of turnoOptions" [value]="option"> {{option}} </mat-radio-button>
+                    </mat-radio-group> 
+                  </div> 
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </mat-card-content>
+        <mat-card-footer>
+          <div class="button-group-donation">
+            <!-- <div mat-dialog-actions> -->
+              <button class="add-donation" (click)="closeModal()" color="warn" mat-raised-button>Cancelar</button>
+            <!-- </div> -->
+            <div>
+              <button [disabled]="form.invalid" (click)="send()" class="add-donation" mat-raised-button color="primary">
+                <div class="button-group">
+                  <span>Atualizar</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </mat-card-footer>
+      </mat-card>
+    </section>
+
+  <!-- </div> -->
+</section>

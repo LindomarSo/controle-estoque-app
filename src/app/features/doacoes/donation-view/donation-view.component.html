@@ -1,0 +1,58 @@
+<section class="donation-view">
+  <h1 mat-dialog-title>Detalhes da doação</h1>
+  <div mat-dialog-content>
+    <div class="wrapper-section">
+      <div class="contact-section">
+        <h3 class="view-title">
+          <mat-icon class="icon-color">person_outline</mat-icon> Contato
+        </h3>
+        <p class="donation-item">
+          <span class="donation-prefix"> Voluntário: </span>
+          {{ data.entidade.nome }}
+        </p>
+        <p class="donation-item">
+          <span class="donation-prefix"> Telefone: </span>
+          {{ data.entidade.telefone | PhoneFormatPipe }}
+        </p>
+        <mat-divider></mat-divider>
+        <p style="padding-top: 15px" class="donation-item">
+          <span class="donation-prefix"> Modificado por: </span>
+          {{ data.user.nomeCompleto }}
+        </p>
+      </div>
+      <div class="donation-section">
+        <h3 class="view-title">
+          <mat-icon class="icon-color">volunteer_activism</mat-icon> Doação
+        </h3>
+        <p class="donation-item">
+          <span class="donation-prefix"> Material doado: </span>
+          {{ data.materialDoado }}
+        </p>
+        <p class="donation-item">
+          <span class="donation-prefix"> Preço: </span> {{ data.preco }}
+        </p>
+        <p class="donation-item">
+          <span class="donation-prefix"> Quantidade: </span>
+          {{ data.quantidade }}
+        </p>
+        <p class="donation-item">
+          <span class="donation-prefix"> Data de Entrada: </span>
+          {{ getDate(data.dtEntrada) }}
+        </p>
+        <p class="donation-item">
+          <span class="donation-prefix"> Unidade: </span> {{ data.unidade }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-dilog" mat-dialog-actions>
+    <button
+      class="close-button"
+      mat-raised-button
+      mat-dialog-close
+      color="warn"
+    >
+      Fechar
+    </button>
+  </div>
+</section>

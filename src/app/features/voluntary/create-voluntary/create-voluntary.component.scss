@@ -1,116 +1,60 @@
-.create-voluntary {
+.create-voluntary{
   height: 100%;
   box-sizing: border-box;
   padding: 20px 50px 20px 30px;
 
-  .add-user {
-    width: 125px;
-    height: 45px;
-    font-size: 15px;
-
-    .button-group {
+  .section-form{
+    
+    .form-group{
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-  }
+      flex-wrap: wrap;
+      column-gap: 15px;
 
-  .address-contact {
-    width: 100%;
-    padding-top: 20px;
-    display: flex;
-    column-gap: 50px;
+      .form-control-custom{
+        width: 100%;
+        flex-grow: 1;
+        flex-basis: 200px;
+      }
 
-    .section-left {
-      width: 100%;
-      padding-right: 10px;
-
-      .form-group {
+      .wrapper-form{
         width: 100%;
         display: flex;
-        flex-wrap: wrap;
-        column-gap: 30px;
+        column-gap: 20px;
 
-        .mat-form-field-appearance-outline .mat-form-field-infix {
-          font-size: 15px;
-          padding: 11px;
-        }
-
-        .form-control,
-        .form-control-level {
-          flex-grow: 1;
-          flex-basis: 300px;
-        }
-
-        .wrapper-form {
+        .form-control-textarea{
           width: 100%;
-          display: flex;
-          flex-wrap: wrap;
-          column-gap: 30px;
-
-          .form-control-custom {
-            flex-grow: 2;
-            flex-basis: 200px;
-          }
-        }
-
-        .form-control-textarea {
-          flex-grow: 2;
-          flex-basis: 600px;
         }
       }
     }
+  }
 
-    .section-right {
-      width: 100%;
-      padding-left: 10px;
+  .button-group{
+    display: flex;
+    column-gap: 15px;
+  }
 
-      .form-group {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 30px;
+  .send-form{
+    display: flex;
+    justify-content: space-between;
+  }
 
-        .wrapper-form {
-          width: 100%;
-          display: flex;
-          flex-wrap: wrap;
-          column-gap: 30px;
+  .action-form{
 
-          .form-control-custom {
-            flex-grow: 2;
-            flex-basis: 200px;
-          }
-        }
-
-        .form-control {
-          flex-grow: 1;
-          flex-basis: 300px;
-        }
-
-        .form-control-textarea {
-          flex-grow: 2;
-          flex-basis: 600px;
-        }
+    .button-create{
+      
+      span{
+        margin-left: 5px;
       }
     }
-
+    
+    .mat-raised-button {
+      border: 2px solid #009AA9;
+      background-color: #009AA9;
+    }
   }
-
-  .mat-stroked-button {
-    border: 2px solid var(--primary-color);
-  }
-
-  input.mat-input-element {
-    margin-top: -4.0625em;
-    font-size: 15px;
-  }
-
-  .edit-button-group {
-    width: 100%;
-    display: flex;
-    justify-content: start;
+  
+  .mat-mdc-form-field {
+    margin-top: 16px;
+    padding: 20px;
   }
 }
-
