@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/core/services/account/account.service';
-import { User } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/shared/models/user/user.model';
 
 @Component({
   selector: 'app-home',

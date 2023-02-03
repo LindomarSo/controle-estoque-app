@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 import { PagesService } from './core/domains/pages.service';
 import { AccountService } from './core/services/account/account.service';
-import { User } from './shared/models/user.model';
+import { User } from './shared/models/user/user.model';
 
 @Component({
   selector: 'app-root',

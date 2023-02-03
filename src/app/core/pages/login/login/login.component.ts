@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/core/services/account/account.service';
-import { Login } from 'src/app/shared/models/login.model';
+import { Login } from 'src/app/shared/models/user/login.model';
 
 @Component({
   selector: 'app-login',

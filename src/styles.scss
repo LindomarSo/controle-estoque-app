@@ -21,6 +21,7 @@ body {
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
   color: var(--secondary-color);
+  background-color: var(--font-color);
 }
 
 .mat-dialog-container {
@@ -44,6 +45,24 @@ body {
 .mat-radio-button.mat-accent:active 
 .mat-radio-persistent-ripple {
   background-color: var(--secondary-color);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #777 #ccc;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ccc;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #777;
+  border-radius: 20px;
 }
 
 :root {

@@ -11,6 +11,8 @@
     .form-group {
       display: flex;
       align-items: center;
+      width: 60%;
+      column-gap: 10px;
 
       .input-search{
         width: 100%;
@@ -27,7 +29,8 @@
     }
 
     .add-user {
-      width: 155px;
+      width: 100%;
+      max-width: 250px;
 
       .button-group {
         display: flex;

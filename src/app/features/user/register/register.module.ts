@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgxMaskModule } from 'ngx-mask';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { RegisterRoutingModule } from './register-routing.module';
 
@@ -20,6 +20,7 @@ import { LogoModule } from 'src/app/core/components/logo/logo.module';
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
+    FormsModule,
     MatInputModule,
     MatSelectModule,
     NgxMaskModule.forRoot(),

@@ -4,27 +4,26 @@
       <div class="form-group">
         <mat-form-field class="input-search" appearance="outline">
           <mat-label>Procurar</mat-label>
-          <input matInput placeholder="Buscar">
+          <input (input)="filterDonations($event.target)" matInput placeholder="Buscar"> 
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-        <button class="filter-column" mat-button color="primary">
-          <div class="button-group">
-            <span>Limpar</span>
-          </div>
-        </button>
+  
+        <mat-form-field class="add-user" appearance="outline">
+          <mat-label class="button-group">
+            <span>Filtrar por tipo de voluntário</span>
+          </mat-label>
+          <mat-select (selectionChange)="getByPersonSelected()" [(ngModel)]="personSelected" name="person">
+            <mat-option *ngFor="let person of typePerson" [value]="person">{{person}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
       </div>
-      <mat-form-field class="add-user" appearance="outline">
-        <mat-label class="button-group">
-          <mat-icon class="material-icons-outlined">person_add_alt</mat-icon>
-          <span>Adicionar</span>
-        </mat-label>
-        <mat-select>
-          <mat-option [routerLink]="['criar-voluntario','fisica']" value="one">Pessoa Física</mat-option>
-          <mat-option [routerLink]="['criar-voluntario','juridica']" value="two">Pessoa Jurídica</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <button (click)="cleanFiltter()" class="filter-column" mat-button color="primary">
+        <div class="button-group">
+          <span>Limpar</span>
+        </div>
+      </button>
     </div>
-
     <div class="table">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="doador">
