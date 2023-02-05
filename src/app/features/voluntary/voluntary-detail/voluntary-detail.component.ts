@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -11,9 +12,19 @@ import { DonationDetailComponent } from '../../doacoes/donation-detail/donation-
 @Component({
   selector: 'app-voluntary-detail',
   templateUrl: './voluntary-detail.component.html',
-  styleUrls: ['./voluntary-detail.component.scss']
+  styleUrls: ['./voluntary-detail.component.scss'], 
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class VoluntaryDetailComponent implements OnInit {
+
+  dataSource: any;
+  displayedColumns: string[] = ['materialDoado', 'destino', 'unidade', 'quantidade', 'estoque', 'acoes'];
 
   voluntaryId!: number;
   voluntary: Voluntary = {} as Voluntary;
@@ -42,6 +53,7 @@ export class VoluntaryDetailComponent implements OnInit {
     this.voluntaryService.getVoluntaryById(this.voluntaryId).subscribe({
       next: (voluntary: Voluntary) => {
         this.voluntary = voluntary;
+        this.dataSource = this.voluntary.doacoes;
       },
       error: () => {
         this.toastr.error('Erro ao carregar voluntário');
@@ -51,9 +63,11 @@ export class VoluntaryDetailComponent implements OnInit {
 
   onChangeDonations(donations: Donation[]){
     this.voluntary.doacoes = donations;
+    this.dataSource = this.voluntary.doacoes;
   }
 
   openDialog(donation: Donation) {
+    donation.entidadeId = this.voluntaryId;
     this.dialog.open(DonationDetailComponent, { data: { donate: donation, voluntaryId: this.voluntaryId }});
   }
 

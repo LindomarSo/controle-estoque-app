@@ -23,7 +23,6 @@ import { DonationViewComponent } from './donation-view/donation-view.component';
 import { PhoneFormatPipe } from 'src/app/utils/phone-format.pipe';
 import { VoluntaryModule } from '../voluntary/voluntary.module';
 import { UtilsModule } from 'src/app/utils/utils.module';
-import { DonationDefaultComponent } from './donation-default/donation-default.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 export const customCurrencyMaskConfig = {
@@ -66,7 +65,7 @@ export const customCurrencyMaskConfig = {
     DoacoesComponent, 
     CreateDonationComponent, 
     DonationDetailComponent, 
-    DonationViewComponent, DonationDefaultComponent,
+    DonationViewComponent,
   ],
   exports: [DoacoesComponent, CreateDonationComponent],
   providers: [

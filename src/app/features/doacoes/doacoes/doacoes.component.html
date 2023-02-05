@@ -3,8 +3,8 @@
     <div class="section-search">
       <div class="form-group">
         <mat-form-field class="input-search" appearance="outline">
-          <mat-label>Procurar</mat-label>
-          <input (input)="filterDonations($event.target)" matInput placeholder="Buscar"> 
+          <mat-label>Buscar</mat-label>
+          <input (input)="filterDonations($event.target)" matInput placeholder="Doador ou pelo material doado"> 
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
   
@@ -32,7 +32,7 @@
         </ng-container>
         <ng-container matColumnDef="doacao">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Material Doado </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.materialDoado}} </td>
+          <td class="center-content" mat-cell *matCellDef="let element"> {{getTitle(element.materialDoado)}} </td>
         </ng-container>
         <ng-container matColumnDef="destino">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Destino </th>
@@ -46,6 +46,10 @@
           <th class="center-content" mat-header-cell *matHeaderCellDef>Quantidade</th>
           <td class="center-content" mat-cell *matCellDef="let element">{{element.quantidade}} </td>
         </ng-container>
+        <ng-container matColumnDef="estoque">
+          <th class="center-content" mat-header-cell *matHeaderCellDef> Estoque </th>
+          <td  class="center-content" mat-cell *matCellDef="let element"> {{element.estoque === 0 ? 'Esgotado' : element.estoque}} </td>
+        </ng-container>
         <ng-container matColumnDef="unidade">
           <th class="center-content" mat-header-cell *matHeaderCellDef>Unidade </th>
           <td class="center-content" mat-cell *matCellDef="let element">{{element.unidade}} </td>
@@ -54,7 +58,7 @@
           <th class="center-content" mat-header-cell *matHeaderCellDef></th>
           <td class="center-content" mat-cell *matCellDef="let element">              
               <span style="cursor: pointer;" (click)="openView(element)">
-                <mat-icon class="material-icons-outlined">
+                <mat-icon color="warn" class="material-icons-outlined">
                   more_vert
                 </mat-icon>
               </span>

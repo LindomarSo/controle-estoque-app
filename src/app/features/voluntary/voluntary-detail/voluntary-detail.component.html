@@ -41,59 +41,59 @@
   <!-- CRIAÇÃO DE DOAÇÃO -->
 
   <div class="donation-section">
-    <div class="open-panel-section" *ngFor="let donation of voluntary.doacoes">
-      <mat-accordion>
-        <mat-expansion-panel class="panel-expanded" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title class="title-donation">
-              {{ getTitle(donation.materialDoado)}}
-            </mat-panel-title>
-            <mat-panel-description>
-              <span class="title-donation">Unidade: {{ donation.unidade }}</span>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="content-section">
-            <div class="content">
-              <p class="paragraph-section"> <span>Material doado: </span> {{donation.materialDoado}} </p>
-              <p class="paragraph-section"> <span>Destino: </span> {{donation.destino}} </p>
-              <p class="paragraph-section"> <span>Data de entrada: </span> {{getDate(donation.dtEntrada)}} </p>
-              <p class="paragraph-section"> <span>Destino: </span> {{donation.destino}} </p>
-              <p *ngIf="donation.preco" class="paragraph-section"> <span>Preço: </span> {{donation.preco | number: '1.2-2'}} </p>
-              <p *ngIf="donation.quantidade" class="paragraph-section"> <span>Quantidade: </span> {{donation.quantidade}} </p>
-              <p class="paragraph-section" *ngIf="donation.habilidade"> <span>Habilidade: </span>{{donation.habilidade}}
-              </p>
-              <p class="paragraph-section" *ngIf="donation.dtRetirada"> <span> Data de retirada:
-                </span>{{getDate(donation.dtRetirada)}} </p>
-              <p class="paragraph-section" *ngIf="donation.retiradaPor"> <span> Data de retirada:
-                </span>{{donation.retiradaPor}} </p>
-                <button (click)="openDialog(donation)" matTooltip="Editar" mat-raised-button color="warn">
-                  <mat-icon>mode_edit_outline</mat-icon> Editar 
-                </button>
-            </div>
-            <div class="content-actions">
-              <div *ngIf="donation.turno" class="form-check-available">
-                <div class="form-check-control">
-                  <div class="check-group">
-                    <h4 class="check-group-title"><b>Disponibilidade</b></h4>
-                    <mat-checkbox class="turno-group" [disabled]="true" [(ngModel)]="donation.segunda">Segunda</mat-checkbox>
-                    <mat-checkbox class="turno-group" [disabled]="true" [(ngModel)]="donation.terca">Terça</mat-checkbox>
-                    <mat-checkbox class="turno-group" [disabled]="true" [(ngModel)]="donation.quarta">Quarta</mat-checkbox>
-                    <mat-checkbox class="turno-group" [disabled]="true" [(ngModel)]="donation.quinta">Quinta</mat-checkbox>
-                    <mat-checkbox class="turno-group" [disabled]="true" [(ngModel)]="donation.sexta">Sexta</mat-checkbox>
-                  </div>
-                  <mat-radio-group [(ngModel)]="donation.turno" 
-                                  aria-labelledby="example-radio-group-label" 
-                                  [disabled]="true"
-                                  >
-                    <h4 class="check-group-title"><b>Período</b></h4>
-                    <mat-radio-button class="turno-group" *ngFor="let option of turnoOptions" [value]="option"> {{option}} </mat-radio-button>
-                  </mat-radio-group> 
-                </div> 
-              </div>
-            </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+    <div *ngIf="voluntary.doacoes.length > 0" class="open-panel-section">
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="materialDoado">
+          <th mat-header-cell *matHeaderCellDef> Material Doado </th>
+          <td mat-cell *matCellDef="let element"> {{getTitle(element.materialDoado)}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="destino">
+          <th mat-header-cell *matHeaderCellDef> Destino </th>
+          <td mat-cell *matCellDef="let element"> {{element.destino}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="unidade">
+          <th mat-header-cell *matHeaderCellDef> Unidade </th>
+          <td mat-cell *matCellDef="let element"> {{element.unidade}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="quantidade">
+          <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+          <td mat-cell *matCellDef="let element"> {{element.quantidade}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="estoque">
+          <th mat-header-cell *matHeaderCellDef> Estoque </th>
+          <td mat-cell *matCellDef="let element"> {{element.estoque}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td matTooltip="Detalhes" 
+              (click)="openDialog(element)" 
+              matTooltipPosition="left"
+              mat-cell *matCellDef="let element">                          
+            <span style="cursor: pointer;">
+              <mat-icon color="warn" class="material-icons-outlined">
+                more_vert
+              </mat-icon>
+            </span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="donation-element-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
     </div>
 
     <app-create-donation [isFisicPerson]="isFisicPerson" [voluntaryId]="voluntaryId"

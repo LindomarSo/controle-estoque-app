@@ -1,7 +1,8 @@
 .create-donation {
   box-sizing: border-box;
   border-radius: 4px;
-
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+ 
   .card-title{
     display: flex;
     align-items: center;
@@ -71,43 +72,27 @@
           top: 8px;
         }
       }
-    }
+    }    
 
     .form-check-available{
-      width: 100%;
-  
+
       .form-check-control{
         display: flex;
-        column-gap: 150px;
-  
+        flex-direction: row;
+        column-gap: 20px;
+
         .check-group{
-          display: flex;
-          flex-direction: column; 
-          gap: 15px;  
-          padding-bottom: 30px;  
-          
-          .check-group-title{
-            width: 100%;
-            font-weight: 700;
-            font-size: 18px;
+          mat-checkbox{
+            margin-right: 10px;
           }
         }
-  
-        .turno-group{
-          display: flex;
-          row-gap: 15px;  
-          flex-direction: column; 
-          
-          .check-group-title{
-            width: 100%;
-            font-weight: 700;
-            font-size: 18px;
-          }
+
+        mat-radio-group mat-radio-button{
+          margin-right: 10px;
         }
       }
     }
   }
-
 
   .add-donation {
     height: 40px;

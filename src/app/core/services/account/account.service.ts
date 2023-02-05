@@ -40,6 +40,10 @@ export class AccountService {
     return this.http.get<User>(`${this.urlBase}/getuser`).pipe(take(1));
   }
 
+  public getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.urlBase}/lista`).pipe(take(1));
+  }
+
   public createUser(model: User): Observable<User> {
     return this.http.post<User>(`${this.urlBase}/register`, model).pipe(take(1));
   }

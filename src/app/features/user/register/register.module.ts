@@ -25,7 +25,7 @@ import { LogoModule } from 'src/app/core/components/logo/logo.module';
     MatSelectModule,
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
-    RegisterRoutingModule,
+    RegisterRoutingModule
   ],
 })
 export class RegisterModule {}

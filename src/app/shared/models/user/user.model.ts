@@ -1,3 +1,4 @@
+import { UserRole } from './userRole';
 export interface User {
   id: number;
   userName: string;
@@ -6,4 +7,6 @@ export interface User {
   phoneNumber: string;
   password: string;
   token: string;
+
+  userRoles: UserRole[];
 }

@@ -3,11 +3,11 @@
     <div class="section-search">
       <div class="form-group">
         <mat-form-field class="input-search" appearance="outline">
-          <mat-label>Procurar</mat-label>
-          <input matInput placeholder="Buscar">
+          <!-- <mat-label>Procurar</mat-label> -->
+          <input id="search" (input)="filterEntities($event.target)" matInput placeholder="Nome, CPF ou e-mail">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-        <button class="filter-column" mat-button color="primary">
+        <button (click)="cleanFiltter()" class="filter-column" mat-button color="primary">
           <div class="button-group">
             <span>Limpar</span>
           </div>
@@ -57,7 +57,8 @@
             <button class="button-btn" [routerLink]="['detalhe', element.id]">
               <mat-icon style="cursor: pointer;" class="material-icons-outlined">
               more_vert
-            </mat-icon></button>
+            </mat-icon>
+          </button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

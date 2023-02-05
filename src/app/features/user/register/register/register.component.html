@@ -24,7 +24,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Selecione uma permissão</mat-label>
-        <mat-select formControlName="perfil" [(ngModel)]="perfil"> {{perfil}}
+        <mat-select formControlName="perfil" [(ngModel)]="perfil">
           <mat-option 
             *ngFor="let role of roles"
             [value]="role.name"> 
@@ -50,7 +50,7 @@
       </div>
 
       <div class="action-button">
-        <button [disabled]="registerUserForm.invalid" class="login-button" color="primary" mat-raised-button type="submit">
+        <button class="login-button" color="primary" mat-raised-button type="submit">
           Cadastrar
         </button>
         <button color="primary" (click)="resetForm()" mat-button type="button">
