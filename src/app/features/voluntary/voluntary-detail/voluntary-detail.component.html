@@ -41,7 +41,7 @@
   <!-- CRIAÇÃO DE DOAÇÃO -->
 
   <div class="donation-section">
-    <div *ngIf="voluntary.doacoes.length > 0" class="open-panel-section">
+    <div *ngIf="voluntary?.doacoes?.length" class="open-panel-section">
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
 

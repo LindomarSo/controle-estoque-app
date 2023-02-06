@@ -60,16 +60,24 @@
             flex-basis: 200px;
           }
         }
+
+        // .date-picker-form-wrapper{
+        //   width: 50%;
+        //   position: absolute;
+        //   right: -300px;
+        // }
   
         .date-picker-form{
-          position: absolute;
+          // position: absolute;
+          width: 100%;
         }
   
         .date-picker-toggle{
           width: 100%;
           position: relative;
           right: -160px;
-          top: 8px;
+          top: -30px;
+          display: none;
         }
       }
     }    

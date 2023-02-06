@@ -18,7 +18,7 @@ export class DonationDetailComponent implements OnInit {
   unities: string[] = [];
   unidade = '';
   entidadeId = 0;
-  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno' ];
+  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno'];
   @Input('donation') donation!: Donation;
   availability = null;
   @Output('donationUpdated') donationUpdated: EventEmitter<Donation> = new EventEmitter();
@@ -78,11 +78,19 @@ export class DonationDetailComponent implements OnInit {
   }
 
   send(): void {
-    this.spinner.show();
 
     if (!this.isDonationDefault)
       this.form.controls['entidadeId'].setValue(this.data.voluntaryId ? this.data.voluntaryId : this.data.donate.entidadeId);
 
+    let qtd = this.donation?.quantidade ? this.donation.quantidade : this.data.donate.quantidade;
+    let estoque = this.form.controls['estoque'].value;
+
+    if (estoque > qtd) {
+      this.toastr.info('O estoque máximo deve ser menor ou igual  a '+qtd);
+      return;
+    }
+
+    this.spinner.show();
     this.donationService.updateDonation(this.form.value).subscribe({
       next: (donation: Donation) => {
         if (this.isDonationDefault)
