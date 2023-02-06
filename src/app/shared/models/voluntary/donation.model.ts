@@ -1,4 +1,4 @@
-import { UserInfo } from "../user.info";
+import { UserInfo } from "../user/user.info";
 import { EntidadeInfo } from "./voluntary.info";
 
 export interface Donation {

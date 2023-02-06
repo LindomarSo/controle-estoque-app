@@ -36,9 +36,9 @@
                       </mat-form-field>
 
                       <mat-form-field class="form-control-custom" appearance="outline">
-                        <mat-label>Quantidade</mat-label>
-                        <input type="number" matInput formControlName="quantidade" placeholder="Quantidade">
-                        <mat-error *ngIf="form?.get('quantidade')?.hasError('required')">
+                        <mat-label>Estoque</mat-label>
+                        <input type="number" matInput formControlName="estoque" placeholder="Estoque">
+                        <mat-error *ngIf="form?.get('estoque')?.hasError('required')">
                           Quantidade é obrigatório
                         </mat-error>
                       </mat-form-field>
@@ -95,7 +95,7 @@
                   </div>
                 </div>
 
-                <div *ngIf="true" class="form-check-available">
+                <div *ngIf="availability" class="form-check-available">
                   <div class="form-check-control">
                     <div class="check-group">
                       <h4 class="check-group-title"><b>Disponibilidade</b></h4>

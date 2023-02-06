@@ -26,7 +26,7 @@ export class SideMenuComponent implements OnInit {
     {
       label: 'Admin',
       icon: 'settings',
-      link: 'cadastro-usuario',
+      link: 'usuarios',
     }
   ];
 

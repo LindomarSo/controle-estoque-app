@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { take, map } from 'rxjs/operators'
 import { PaginationResult } from 'src/app/shared/models/pagination/pagination.model';
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
@@ -15,7 +15,8 @@ export class DonationService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(pageNumber?: number | string, pageSize?: number | string, search?: string): Observable<PaginationResult<Donation[]>>{
+  getAll(pageNumber?: number | string, pageSize?: number | string, search?: string, typePerson?: string)
+    : Observable<PaginationResult<Donation[]>>{
     const paginationResult: PaginationResult<Donation[]> = new PaginationResult<Donation[]>();
     let httpParams = new HttpParams();
 
@@ -26,6 +27,10 @@ export class DonationService {
 
     if (!!search) {
       httpParams = httpParams.append('descricao', search)
+    }
+
+    if (!!typePerson) {
+      httpParams = httpParams.append('tipoEntidade', typePerson)
     }
 
     return this.http.get<Donation[]>(this.url, { observe: 'response', params: httpParams}).pipe(take(1), map((response: any) => {

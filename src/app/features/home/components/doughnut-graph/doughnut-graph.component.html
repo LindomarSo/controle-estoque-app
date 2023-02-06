@@ -1,7 +1,7 @@
 <p>doughnut-graph works!</p>
 
 <div class="chart-container">
-  <canvas
+  <!-- <canvas
     baseChart
     [labels]="doughnutChartLabels"
     [datasets]="doughnutChartDatasets"
@@ -9,5 +9,12 @@
     [legend]="true"
     [type]="'doughnut'"
   >
-  </canvas>
+  </canvas> -->
+  <canvas baseChart
+  [datasets]="barChartData"
+  [labels]="barChartLabels"
+  [options]="barChartOptions"
+  [legend]="barChartLegend"
+  [type]="'bar'">
+</canvas>
 </div>

@@ -1,5 +1,9 @@
 .mat-tab-group{
-  .mat-tab-label{
-    color: black;
+  margin-top: 20px;
+
+  ::ng-deep .mat-tab-label{
+    color: var(--primary-color) !important;
+    font-weight: 700;
+    font-size: 15px;
   }
 }

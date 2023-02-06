@@ -4,10 +4,10 @@
       <div class="form-group">
         <mat-form-field class="input-search" appearance="outline">
           <mat-label>Procurar</mat-label>
-          <input matInput placeholder="Buscar">
+          <input id="search" (input)="filterEntities($event.target)" matInput placeholder="Nome, CNPJ ou e-mail">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-        <button class="filter-column" mat-button color="primary">
+        <button (click)="cleanFiltter()" class="filter-column" mat-button color="primary">
           <div class="button-group">
             <span>Limpar</span>
           </div>

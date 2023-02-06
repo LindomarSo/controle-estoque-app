@@ -17,8 +17,10 @@ export class DonationDetailComponent implements OnInit {
   isDonationDefault: boolean = true;
   unities: string[] = [];
   unidade = '';
-  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno' ];
+  entidadeId = 0;
+  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno'];
   @Input('donation') donation!: Donation;
+  availability = null;
   @Output('donationUpdated') donationUpdated: EventEmitter<Donation> = new EventEmitter();
 
   constructor(public dialog: MatDialog,
@@ -29,16 +31,24 @@ export class DonationDetailComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.getUnities();
     this.validation();
+    this.getUnities();
+    this.getLoadDonation();
+  }
+
+  private getLoadDonation() {
     if (this.data.donate) {
       this.unidade = this.data.donate.unidade;
       this.form.patchValue(this.data.donate);
       this.isDonationDefault = false;
+      this.availability = this.data.donate.disponibilidade;
+      this.entidadeId = this.data.donate.entidadeId;
     }
-    else{      
+    else {
       this.form.patchValue(this.donation);
       this.unidade = this.donation.unidade;
+      this.availability = this.data.disponibilidade;
+      this.entidadeId = this.donation.entidadeId;
     }
   }
 
@@ -47,10 +57,10 @@ export class DonationDetailComponent implements OnInit {
       id: [],
       materialDoado: [],
       preco: [],
-      quantidade: [],
+      estoque: [],
       destino: [],
       dtEntrada: [],
-      entidadeId: [this.data.entidadeId],
+      entidadeId: [],
       unidade: [],
       dtRetirada: [],
       retiradaPor: [],
@@ -68,11 +78,19 @@ export class DonationDetailComponent implements OnInit {
   }
 
   send(): void {
-    this.spinner.show();
 
     if (!this.isDonationDefault)
-      this.form.controls['entidadeId'].setValue(this.data.voluntaryId);
+      this.form.controls['entidadeId'].setValue(this.data.voluntaryId ? this.data.voluntaryId : this.data.donate.entidadeId);
 
+    let qtd = this.donation?.quantidade ? this.donation.quantidade : this.data.donate.quantidade;
+    let estoque = this.form.controls['estoque'].value;
+
+    if (estoque > qtd) {
+      this.toastr.info('O estoque máximo deve ser menor ou igual  a '+qtd);
+      return;
+    }
+
+    this.spinner.show();
     this.donationService.updateDonation(this.form.value).subscribe({
       next: (donation: Donation) => {
         if (this.isDonationDefault)

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { take, map } from 'rxjs/operators';
 import { Observable, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/shared/models/user/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,5 +38,13 @@ export class AccountService {
 
   public getUser(): Observable<User> {
     return this.http.get<User>(`${this.urlBase}/getuser`).pipe(take(1));
+  }
+
+  public getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.urlBase}/lista`).pipe(take(1));
+  }
+
+  public createUser(model: User): Observable<User> {
+    return this.http.post<User>(`${this.urlBase}/register`, model).pipe(take(1));
   }
 }

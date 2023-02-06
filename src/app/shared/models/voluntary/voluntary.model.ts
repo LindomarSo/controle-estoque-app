@@ -1,5 +1,5 @@
 import { Address } from "./address.model";
-import { User } from '../user.model';
+import { User } from '../user/user.model';
 import { Donation } from "./donation.model";
 
 export interface Voluntary {
