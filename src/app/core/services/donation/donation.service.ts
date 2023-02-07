@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { take, map } from 'rxjs/operators'
 import { PaginationResult } from 'src/app/shared/models/pagination/pagination.model';
+import { BarChartData } from 'src/app/shared/models/voluntary/barChartData';
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 import { environment } from 'src/environments/environment';
 
@@ -45,6 +46,10 @@ export class DonationService {
 
   getDonationById(id: number): Observable<Donation>{
     return this.http.get<Donation>(`${this.url}/${id}`).pipe(take(1));
+  }
+
+  getBarChartData(data: string): Observable<BarChartData[]>{
+    return this.http.get<BarChartData[]>(`${this.url}/graph/${data}`).pipe(take(1));
   }
 
   getUnties(): Observable<string[]>{
