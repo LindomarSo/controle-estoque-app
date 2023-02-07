@@ -40,11 +40,19 @@ export class AccountService {
     return this.http.get<User>(`${this.urlBase}/getuser`).pipe(take(1));
   }
 
+  public getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.urlBase}/id/${id}`).pipe(take(1));
+  }
+
   public getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.urlBase}/lista`).pipe(take(1));
   }
 
-  public createUser(model: User): Observable<User> {
+  public post(model: User): Observable<User> {
     return this.http.post<User>(`${this.urlBase}/register`, model).pipe(take(1));
+  }
+
+  public put(model: User): Observable<User> {
+    return this.http.put<User>(`${this.urlBase}/updateUser`, model).pipe(take(1));
   }
 }

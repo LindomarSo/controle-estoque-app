@@ -5,12 +5,13 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/core/services/account/account.service';
 import { RoleService } from 'src/app/core/services/account/role.service';
 import { Role } from 'src/app/shared/models/user/role';
+import { User } from 'src/app/shared/models/user/user.model';
 import { ValidatorsField } from 'src/app/utils/validatefield/ValidatorsField';
 
 @Component({
@@ -22,6 +23,8 @@ export class RegisterComponent implements OnInit {
 
   roles: Role[] = [];
   perfil: any;
+  userId = 0;
+  method = 'post';
 
   private formOptions: AbstractControlOptions = {
     validators: ValidatorsField.MustMatch('password', 'confirmPassword')
@@ -45,11 +48,16 @@ export class RegisterComponent implements OnInit {
     private toastr: ToastrService,
     private roleService: RoleService,
     private router: Router,
+    private route: ActivatedRoute,
     private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.userId = +this.route.snapshot.params['id'];
+    if(this.userId > 0)
+      this.getUserById(this.userId);
+
     this.getRole();
-   }
+  }
 
   resetForm() {
     this.registerUserForm.reset();
@@ -57,7 +65,11 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.registerUserForm.valid) {
-      this.accountService.createUser(this.registerUserForm.value).subscribe({
+      let service = this.method === 'post' ? 
+              this.accountService.post(this.registerUserForm.value) : 
+              this.accountService.put(this.registerUserForm.value);
+      
+      service.subscribe({
         next: () => {
           this.createProfile();
         },
@@ -72,8 +84,8 @@ export class RegisterComponent implements OnInit {
     this.roleService.get().subscribe({
       next: (role: Role[]) => {
         this.roles = role;
-       },
-      error: () => { 
+      },
+      error: () => {
         this.toastr.error('Erro ao carregar permissões');
       }
     })
@@ -81,18 +93,32 @@ export class RegisterComponent implements OnInit {
 
   createProfile(): void {
     let profile = new Role();
-    profile.email= this.registerUserForm.value.email;
-    profile.role= this.registerUserForm.value.perfil;
+    profile.email = this.registerUserForm.value.email;
+    profile.role = this.registerUserForm.value.perfil;
     profile.delete = false;
-    
+
     this.roleService.update(profile).subscribe({
       next: () => {
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/usuarios']);
         this.toastr.success('Usuario cadastrado com sucesso!');
       },
       error: () => {
         this.toastr.error('Erro ao cadastrar perfil!');
       },
     })
+  }
+
+  getUserById(id: number): void {
+    this.method = 'put';
+    this.spinner.show();
+    this.accountService.getUserById(id).subscribe({
+      next: (user: User) => {
+        this.registerUserForm.patchValue(user);
+        this.perfil = user.userRoles[0].role.name;
+      },
+      error: () => {
+        this.toastr.error('Erro ao carregar usuário');
+      },
+    }).add(() => this.spinner.hide());
   }
 }
