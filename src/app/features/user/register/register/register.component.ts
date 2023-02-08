@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = +this.route.snapshot.params['id'];
-    if(this.userId > 0)
+    if (this.userId > 0)
       this.getUserById(this.userId);
 
     this.getRole();
@@ -65,10 +65,10 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.registerUserForm.valid) {
-      let service = this.method === 'post' ? 
-              this.accountService.post(this.registerUserForm.value) : 
-              this.accountService.put(this.registerUserForm.value);
-      
+      let service = this.method === 'post' ?
+        this.accountService.post(this.registerUserForm.value) :
+        this.accountService.put(this.registerUserForm.value);
+
       service.subscribe({
         next: () => {
           this.createProfile();
@@ -96,6 +96,11 @@ export class RegisterComponent implements OnInit {
     profile.email = this.registerUserForm.value.email;
     profile.role = this.registerUserForm.value.perfil;
     profile.delete = false;
+
+    if (this.method === 'put')
+      profile.update = true;
+    else
+      profile.update = false;
 
     this.roleService.update(profile).subscribe({
       next: () => {
