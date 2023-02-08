@@ -37,7 +37,11 @@
         <ng-container matColumnDef="acoes">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-                <mat-icon style="cursor: pointer;" color="warn" class="material-icons-outlined">
+                <mat-icon 
+                    style="cursor: pointer;" 
+                    color="warn" 
+                    [routerLink]="['cadastro/',element.id]"
+                    class="material-icons-outlined">
                     more_vert
                 </mat-icon>
             </td>

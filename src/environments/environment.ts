@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlBase: 'http://localhost:5197/api/v1/',
+  urlBase: 'https://bluehouse-api.azurewebsites.net/api/v1/',
 };
 
 /*

@@ -1,6 +1,6 @@
 <div *ngIf="isLoading" class="chart-container">
   <div class="chart-title">
-    <h1>Gráfico de doações no período de um ano</h1>
+    <h1>Quantidade de doações em {{selectedYear}}</h1>
     <mat-form-field appearance="outline">
       <mat-select (valueChange)="onChange($event)" [(ngModel)]="selectedYear" placeholder="Ano" name="food">
         <mat-option *ngFor="let year of yearsList" [value]="year">
@@ -8,7 +8,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </div> {{selectedYear}}
+  </div> 
   <!-- <canvas 
     baseChart
     [labels]="doughnutChartLabels"

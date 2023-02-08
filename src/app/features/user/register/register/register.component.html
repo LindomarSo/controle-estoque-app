@@ -51,9 +51,9 @@
 
       <div class="action-button">
         <button class="login-button" color="primary" mat-raised-button type="submit">
-          Cadastrar
+          {{userId > 0 ? 'Atualizar' : 'Cadastrar'}}
         </button>
-        <button color="primary" (click)="resetForm()" mat-button type="button">
+        <button *ngIf="!userId" color="primary" (click)="resetForm()" mat-button type="button">
           Limpar
         </button>
       </div>

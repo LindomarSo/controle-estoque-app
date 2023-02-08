@@ -13,7 +13,7 @@
           <div *ngIf="isFisicPerson" class="phifical-person">
             <p class="paragraph"><b>CPF:</b> {{voluntary.documento | cpfFormat }} </p>
             <p><b>Escolaridade:</b> {{voluntary.escolaridade}} </p>
-            <p><b>Idade:</b> {{voluntary.dtNascimento}} </p>
+            <p><b>Idade:</b> {{calculateAge(voluntary.dtNascimento)}} </p>
             <p><b>Tipo de voluntário:</b> {{voluntary.tipoEntidade}} </p>
             <p><b>Habilidades:</b> {{voluntary.habilidade}} </p>
           </div>

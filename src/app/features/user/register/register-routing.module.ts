@@ -10,6 +10,13 @@ const routes: Routes = [
       fullPage: true,
     },
   },
+  {
+    path: ':id',
+    component: RegisterComponent,
+    data: {
+      fullPage: true,
+    },
+  }
 ];
 
 @NgModule({
