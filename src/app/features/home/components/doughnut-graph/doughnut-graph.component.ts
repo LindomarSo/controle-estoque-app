@@ -13,7 +13,7 @@ export class DoughnutGraphComponent implements OnInit {
   isLoading = false;
   barChartList: BarChartData[] = [];
   selectedYear: number = 0;
-  yearsList:number[] = [];
+  yearsList: number[] = [];
 
   barChartOptions = {
     scaleShowVerticalLines: false,
@@ -53,12 +53,13 @@ export class DoughnutGraphComponent implements OnInit {
 
   getLastTenYears(): void {
     const currentDate = new Date();
-  
+
     for (let i = 0; i < 10; i++) {
       this.yearsList.push(currentDate.getFullYear() - (10 - i));
     }
 
-    this.selectedYear = this.yearsList[9];
+    this.yearsList.push(currentDate.getFullYear());
+    this.selectedYear = this.yearsList[this.yearsList.length - 1];
   }
 
   getBarChartData(year: string): void {
@@ -66,14 +67,16 @@ export class DoughnutGraphComponent implements OnInit {
       next: (response: BarChartData[]) => {
         this.barChartList = response;
         this.barChartData[0].data = [];
-        this.barChartLabels = [];
+        this.barChartLabels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-        response.forEach(x => {
-          this.barChartLabels.push(x.mes);
-          this.barChartData[0].data.push(x.value);
+        this.barChartLabels.forEach((value, index, objs) => {
+          if (response[index]?.mes.toLowerCase() === value.toLowerCase())
+            this.barChartData[0].data[index] = response[index].value;
+          else{
+            let data = objs.indexOf(response[index]?.mes.charAt(0).toUpperCase() + response[index]?.mes.slice(1,  response[index]?.mes.length));
+            this.barChartData[0].data[data] = response[index]?.value > 0 ? response[index]?.value : 0
+          }
         });
-        
-        this.barChartLabels = this.barChartLabels?.map(str => str.charAt(0).toUpperCase() + str.slice(1, str.length));
 
         this.isLoading = true;
       },
@@ -83,7 +86,7 @@ export class DoughnutGraphComponent implements OnInit {
     });
   }
 
-  onChange(event: any){
+  onChange(event: any) {
     this.getBarChartData(event);
   }
 }
