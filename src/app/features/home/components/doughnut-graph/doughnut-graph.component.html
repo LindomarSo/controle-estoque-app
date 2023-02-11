@@ -1,4 +1,5 @@
-<div *ngIf="isLoading" class="chart-container">
+<loading-container *ngIf="isLoading" [height]="500"></loading-container>
+<div *ngIf="!isLoading" class="chart-container">
   <div class="chart-title">
     <h1>Quantidade de doações em {{selectedYear}}</h1>
     <mat-form-field appearance="outline">

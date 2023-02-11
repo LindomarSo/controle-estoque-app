@@ -1,4 +1,5 @@
-<div class="register">
+<loading-container *ngIf="isLoading" [height]="500"></loading-container>
+<div *ngIf="!isLoading" class="register">
   <div class="left-section">
     <div class="title">Cadastro de Usuário</div>
 

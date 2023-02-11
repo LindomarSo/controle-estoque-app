@@ -2,7 +2,6 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.service';
 
@@ -30,6 +29,7 @@ export class CreateVoluntaryComponent implements OnInit {
   documentType = 'CPF';
   documentMask = 'CPF';
   name = 'Nome Completo';
+  isLoading = true;
 
   dateFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
@@ -41,7 +41,6 @@ export class CreateVoluntaryComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private spinner: NgxSpinnerService,
     private toastr: ToastrService,
   ) { }
 
@@ -87,7 +86,7 @@ export class CreateVoluntaryComponent implements OnInit {
 
   send(): void {
     if (this.form.valid) {
-      this.spinner.show();
+      this.isLoading = true;
       this.voluntaryService.post(this.form.value).subscribe({
         next: () => {
           this.toastr.success('Voluntário adicionado com sucesso!');
@@ -96,12 +95,11 @@ export class CreateVoluntaryComponent implements OnInit {
         error: () => {
           this.toastr.error('Erro ao adicionar voluntário');
         }
-      }).add(() => this.spinner.hide());
+      }).add(() => this.isLoading = false);
     }
   }
 
   getSchooling(): void {
-    this.spinner.show();
     this.voluntaryService.getSchooling().subscribe({
       next: (response: any) => {
         this.schooling = response;
@@ -109,11 +107,10 @@ export class CreateVoluntaryComponent implements OnInit {
       error: () => {
         this.toastr.error('Não foi possível carregar escolaridade');
       }
-    }).add(() => this.spinner.hide());
+    });
   }
 
   getPersonType(): void {
-    this.spinner.show();
     this.voluntaryService.getPersonType().subscribe({
       next: (response: any) => {
         this.types = response;
@@ -122,7 +119,7 @@ export class CreateVoluntaryComponent implements OnInit {
       error: () => {
         this.toastr.error('Não foi possível carregar tipos');
       }
-    }).add(() => this.spinner.hide());
+    }).add(() => this.isLoading = false);
   }
 
   getTypePerson(): void {

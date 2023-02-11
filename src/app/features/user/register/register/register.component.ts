@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
   perfil: any;
   userId = 0;
   method = 'post';
+  isLoading = false;
 
   private formOptions: AbstractControlOptions = {
     validators: ValidatorsField.MustMatch('password', 'confirmPassword')
@@ -65,18 +66,20 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.registerUserForm.valid) {
+      this.isLoading = true;
       let service = this.method === 'post' ?
         this.accountService.post(this.registerUserForm.value) :
         this.accountService.put(this.registerUserForm.value);
 
       service.subscribe({
         next: () => {
-          this.createProfile();
+          if (this.registerUserForm.value.perfil)
+            this.createProfile();
         },
         error: () => {
           this.toastr.error('Erro ao cadastrar um usuário!');
         }
-      })
+      }).add(() => { if (!this.registerUserForm.value.perfil) this.isLoading = false });
     }
   }
 
@@ -110,7 +113,7 @@ export class RegisterComponent implements OnInit {
       error: () => {
         this.toastr.error('Erro ao cadastrar perfil!');
       },
-    })
+    }).add(() => this.isLoading = false);
   }
 
   getUserById(id: number): void {

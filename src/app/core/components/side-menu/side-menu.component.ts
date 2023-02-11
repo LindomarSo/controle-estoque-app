@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AccountService } from '../../services/account/account.service';
 
 @Component({
   selector: 'side-menu',
@@ -22,20 +23,25 @@ export class SideMenuComponent implements OnInit {
       label: 'Voluntários',
       icon: 'person_add',
       link: 'voluntarios',
-    },
-    {
-      label: 'Admin',
-      icon: 'settings',
-      link: 'usuarios',
     }
   ];
 
-  constructor(public router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.checkUrl();
-      }
+  constructor(public router: Router,
+    private accountService: AccountService) {
+
+    let perfil = '';
+    this.accountService.currentUser$.subscribe((user) => {
+     perfil = user.perfil;
     });
+    
+    if (perfil === 'Administrador')
+    this.dataSections.push({ label: 'Admin', icon: 'settings', link: 'usuarios', });
+
+      this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.checkUrl();
+        }
+      });
   }
 
   ngOnInit(): void {

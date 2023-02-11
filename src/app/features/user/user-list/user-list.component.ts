@@ -13,6 +13,7 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['nome', 'telefone', 'email', 'perfil', 'acoes'];
   dataSource: User[] = [];
   userList: User[] = [];
+  isLoading = true;
 
   constructor(private accountService: AccountService,
     private toastr: ToastrService) { }
@@ -26,12 +27,11 @@ export class UserListComponent implements OnInit {
       next: (userList: User[]) => {
         this.userList = userList;
         this.dataSource = this.userList;
-        console.log(this.dataSource)
       },
       error: () => {
         this.toastr.error('Erro ao busca lista de usuários');
       }
-    });
+    }).add(() => this.isLoading = false);
   }
 
   getProfile(profile: User) {
