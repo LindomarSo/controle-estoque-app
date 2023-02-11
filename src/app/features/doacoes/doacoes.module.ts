@@ -25,6 +25,7 @@ import { VoluntaryModule } from '../voluntary/voluntary.module';
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CoreModule } from 'src/app/core/core.module';
 export const customCurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -59,13 +60,14 @@ export const customCurrencyMaskConfig = {
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     CommonModule,
     UtilsModule,
-    DoacoesRoutingModule
+    DoacoesRoutingModule,
+    CoreModule
   ],
   declarations: [
     DoacoesComponent, 
     CreateDonationComponent, 
     DonationDetailComponent, 
-    DonationViewComponent,
+    DonationViewComponent
   ],
   exports: [DoacoesComponent, CreateDonationComponent],
   providers: [

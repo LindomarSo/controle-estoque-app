@@ -26,6 +26,7 @@ export class DoacoesComponent implements OnInit {
   typePerson: string[] = [];
   personSelected: string = "";
   search: string = "";
+  isLoading = true;
 
   displayedColumns: string[] = [
     'doador',
@@ -43,8 +44,7 @@ export class DoacoesComponent implements OnInit {
   constructor(private donationService: DonationService,
     private toastr: ToastrService,
     private voluntaryService: VoluntaryService,
-    public dialog: MatDialog,
-    private spinner: NgxSpinnerService) { }
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
@@ -76,7 +76,7 @@ export class DoacoesComponent implements OnInit {
   }
 
   getAll(term?: string, type?: string): void {
-    this.spinner.show();
+    this.isLoading = true;
     this.donationService.getAll(this.pagination.currentPage,
       this.pagination.itemsPerPage, term, type).subscribe({
         next: (response: PaginationResult<Donation[]>) => {
@@ -88,7 +88,7 @@ export class DoacoesComponent implements OnInit {
           console.error(error);
           this.toastr.error('Error ao carregar doações');
         }
-      }).add(() => this.spinner.hide());
+      }).add(() => this.isLoading = false);
   }
 
   setPagination(evento: PageEvent) {
