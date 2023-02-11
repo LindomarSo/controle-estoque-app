@@ -1,4 +1,5 @@
-<section class="donation-table">
+<loading-container *ngIf="isLoading" [height]="500"></loading-container>
+<section *ngIf="!isLoading" class="donation-table">
   <div id="scrollTitle">
     <div class="section-search">
       <div class="form-group">
