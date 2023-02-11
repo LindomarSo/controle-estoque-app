@@ -56,6 +56,7 @@ export class DoughnutGraphComponent implements OnInit {
   }
 
   getBarChartData(year: string): void {
+    this.isLoading = true;
     this.donationService.getBarChartData(`${year}-01-01`).subscribe({
       next: (response: BarChartData[]) => {
         this.barChartList = response;
@@ -74,8 +75,6 @@ export class DoughnutGraphComponent implements OnInit {
             this.barChartData[1].data[data] = response[index]?.money > 0 ? response[index]?.money : 0;
           }
         })
-
-        this.isLoading = true;
       },
       error: () => {
         this.toastr.error('Erro ao carregar painel');
