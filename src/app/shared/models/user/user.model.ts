@@ -7,6 +7,7 @@ export interface User {
   phoneNumber: string;
   password: string;
   token: string;
+  perfil: string;
 
   userRoles: UserRole[];
 }

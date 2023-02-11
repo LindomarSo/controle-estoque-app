@@ -4,7 +4,7 @@ import { EntidadeInfo } from "./voluntary.info";
 export interface Donation {
   id: number;
   materialDoado: string;
-  preco: string;
+  preco: number;
   quantidade: number;
   destino: string;
   dtEntrada: string;

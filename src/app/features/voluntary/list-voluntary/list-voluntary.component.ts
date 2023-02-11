@@ -19,7 +19,7 @@ export class ListVoluntaryComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true})
   paginator!: MatPaginator;
   pagination = { } as Pagination;
-  voluntary!: Voluntary[];
+  voluntary: Voluntary[] = [];
   displayedColumns: string[] = [
     'Nome',
     'Telefone',
@@ -31,6 +31,8 @@ export class ListVoluntaryComponent implements OnInit {
   ];
 
   termGetChanged: Subject<string> = new Subject<string>();
+
+  isLoading = true;
 
   constructor(private voluntaryService: VoluntaryService,
               private toastr: ToastrService) { }
@@ -66,6 +68,7 @@ export class ListVoluntaryComponent implements OnInit {
     this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
     this.voluntaryService.getAll('fisica', this.pagination.currentPage, this.pagination.itemsPerPage).subscribe({
       next: (paginationResult: PaginationResult<Voluntary[]>) => {
+        this.voluntary = paginationResult.result;
         this.dataSource.data = paginationResult.result;
         this.pagination = paginationResult.pagination;
       },
@@ -73,7 +76,7 @@ export class ListVoluntaryComponent implements OnInit {
         console.error(error);
         this.toastr.error('Não foi possível carregar voluntários');
       }
-    }).add();
+    }).add(() => this.isLoading = false);
   }
 
   getAddress(address: Address): string{

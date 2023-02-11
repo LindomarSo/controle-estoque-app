@@ -28,6 +28,7 @@ import { VoluntaryDetailComponent } from './voluntary-detail/voluntary-detail.co
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     DoacoesModule,
     FormsModule,
     UtilsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule
   ],
   exports: [
     ListVoluntaryComponent,

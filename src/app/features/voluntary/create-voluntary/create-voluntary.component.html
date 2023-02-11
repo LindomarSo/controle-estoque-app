@@ -1,4 +1,5 @@
-<section class="create-voluntary">
+<loading-container *ngIf="isLoading" [height]="500"></loading-container>
+<section *ngIf="!isLoading" class="create-voluntary">
   <mat-stepper #stepper>
     <mat-step [stepControl]="form" errorMessage="Os dados do voluntário são obrigatórios">
       <form [formGroup]="form">

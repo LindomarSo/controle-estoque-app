@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { LogoModule } from 'src/app/core/components/logo/logo.module';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -25,7 +26,8 @@ import { LogoModule } from 'src/app/core/components/logo/logo.module';
     MatSelectModule,
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
-    RegisterRoutingModule
+    RegisterRoutingModule,
+    CoreModule
   ],
 })
 export class RegisterModule {}

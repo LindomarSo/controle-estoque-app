@@ -25,7 +25,10 @@
       </button>
     </div>
     <div class="table">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <div *ngIf="!donation.length" class="dont-have">
+        Nenhuma doação cadastrada ainda!
+      </div>
+      <table *ngIf="donation.length" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="doador">
           <th mat-header-cell *matHeaderCellDef>Doador </th>
           <td mat-cell *matCellDef="let element"> {{element.entidade.nome}} </td>
@@ -67,7 +70,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr class="donation-element-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator [length]="pagination.totalItems" [pageSize]="pagination.itemsPerPage" [pageSizeOptions]="[5, 10, 15]"
+      <mat-paginator *ngIf="donation.length" [length]="pagination.totalItems" [pageSize]="pagination.itemsPerPage" [pageSizeOptions]="[5, 10, 15]"
         (page)="setPagination($event)">
       </mat-paginator>
     </div>

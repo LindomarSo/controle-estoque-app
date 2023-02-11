@@ -10,21 +10,14 @@ import { BarChartData } from 'src/app/shared/models/voluntary/barChartData';
 })
 export class DoughnutGraphComponent implements OnInit {
 
-  isLoading = false;
+  isLoading = true;
   barChartList: BarChartData[] = [];
   selectedYear: number = 0;
   yearsList: number[] = [];
 
   barChartOptions = {
     scaleShowVerticalLines: false,
-    responsive: true,
-    options: {
-      scales: {
-        xAxes: [{
-          barPercentage: 0.05
-        }]
-      }
-    }
+    responsive: true
   };
 
   barChartLabels: string[] = [];
@@ -32,13 +25,13 @@ export class DoughnutGraphComponent implements OnInit {
   barChartLegend = true;
   barChartData = [
     {
-      data: [0], label: 'Doações',
-      backgroundColor: '#009AA9'
+      data: [0], label: 'Volume de doações',
+      backgroundColor: '#ff8000'
     },
-    // {
-    //   data: [65, 59, 80, 81, 56, 55, 40], label: 'Voluntários',
-    //   backgroundColor: '#f44336'
-    // }
+    {
+      data: [0], label: 'Valores doados R$',
+      backgroundColor: '#4682b4'
+    }
   ];
 
   constructor(private donationService: DonationService,
@@ -67,23 +60,27 @@ export class DoughnutGraphComponent implements OnInit {
       next: (response: BarChartData[]) => {
         this.barChartList = response;
         this.barChartData[0].data = [];
+        this.barChartData[1].data = [];
         this.barChartLabels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
         this.barChartLabels.forEach((value, index, objs) => {
-          if (response[index]?.mes.toLowerCase() === value.toLowerCase())
+          if (response[index]?.mes.toLowerCase() === value.toLowerCase()){
             this.barChartData[0].data[index] = response[index].value;
+            this.barChartData[1].data[index] = response[index].money;
+          }
           else{
             let data = objs.indexOf(response[index]?.mes.charAt(0).toUpperCase() + response[index]?.mes.slice(1,  response[index]?.mes.length));
-            this.barChartData[0].data[data] = response[index]?.value > 0 ? response[index]?.value : 0
+            this.barChartData[0].data[data] = response[index]?.value > 0 ? response[index]?.value : 0;
+            this.barChartData[1].data[data] = response[index]?.money > 0 ? response[index]?.money : 0;
           }
-        });
+        })
 
         this.isLoading = true;
       },
       error: () => {
         this.toastr.error('Erro ao carregar painel');
       },
-    });
+    }).add(() => this.isLoading = false);;
   }
 
   onChange(event: any) {

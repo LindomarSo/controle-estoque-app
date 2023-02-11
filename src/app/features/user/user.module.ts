@@ -5,6 +5,7 @@ import {MatTableModule} from '@angular/material/table';
 import { UserListComponent } from './user-list/user-list.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [UserListComponent],
@@ -13,7 +14,8 @@ import {MatIconModule} from '@angular/material/icon';
     UserRoutingModule, 
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    CoreModule
   ],
 })
 export class UserModule {}
