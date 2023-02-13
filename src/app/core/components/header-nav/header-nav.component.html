@@ -1,9 +1,20 @@
 <div class="header-nav">
-  <div *ngIf="(accountService.currentUser$ | async) as user" class="user-info">
-    <label class="welcome-phrase">Seja bem vindo(a),</label>
-    <label class="user-name">{{user.nomeCompleto}}</label>
+  <div class="header-info">
+    <div class="image-header">
+      <img src="../../../../assets/imgs/logo.png" />
+    </div>
+
+    <div *ngIf="accountService.currentUser$ | async as user" class="user-info">
+      <label class="welcome-phrase">Seja bem vindo(a),</label>
+      <label class="user-name">{{ user.nomeCompleto }}</label>
+    </div>
   </div>
-  <button (click)="logout()" class="button-logout" mat-raised-button color="warn">
+  <button
+    (click)="logout()"
+    class="button-logout"
+    mat-raised-button
+    color="warn"
+  >
     <div matTooltip="Sair do sistema" class="button-group">
       <mat-icon class="material-icons-outlined">logout</mat-icon>
     </div>

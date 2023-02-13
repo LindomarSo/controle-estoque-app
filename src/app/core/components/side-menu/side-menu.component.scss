@@ -7,31 +7,17 @@ $border-config: 1px solid #e5eaee;
   background-color: var(--primary-color);
   position: sticky;
 
-  .side-header {
-    box-sizing: border-box;
-    height: 125px;
-    // border-bottom: $border-config;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .title-header {
-      display: flex;
-      flex-direction: row;
-
-      img {
-        width: 81px;
-      }
-    }
-  }
-
   .sections {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    padding-top: 30px;
+
     .section {
       position: relative;
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      margin-top: 40px;
       cursor: pointer;
 
       .selector {
