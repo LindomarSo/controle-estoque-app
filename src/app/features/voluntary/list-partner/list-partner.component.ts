@@ -37,7 +37,7 @@ export class ListPartnerComponent implements OnInit {
   ngOnInit(): void {
     this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
     this.getAllPartners();
-    this.configPagination();
+    setTimeout(() => { this.configPagination();  }, 0)
   }
 
   filterEntities(fillter: any): void {
