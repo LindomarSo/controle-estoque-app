@@ -49,8 +49,8 @@ export class DoacoesComponent implements OnInit {
   ngOnInit(): void {
     this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
     this.getAll();
-    this.configPagination();
     this.getTypePerson();
+    setTimeout(() => { this.configPagination();  }, 0)
   }
 
   filterDonations(fillter: any): void {
