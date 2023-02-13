@@ -1,41 +1,32 @@
 $border-config: 1px solid #e5eaee;
+$link-menu-color: var(--font-color);
+$background-menu-color: var(--primary-color);
 
 .side-menu {
   width: 220px;
   height: 100%;
   border-right: $border-config;
-  background-color: var(--primary-color);
+  background-color: $background-menu-color;
   position: sticky;
 
-  .side-header {
-    box-sizing: border-box;
-    height: 125px;
-    // border-bottom: $border-config;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .title-header {
-      display: flex;
-      flex-direction: row;
-
-      img {
-        width: 81px;
-      }
-    }
-  }
-
   .sections {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    padding-top: 30px;
+
     .section {
       position: relative;
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      margin-top: 40px;
+      box-sizing: border-box;
+      padding: 10px 0px;
+
       cursor: pointer;
 
       .selector {
-        background: var(--font-color);
+        background: $link-menu-color;
         width: 5px;
         height: 24px;
         border-top-right-radius: 4px;
@@ -50,11 +41,11 @@ $border-config: 1px solid #e5eaee;
         margin-left: 25px;
 
         .icon {
-          color: var(--font-color);
+          color: $link-menu-color;
           cursor: pointer;
 
           &.active {
-            color: var(--font-color);
+            color: $link-menu-color;
           }
           &.inactive {
             color: #858585;
@@ -64,25 +55,40 @@ $border-config: 1px solid #e5eaee;
         .label {
           margin-left: 10px;
           padding-top: 2px;
-          color: var(--font-color);
+          color: $link-menu-color;
         }
       }
 
       &:hover {
-        .tab {
-          transform: scale(1.1);
+        &.unselected {
+          .tab {
+            transform: scale(1.05);
+          }
         }
       }
 
       &.unselected {
+        opacity: 0.7;
+
         .selector {
           background: #d9d9d9;
         }
       }
 
       &.selected {
+        background: #ffffff21;
+
+        .tab {
+          margin-left: 25px;
+        }
+
         .selector {
-          width: 10px;
+          width: 15px;
+          transition: width 25ms;
+        }
+
+        .label {
+          font-weight: 700;
         }
       }
     }

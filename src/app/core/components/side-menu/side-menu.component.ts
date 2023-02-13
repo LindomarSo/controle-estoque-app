@@ -23,31 +23,35 @@ export class SideMenuComponent implements OnInit {
       label: 'Voluntários',
       icon: 'person_add',
       link: 'voluntarios',
-    }
+    },
   ];
 
-  constructor(public router: Router,
-    private accountService: AccountService) {
-
+  constructor(public router: Router, private accountService: AccountService) {
     let perfil = '';
     this.accountService.currentUser$.subscribe((user) => {
-     perfil = user.perfil;
+      perfil = user.perfil;
     });
-    
-    if (perfil === 'Administrador')
-    this.dataSections.push({ label: 'Admin', icon: 'settings', link: 'usuarios', });
 
-      this.router.events.subscribe((event) => {
-        if (event instanceof NavigationEnd) {
-          this.checkUrl();
-        }
+    if (perfil === 'Administrador')
+      this.dataSections.push({
+        label: 'Admin',
+        icon: 'settings',
+        link: 'usuarios',
       });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.checkUrl();
+      }
+    });
   }
 
   ngOnInit(): void {
     this.dataSections.forEach((section) => {
       section.selected = false;
     });
+
+    this.checkUrl();
   }
 
   checkUrl() {

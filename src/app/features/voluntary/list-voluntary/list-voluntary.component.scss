@@ -1,19 +1,16 @@
 .voluntaty-table {
   height: 100%;
   box-sizing: border-box;
-  padding: 10px 50px 20px 30px;
 
   .section-search {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
 
     .form-group {
       display: flex;
       align-items: center;
 
-      .input-search{
+      .input-search {
         width: 100%;
       }
     }
@@ -43,7 +40,7 @@
       border-radius: 6px;
     }
 
-    .dont-have{
+    .dont-have {
       margin-top: 30px;
       padding: 25px;
       box-shadow: 1px 1px 6px rgb(0 0 0 / 30%);
@@ -88,7 +85,7 @@
           text-align: center !important;
         }
 
-        .icon-more{
+        .icon-more {
           color: var(--third-color);
         }
       }
@@ -100,7 +97,7 @@
       }
     }
 
-    .button-btn{
+    .button-btn {
       border: 0;
       padding: 0;
       margin: 0;

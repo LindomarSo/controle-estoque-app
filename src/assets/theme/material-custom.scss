@@ -1,0 +1,18 @@
+td.mat-cell:last-of-type {
+    padding-right: 0px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: var(--secondary-color);
+  background-color: var(--font-color);
+}
+
+.mat-dialog-container {
+  display: block;
+  padding: 0px !important;
+  border-radius: 4px;
+}
+
+.mat-horizontal-stepper-header-container {
+  padding: 24px;
+}

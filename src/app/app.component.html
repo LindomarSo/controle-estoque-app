@@ -1,18 +1,23 @@
 <div class="main">
   <!-- <side-nav *ngIf="!fullPage"></side-nav> -->
-  <side-menu *ngIf="!fullPage"></side-menu>
-  <div class="content-section">
-    <div class="header" *ngIf="!fullPage">
-      <header-nav [title]="pageService.pageTitle"></header-nav>
-    </div>
-    <div class="content" [class.full-page]="fullPage">
-      <router-outlet></router-outlet>
-      <ngx-spinner
-        bdColor="rgba(51,51,51,0.8)"
-        size="medium" color="#fff"
-        type="ball-scale-multiple">
-        <p style="font-size: 20px; color: white">Carregando...</p>
-      </ngx-spinner>
+  <div class="header" *ngIf="!fullPage">
+    <header-nav [title]="pageService.pageTitle"></header-nav>
+  </div>
+
+  <div class="navigation">
+    <side-menu *ngIf="!fullPage"></side-menu>
+    <div class="content-section" [class.no-padding]="isToShowFull">
+      <div class="content" [class.full-page]="fullPage">
+        <router-outlet></router-outlet>
+        <ngx-spinner
+          bdColor="rgba(51,51,51,0.8)"
+          size="medium"
+          color="#fff"
+          type="ball-scale-multiple"
+        >
+          <p style="font-size: 20px; color: white">Carregando...</p>
+        </ngx-spinner>
+      </div>
     </div>
   </div>
 </div>
