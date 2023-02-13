@@ -3,26 +3,38 @@
   <div id="scrollTitle">
     <h1 class="page-title">Doações</h1>
     <div class="section-search">
-
-      
       <div class="form-group">
         <mat-form-field class="input-search" appearance="outline">
           <mat-label>Buscar</mat-label>
-          <input (input)="filterDonations($event.target)" matInput placeholder="Doador ou pelo material doado"> 
+          <input
+            (input)="filterDonations($event.target)"
+            matInput
+            placeholder="Doador ou pelo material doado"
+          />
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-  
+
         <mat-form-field class="add-user" appearance="outline">
           <mat-label class="button-group">
             <span>Filtrar por tipo de voluntário</span>
           </mat-label>
-          <mat-select (selectionChange)="getByPersonSelected()" [(ngModel)]="personSelected" name="person">
-            <mat-option *ngFor="let person of typePerson" [value]="person">{{person}}</mat-option>
+          <mat-select
+            (selectionChange)="getByPersonSelected()"
+            [(ngModel)]="personSelected"
+            name="person"
+          >
+            <mat-option *ngFor="let person of typePerson" [value]="person">{{
+              person
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
-        
       </div>
-      <button (click)="cleanFiltter()" class="filter-column" mat-button color="primary">
+      <button
+        (click)="cleanFiltter()"
+        class="filter-column"
+        mat-button
+        color="primary"
+      >
         <div class="button-group">
           <span>Limpar</span>
         </div>
@@ -32,50 +44,90 @@
       <div *ngIf="!donation.length" class="dont-have">
         Nenhuma doação cadastrada ainda!
       </div>
-      <table *ngIf="donation.length" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table
+        *ngIf="donation.length"
+        mat-table
+        [dataSource]="dataSource"
+        class="mat-elevation-z8"
+      >
         <ng-container matColumnDef="doador">
-          <th mat-header-cell *matHeaderCellDef>Doador </th>
-          <td mat-cell *matCellDef="let element"> {{element.entidade.nome}} </td>
+          <th mat-header-cell *matHeaderCellDef>Doador</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.entidade.nome }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="doacao">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Material Doado </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{getTitle(element.materialDoado)}} </td>
+          <th class="center-content" mat-header-cell *matHeaderCellDef>
+            Material Doado
+          </th>
+          <td class="center-content" mat-cell *matCellDef="let element">
+            {{ getTitle(element.materialDoado) }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="destino">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Destino </th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{element.destino}} </td>
+          <th class="center-content" mat-header-cell *matHeaderCellDef>
+            Destino
+          </th>
+          <td class="center-content" mat-cell *matCellDef="let element">
+            {{ element.destino }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="dataEntrada">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Data Entrada</th>
-          <td class="center-content" mat-cell *matCellDef="let element"> {{ getDate(element.dtEntrada) }} </td>
+          <th class="center-content" mat-header-cell *matHeaderCellDef>
+            Data Entrada
+          </th>
+          <td class="center-content" mat-cell *matCellDef="let element">
+            {{ getDate(element.dtEntrada) }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="qtd">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Quantidade</th>
-          <td class="center-content" mat-cell *matCellDef="let element">{{element.quantidade}} </td>
+          <th class="center-content" mat-header-cell *matHeaderCellDef>
+            Quantidade
+          </th>
+          <td class="center-content" mat-cell *matCellDef="let element">
+            {{ element.quantidade }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="estoque">
-          <th class="center-content" mat-header-cell *matHeaderCellDef> Estoque </th>
-          <td  class="center-content" mat-cell *matCellDef="let element"> {{element.estoque === 0 ? 'Esgotado' : element.estoque}} </td>
+          <th class="center-content" mat-header-cell *matHeaderCellDef>
+            Estoque
+          </th>
+          <td class="center-content" mat-cell *matCellDef="let element">
+            {{ element.estoque === 0 ? "Esgotado" : element.estoque }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="unidade">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>Unidade </th>
-          <td class="center-content" mat-cell *matCellDef="let element">{{element.unidade}} </td>
+          <th class="center-content" mat-header-cell *matHeaderCellDef>
+            Unidade
+          </th>
+          <td class="center-content" mat-cell *matCellDef="let element">
+            {{ element.unidade }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="acoes">
           <th class="center-content" mat-header-cell *matHeaderCellDef></th>
-          <td class="center-content" mat-cell *matCellDef="let element">              
-              <span style="cursor: pointer;" (click)="openView(element)">
-                <mat-icon color="warn" class="material-icons-outlined">
-                  more_vert
-                </mat-icon>
-              </span>
+          <td class="center-content" mat-cell *matCellDef="let element">
+            <span style="cursor: pointer" (click)="openView(element)">
+              <mat-icon color="warn" class="material-icons-outlined">
+                more_vert
+              </mat-icon>
+            </span>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr class="donation-element-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr
+          class="donation-element-row"
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
       </table>
-      <mat-paginator *ngIf="donation.length" [length]="pagination.totalItems" [pageSize]="pagination.itemsPerPage" [pageSizeOptions]="[5, 10, 15]"
-        (page)="setPagination($event)">
+      <mat-paginator
+        *ngIf="donation.length"
+        [length]="pagination.totalItems"
+        [pageSize]="pagination.itemsPerPage"
+        [pageSizeOptions]="[5, 10, 15]"
+        (page)="setPagination($event)"
+      >
       </mat-paginator>
     </div>
   </div>

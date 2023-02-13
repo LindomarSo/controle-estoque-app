@@ -51,6 +51,9 @@ export class AppComponent implements OnInit {
   }
 
   get isToShowFull(): boolean {
-    return this.router.url.indexOf('/login') != -1;
+    return (
+      this.router.url.indexOf('/login') != -1 ||
+      this.router.url.indexOf('/bem-vindo') != -1
+    );
   }
 }
