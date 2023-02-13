@@ -39,7 +39,7 @@ export class ListVoluntaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
-    this.configPagination();
+    setTimeout(() => { this.configPagination();  }, 0)
   }
 
   filterEntities(fillter: any): void {

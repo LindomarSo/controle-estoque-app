@@ -79,7 +79,7 @@ export class DoughnutGraphComponent implements OnInit {
       error: () => {
         this.toastr.error('Erro ao carregar painel');
       },
-    }).add(() => this.isLoading = false);;
+    }).add(() => this.isLoading = false);
   }
 
   onChange(event: any) {
