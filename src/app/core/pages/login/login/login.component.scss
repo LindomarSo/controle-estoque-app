@@ -17,13 +17,13 @@
     position: relative;
 
     .background {
-      // mask-image: linear-gradient(
-      //   to left,
-      //   rgba(0, 0, 0, 1) 60%,
-      //   rgba(0, 0, 0, 0)
-      // );
-      background: url("../../../../../assets/imgs/login/login.jpg") 30% 30%
-        no-repeat;
+      mask-image: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 1) 60%,
+        rgba(0, 0, 0, 0)
+      );
+      background: url("../../../../../assets/imgs/login/login-hand-donation.jpg")
+        30% 30% no-repeat;
       background-size: cover;
       width: 100%;
       height: 100%;
@@ -36,18 +36,19 @@
   .left-section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding: 130px;
+    box-sizing: border-box;
 
     .logo {
-      margin-bottom: 95px;
+      margin-bottom: 35px;
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       flex-direction: row;
       width: 50%;
 
       img {
-        width: 105px;
+        width: 145px;
       }
     }
 
@@ -56,7 +57,7 @@
       justify-content: flex-start;
       align-items: flex-start;
       flex-direction: column;
-      width: 50%;
+      width: 60%;
 
       h1 {
         font-weight: 700;
@@ -69,8 +70,6 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-
-
 
         .field {
           width: 100%;
@@ -105,19 +104,20 @@
 
           .login-button {
             width: 206px;
-            height: 55px;
+            height: 50px;
             margin-top: 20px;
             font-weight: 700;
             font-size: 24px;
 
-            .button-group{
+            .button-group {
               display: flex;
               justify-content: center;
               align-items: center;
               flex-direction: row;
               gap: 10px;
 
-              span, mat-icon{
+              span,
+              mat-icon {
                 display: block;
               }
             }
@@ -144,11 +144,9 @@
   }
 }
 
-@media screen and (max-width: 1445px){
+@media screen and (max-width: 1445px) {
   .login {
-
     .left-section {
-
       .logo {
         margin-bottom: 30px;
 
@@ -157,16 +155,14 @@
         }
       }
       .form-login {
-        transform: scale(0.9);
+        width: 100%;
 
         h1 {
-          font-size: 30px;;
+          font-size: 30px;
         }
 
         .form-content {
-
           .action-button {
-
             .login-button {
               height: 50px;
               margin-top: 20px;
@@ -179,11 +175,9 @@
   }
 }
 
-@media screen and (max-width: 1367px){
+@media screen and (max-width: 1367px) {
   .login {
-
     .left-section {
-
       .logo {
         margin-bottom: 30px;
 
@@ -192,16 +186,14 @@
         }
       }
       .form-login {
-        transform: scale(0.9);
+        width: 100%;
 
         h1 {
-          font-size: 30px;;
+          font-size: 30px;
         }
 
         .form-content {
-
           .action-button {
-
             .login-button {
               height: 50px;
               margin-top: 20px;

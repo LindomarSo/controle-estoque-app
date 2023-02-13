@@ -68,7 +68,11 @@ $border-config: 1px solid #e5eaee;
 
       &.selected {
         .selector {
-          width: 10px;
+          width: 15px;
+        }
+
+        .label {
+          font-weight: 700;
         }
       }
     }

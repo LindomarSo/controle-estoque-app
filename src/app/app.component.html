@@ -6,7 +6,7 @@
 
   <div class="navigation">
     <side-menu *ngIf="!fullPage"></side-menu>
-    <div class="content-section">
+    <div class="content-section" [class.no-padding]="isToShowFull">
       <div class="content" [class.full-page]="fullPage">
         <router-outlet></router-outlet>
         <ngx-spinner

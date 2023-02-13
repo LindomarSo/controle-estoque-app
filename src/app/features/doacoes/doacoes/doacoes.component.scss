@@ -2,10 +2,16 @@
   height: 100%;
   box-sizing: border-box;
 
+  .page-title {
+    font-weight: 600 !important;
+    font-size: 24px;
+    color: var(--primary-color);
+  }
+
   .section-search {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     .form-group {
       display: flex;
@@ -13,7 +19,7 @@
       width: 60%;
       column-gap: 10px;
 
-      .input-search{
+      .input-search {
         width: 100%;
         max-width: 300px;
       }
@@ -45,7 +51,7 @@
       border-radius: 6px;
     }
 
-    .dont-have{
+    .dont-have {
       margin-top: 30px;
       padding: 25px;
       box-shadow: 1px 1px 6px rgb(0 0 0 / 30%);
@@ -79,11 +85,11 @@
       th {
         font-size: 15px;
         font-weight: 600;
-        background-color: #000;
+        background-color: var(--secondary-color);
         color: var(--font-color);
       }
 
-      .esgotado{
+      .esgotado {
         color: red !important;
       }
 

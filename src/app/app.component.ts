@@ -34,6 +34,8 @@ export class AppComponent implements OnInit {
     });
   }
 
+  
+
   ngOnInit() {
     this.setCurrentUser();
   }
@@ -46,5 +48,9 @@ export class AppComponent implements OnInit {
     else user = null!;
 
     if (user) this.account.setCurrentUser(user);
+  }
+
+  get isToShowFull(): boolean {
+    return this.router.url.indexOf('/login') != -1;
   }
 }

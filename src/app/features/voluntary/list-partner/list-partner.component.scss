@@ -67,8 +67,8 @@
       th {
         font-size: 15px;
         font-weight: 600;
-        // background-color: var(--secondary-color);
-        color: #000;
+        background-color: var(--secondary-color);
+        color: var(--font-color);
       }
 
       .mat-cell:not(:last-of-type) {

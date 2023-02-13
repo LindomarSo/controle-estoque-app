@@ -1,51 +1,63 @@
 .user-list {
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    button{
-        height: 40px;
+  button {
+    height: 40px;
+  }
+
+  .title-table {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      font-weight: 800;
+      margin: 0;
+    }
+  }
+
+  table {
+    width: 100%;
+
+    tr.user-element-row:hover {
+      background: whitesmoke;
     }
 
-    .title-table {
-        margin-bottom: 30px;
-        display: flex;
-        justify-content: space-between;
-
-        .title {
-            font-weight: 800;
-        }
+    tr.user-element-row:active {
+      background: #efefef;
     }
 
-    table {
-        width: 100%;
+    th {
+      font-weight: 700;
+      color: var(--font-color);
+      background-color: var(--secondary-color);
+      font-size: 14px;
 
-        tr.user-element-row:hover {
-            background: whitesmoke;
-        }
+      &:last-child {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
 
-        tr.user-element-row:active {
-            background: #efefef;
-        }
+      &:first-child {
+        border-bottom-left-radius: 6px;
+        border-top-left-radius: 6px;
+      }
 
-        th {
-            font-weight: 700;
-            color: #000;
-            font-size: 14px;
-
-            &:not(:first-of-type) {
-                text-align: center;
-            }
-        }
-
-        tr {
-            &:first {
-                text-align: left;
-            }
-        }
-
-        td{
-            &:not(:first-of-type) {
-                text-align: center;
-            }
-        }
+      &:not(:first-of-type) {
+        text-align: center;
+      }
     }
+
+    tr {
+      &:first {
+        text-align: left;
+      }
+    }
+
+    td {
+      &:not(:first-of-type) {
+        text-align: center;
+      }
+    }
+  }
 }
