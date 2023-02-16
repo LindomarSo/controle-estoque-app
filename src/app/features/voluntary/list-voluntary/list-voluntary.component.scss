@@ -52,6 +52,7 @@
 
     table {
       width: 100%;
+      border-radius: 8px;
 
       th:last-child {
         border-top-right-radius: 6px;
@@ -102,6 +103,11 @@
       padding: 0;
       margin: 0;
       background-color: #fff;
+
+      > mat-icon {
+        cursor: pointer;
+        color: var(--highlight-button);
+      }
     }
   }
 

@@ -29,6 +29,7 @@ import { UtilsModule } from 'src/app/utils/utils.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CoreModule } from 'src/app/core/core.module';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { CoreModule } from 'src/app/core/core.module';
     MatNativeDateModule,
     MatCardModule,
     MatDatepickerModule,
+    MatMenuModule,
     NgxMaskModule.forRoot(),
     DoacoesModule,
     FormsModule,
