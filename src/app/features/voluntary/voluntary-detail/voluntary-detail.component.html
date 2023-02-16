@@ -1,6 +1,6 @@
 <section class="voluntary-detail" *ngIf="voluntary">
   <div>
-    <mat-card class="voluntary-card">
+    <mat-card class="voluntary-card mat-elevation-z2">
       <mat-card-header>
         <div class="voluntary-header">
           <mat-card-title> {{ voluntary.nome }} </mat-card-title>
@@ -18,7 +18,12 @@
               <b>CPF:</b> {{ voluntary.documento | cpfFormat }}
             </p>
             <p><b>Escolaridade:</b> {{ voluntary.escolaridade }}</p>
-            <p><b>Idade:</b> {{ calculateAge(voluntary.dtNascimento) }}</p>
+            <p>
+              <b>Idade:</b> {{ calculateAge(voluntary.dtNascimento) }}
+              <span class="birth-day"
+                >({{ voluntary.dtNascimento | date : "dd/MM/YYYY" }})</span
+              >
+            </p>
             <p><b>Tipo de voluntário:</b> {{ voluntary.tipoEntidade }}</p>
             <p><b>Habilidades:</b> {{ voluntary.habilidade }}</p>
           </div>
@@ -53,7 +58,7 @@
 
   <div class="donation-section">
     <div *ngIf="voluntary.doacoes?.length" class="open-panel-section">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
         <!-- Position Column -->
         <ng-container matColumnDef="materialDoado">
           <th mat-header-cell *matHeaderCellDef>Material Doado</th>
@@ -62,28 +67,40 @@
           </td>
         </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="destino">
-          <th mat-header-cell *matHeaderCellDef>Destino</th>
-          <td mat-cell *matCellDef="let element">{{ element.destino }}</td>
-        </ng-container>
-
         <!-- Weight Column -->
         <ng-container matColumnDef="unidade">
           <th mat-header-cell *matHeaderCellDef>Unidade</th>
           <td mat-cell *matCellDef="let element">{{ element.unidade }}</td>
         </ng-container>
 
+        <!-- Name Column -->
+        <ng-container matColumnDef="destino">
+          <th mat-header-cell *matHeaderCellDef>Destino</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.destino ? element.destino : "-" }}
+          </td>
+        </ng-container>
+
         <!-- Symbol Column -->
         <ng-container matColumnDef="quantidade">
           <th mat-header-cell *matHeaderCellDef>Quantidade</th>
-          <td mat-cell *matCellDef="let element">{{ element.quantidade }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.quantidade ? element.quantidade : "-" }}
+          </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="estoque">
           <th mat-header-cell *matHeaderCellDef>Estoque</th>
-          <td mat-cell *matCellDef="let element">{{ element.estoque }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{
+              element.estoque
+                ? element.estoque === 0
+                  ? "Esgotado"
+                  : element.estoque
+                : "-"
+            }}
+          </td>
         </ng-container>
 
         <!-- Symbol Column -->
@@ -113,12 +130,12 @@
       </table>
     </div>
 
-    <app-create-donation
+    <!-- <app-create-donation
       [isFisicPerson]="isFisicPerson"
       [voluntaryId]="voluntaryId"
       (changeDonation)="onChangeDonations($event)"
     >
-    </app-create-donation>
+    </app-create-donation> -->
   </div>
 
   <!-- CRIAÇÃO DE DOAÇÃO -->

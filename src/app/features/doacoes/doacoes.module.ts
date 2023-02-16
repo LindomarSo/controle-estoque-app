@@ -14,7 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { CreateDonationComponent } from './create-donation/create-donation.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -26,16 +26,17 @@ import { UtilsModule } from 'src/app/utils/utils.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CoreModule } from 'src/app/core/core.module';
+import { DonationModalComponent } from './donation-modal/donation-modal.component';
 export const customCurrencyMaskConfig = {
-  align: "left",
+  align: 'left',
   allowNegative: true,
   allowZero: true,
-  decimal: ",",
+  decimal: ',',
   precision: 2,
-  prefix: "R$ ",
-  suffix: "",
-  thousands: ".",
-  nullable: true
+  prefix: 'R$ ',
+  suffix: '',
+  thousands: '.',
+  nullable: true,
 };
 
 @NgModule({
@@ -53,6 +54,7 @@ export const customCurrencyMaskConfig = {
     MatStepperModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatMenuModule,
     ReactiveFormsModule,
     MatCardModule,
     MatDatepickerModule,
@@ -61,17 +63,16 @@ export const customCurrencyMaskConfig = {
     CommonModule,
     UtilsModule,
     DoacoesRoutingModule,
-    CoreModule
+    CoreModule,
   ],
   declarations: [
-    DoacoesComponent, 
-    CreateDonationComponent, 
-    DonationDetailComponent, 
-    DonationViewComponent
+    DoacoesComponent,
+    CreateDonationComponent,
+    DonationDetailComponent,
+    DonationViewComponent,
+    DonationModalComponent,
   ],
   exports: [DoacoesComponent, CreateDonationComponent],
-  providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
-  ]
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }],
 })
-export class DoacoesModule { }
+export class DoacoesModule {}

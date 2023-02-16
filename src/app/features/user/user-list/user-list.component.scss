@@ -19,6 +19,11 @@
 
   table {
     width: 100%;
+    border-radius: 8px;
+
+    tbody {
+      border-radius: 8px;
+    }
 
     tr.user-element-row:hover {
       background: whitesmoke;
@@ -56,6 +61,16 @@
     }
 
     td {
+      &:last-child {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+
+      &:first-child {
+        border-bottom-left-radius: 6px;
+        border-top-left-radius: 6px;
+      }
+
       &:not(:first-of-type) {
         text-align: center;
       }

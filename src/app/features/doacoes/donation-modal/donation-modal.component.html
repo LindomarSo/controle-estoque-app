@@ -1,0 +1,165 @@
+<mat-card class="donation-modal">
+  <mat-card-title class="card-header">
+    <span>Nova doação</span>
+    <mat-icon class="material-icons-outlined">volunteer_activism</mat-icon>
+  </mat-card-title>
+  <loading-container *ngIf="!formIsReady" [height]="300"></loading-container>
+  <mat-card-content *ngIf="formIsReady">
+    <div class="content">
+      <mat-divider></mat-divider>
+      <form [formGroup]="donationForm">
+        <div class="top">
+          <mat-form-field appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="categoria">
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category"
+              >
+                {{ category.nome }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="showField('doador')" appearance="outline">
+            <mat-label>Doador</mat-label>
+            <input
+              matInput
+              [value]="data.donator.nome"
+              placeholder="Doador"
+              disabled
+            />
+            <mat-error> Doador é obrigatório </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="donation-info">
+          <mat-form-field *ngIf="showField('descricao')" appearance="outline">
+            <mat-label>Descrição da doação</mat-label>
+            <textarea
+              type="text"
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="6"
+              cdkAutosizeMaxRows="6"
+              formControlName="materialDoado"
+              matInput
+              placeholder="Escreva aqui uma descrição sobre a doação"
+            ></textarea>
+            <mat-error> Material doado é obrigatório </mat-error>
+          </mat-form-field>
+
+          <div class="quantities">
+            <mat-form-field *ngIf="showField('preco')" appearance="outline">
+              <mat-label>Valor</mat-label>
+              <input
+                currencyMask
+                matInput
+                formControlName="preco"
+                placeholder="R$ 0,00"
+              />
+              <mat-error> O valor é obrigatório </mat-error>
+            </mat-form-field>
+
+            <mat-form-field
+              *ngIf="showField('quantidade')"
+              appearance="outline"
+            >
+              <mat-label>Quantidade</mat-label>
+              <input
+                type="number"
+                matInput
+                formControlName="quantidade"
+                placeholder="Quantidade"
+              />
+              <mat-error> Quantidade é obrigatório </mat-error>
+            </mat-form-field>
+
+            <div *ngIf="showField('dtEntrada')" class="date-field">
+              <mat-form-field class="date-picker-form" appearance="outline">
+                <mat-label>Data de entrada</mat-label>
+                <input
+                  (click)="picker.open()"
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="dtEntrada"
+                  placeholder="Data de entrada"
+                />
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error> Data de entrada é obrigatória </mat-error>
+              </mat-form-field>
+              <!-- <mat-datepicker-toggle
+                class="date-picker-toggle"
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle> -->
+            </div>
+          </div>
+
+          <div class="destination">
+            <mat-form-field *ngIf="showField('unidade')" appearance="outline">
+              <mat-label>Unidade</mat-label>
+              <mat-select formControlName="unidade">
+                <mat-option
+                  *ngFor="let unity of ['Riacho Fundo II', 'Samambaia']"
+                  [value]="unity"
+                >
+                  {{ unity }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="showField('destino')" appearance="outline">
+              <mat-label>Destino</mat-label>
+              <input matInput formControlName="destino" placeholder="Destino" />
+              <mat-error> Destino é obrigatório </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div
+            *ngIf="showField('dias') && showField('turno')"
+            class="check-available"
+          >
+            <div class="check-group">
+              <h4>Disponibilidade</h4>
+              <div class="days">
+                <div class="half">
+                  <mat-checkbox formControlName="segunda">Segunda</mat-checkbox>
+                  <mat-checkbox formControlName="terca">Terça</mat-checkbox>
+                  <mat-checkbox formControlName="quarta">Quarta</mat-checkbox>
+                </div>
+                <div class="half">
+                  <mat-checkbox formControlName="quinta">Quinta</mat-checkbox>
+                  <mat-checkbox formControlName="sexta">Sexta</mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <mat-radio-group formControlName="turno" class="turno-group">
+              <h4>Período</h4>
+              <div class="turnos">
+                <mat-radio-button
+                  *ngFor="let option of turnoOptions"
+                  [value]="option"
+                >
+                  {{ option }}
+                </mat-radio-button>
+              </div>
+            </mat-radio-group>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="actions">
+      <button
+        [disabled]="donationForm.invalid || !formIsReady"
+        mat-raised-button
+        color="accent"
+        (click)="send()"
+      >
+        Cadastrar
+      </button>
+
+      <button mat-button (click)="resetForm()">Limpar</button>
+    </div>
+  </mat-card-footer>
+</mat-card>

@@ -8,28 +8,31 @@ import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 @Component({
   selector: 'app-create-donation',
   templateUrl: './create-donation.component.html',
-  styleUrls: ['./create-donation.component.scss']
+  styleUrls: ['./create-donation.component.scss'],
 })
 export class CreateDonationComponent implements OnInit {
-
   @Input('voluntaryId') voluntaryId!: number;
   @Input('isFisicPerson') isFisicPerson: boolean = true;
-  @Output('changeDonation') changeDonation: EventEmitter<Donation[]> = new EventEmitter();
+  @Output('changeDonation') changeDonation: EventEmitter<Donation[]> =
+    new EventEmitter();
   form!: FormGroup;
   donation!: Donation;
   unities!: string[];
   indices: number[] = [];
   indice: number = 0;
-  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno' ];
+  turnoOptions: string[] = ['Manhã', 'Tarde', 'Noite'];
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private donationService: DonationService,
-    private spinner: NgxSpinnerService) { }
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.validation();
     this.getUnities();
+    this.addDonation();
   }
 
   get donations(): FormArray {
@@ -38,7 +41,7 @@ export class CreateDonationComponent implements OnInit {
 
   validation() {
     this.form = this.formBuilder.group({
-      donations: this.formBuilder.array([])
+      donations: this.formBuilder.array([]),
     });
   }
 
@@ -57,42 +60,48 @@ export class CreateDonationComponent implements OnInit {
       quarta: [false],
       quinta: [false],
       sexta: [false],
-      turno: [donation.turno]
+      turno: [donation.turno],
     });
   }
 
   addDonation(): void {
-    this.donations.push(this.createDonation({ id: 0 } as Donation))
+    this.donations.push(this.createDonation({ id: 0 } as Donation));
   }
 
   send(): void {
-    // console.log(this.donations.value);
-    // return ;
     this.spinner.show();
 
-    this.donationService.createDonation(this.donations.value).subscribe({
-      next: (donation: Donation[]) => {
-        this.changeDonation.emit(donation);
-        this.toastr.success('Doação adicionada com sucesso');
-        this.donations.clear();
-      },
-      error: () => {
-        this.toastr.error('Não foi possível adicionar a doação');
-      }
-    }).add(() => this.spinner.hide());
+    console.log('Criar: ', this.donations.value);
+
+    // this.donationService
+    //   .createDonation(this.donations.value)
+    //   .subscribe({
+    //     next: (donation: Donation[]) => {
+    //       this.changeDonation.emit(donation);
+    //       this.toastr.success('Doação adicionada com sucesso');
+    //       this.donations.clear();
+    //     },
+    //     error: () => {
+    //       this.toastr.error('Não foi possível adicionar a doação');
+    //     },
+    //   })
+    //   .add(() => this.spinner.hide());
   }
 
   getUnities(): void {
     this.spinner.show();
 
-    this.donationService.getUnties().subscribe({
-      next: (unities: string[]) => {
-        this.unities = unities;
-      },
-      error: () => {
-        this.toastr.error('Não carregar unidades');
-      }
-    }).add(() => this.spinner.hide());
+    this.donationService
+      .getUnties()
+      .subscribe({
+        next: (unities: string[]) => {
+          this.unities = unities;
+        },
+        error: () => {
+          this.toastr.error('Não carregar unidades');
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   resetForm(): void {
