@@ -1,11 +1,12 @@
 .chart-container {
+  width: 100%;
 
-  .chart-title{
+  .chart-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    h1{
+    h1 {
       color: var(--primary-color);
       font-size: 36px;
       font-weight: 700;
@@ -18,6 +19,10 @@
     // height: auto !important;
     max-height: 400px !important;
     font-size: 36px !important;
+    background-color: white;
+    width: 100%;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 3px 5px rgb(0 0 0 / 20%);
   }
 }
-
