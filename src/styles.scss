@@ -2,6 +2,7 @@
 @import "./theme.scss";
 @import "./assets/theme/material-custom.scss";
 @import "./assets/theme/custom-scrollbar.scss";
+@import "./assets/theme/global-style.scss";
 
 // regular style toast
 @import "ngx-toastr/toastr";
@@ -15,30 +16,18 @@ body {
 body {
   margin: 0;
   font-family: Inter, sans-serif !important;
+  overflow: hidden;
 
   input {
     font-family: Inter, sans-serif !important;
   }
 }
 
-// .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-//   border-color: var(--secondary-color);
-// }
-
-// .mat-radio-button.mat-accent .mat-radio-inner-circle,
-// .mat-radio-button.mat-accent
-//   .mat-radio-ripple
-//   .mat-ripple-element:not(.mat-radio-persistent-ripple),
-// .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
-// .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
-//   background-color: var(--secondary-color);
-// }
-
-
 :root {
   --primary-color: #1a3972;
   --secondary-color: #4682b4;
   --third-color: #ff8000;
+  --highlight-button: #1f9b93;
   --font-color: white;
   --background-color: #f5f6f8;
 }

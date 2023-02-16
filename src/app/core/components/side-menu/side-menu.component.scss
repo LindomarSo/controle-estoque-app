@@ -39,6 +39,7 @@ $background-menu-color: var(--primary-color);
         align-items: center;
         position: absolute;
         margin-left: 25px;
+        user-select: none;
 
         .icon {
           color: $link-menu-color;
