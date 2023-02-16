@@ -1,0 +1,82 @@
+.donation-modal {
+  min-width: 600px;
+
+  .card-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .content {
+    form {
+      display: flex;
+      flex-direction: column;
+      padding-top: 15px;
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      .top {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        column-gap: 20px;
+      }
+
+      .donation-info {
+        .quantities,
+        .destination {
+          display: flex;
+          flex-direction: row;
+          column-gap: 20px;
+        }
+
+        .check-available {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          gap: 5px;
+
+          .check-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .days {
+              display: flex;
+              flex-direction: row;
+              column-gap: 20px;
+
+              .half {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+              }
+            }
+          }
+        }
+
+        .turno-group {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .turnos {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 0px 15px 20px;
+  }
+}
