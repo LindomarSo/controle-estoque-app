@@ -20,13 +20,13 @@ import { NgxCurrencyModule } from 'ngx-currency';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DonationDetailComponent } from './donation-detail/donation-detail.component';
 import { DonationViewComponent } from './donation-view/donation-view.component';
-import { PhoneFormatPipe } from 'src/app/utils/phone-format.pipe';
-import { VoluntaryModule } from '../voluntary/voluntary.module';
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CoreModule } from 'src/app/core/core.module';
 import { DonationModalComponent } from './donation-modal/donation-modal.component';
+import { PipesModule } from 'src/app/utils/pipes/pipes.module';
+import { A11yModule } from '@angular/cdk/a11y';
 export const customCurrencyMaskConfig = {
   align: 'left',
   allowNegative: true,
@@ -61,8 +61,10 @@ export const customCurrencyMaskConfig = {
     MatDividerModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     CommonModule,
+    PipesModule,
     UtilsModule,
     DoacoesRoutingModule,
+    A11yModule,
     CoreModule,
   ],
   declarations: [

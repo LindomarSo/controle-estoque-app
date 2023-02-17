@@ -30,6 +30,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CoreModule } from 'src/app/core/core.module';
 import { MatMenuModule } from '@angular/material/menu';
+import { PipesModule } from 'src/app/utils/pipes/pipes.module';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { MatMenuModule } from '@angular/material/menu';
     DoacoesModule,
     FormsModule,
     UtilsModule,
+    PipesModule,
     ReactiveFormsModule,
     CoreModule
   ],

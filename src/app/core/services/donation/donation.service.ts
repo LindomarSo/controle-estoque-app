@@ -81,7 +81,7 @@ export class DonationService {
     return this.http.post<any>(this.url, model).pipe(take(1));
   }
 
-  updateDonation(model: Donation): Observable<Donation> {
-    return this.http.put<Donation>(this.url, model).pipe(take(1));
+  updateDonation(model: any): Observable<any> {
+    return this.http.put<any>(this.url, model).pipe(take(1));
   }
 }

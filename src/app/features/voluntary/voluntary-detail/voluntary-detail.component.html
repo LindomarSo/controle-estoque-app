@@ -61,7 +61,7 @@
         <ng-container matColumnDef="materialDoado">
           <th mat-header-cell *matHeaderCellDef>Material Doado</th>
           <td mat-cell *matCellDef="let element">
-            {{ getTitle(element.materialDoado) }}
+            {{ getTitle(element.materialDoado) | ellipsis : 40 }}
           </td>
         </ng-container>
 

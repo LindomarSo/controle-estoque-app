@@ -5,18 +5,8 @@ import { CpfFormatPipe } from './cpf/cpf-format.pipe';
 import { CnpjFormatPipe } from './cnpj/cnpj-format.pipe';
 
 @NgModule({
-  declarations: [
-    PhoneFormatPipe,
-    CpfFormatPipe,
-    CnpjFormatPipe
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    PhoneFormatPipe,
-    CpfFormatPipe,
-    CnpjFormatPipe
-  ]
+  declarations: [PhoneFormatPipe, CpfFormatPipe, CnpjFormatPipe],
+  imports: [CommonModule],
+  exports: [PhoneFormatPipe, CpfFormatPipe, CnpjFormatPipe],
 })
-export class UtilsModule { }
+export class UtilsModule {}
