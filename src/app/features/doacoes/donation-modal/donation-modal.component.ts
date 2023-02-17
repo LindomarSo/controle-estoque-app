@@ -1,11 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { DonationService } from 'src/app/core/services/donation/donation.service';
-import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.service';
-import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 
 @Component({
   selector: 'app-donation-modal',
@@ -14,40 +12,10 @@ import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 })
 export class DonationModalComponent implements OnInit {
   public donationForm: FormGroup = new FormGroup({});
-
-  public categories: any = [];
-
+  public categories: any[] = [];
   public turnoOptions: string[] = ['Manhã', 'Tarde', 'Noite'];
-
-  donator = {
-    id: 1,
-    nome: 'João Felipe',
-    telefone: '61333333333',
-    email: 'joaof@gmail.com',
-    documento: '73317403349',
-    habilidade: 'Comer e jogar bola.',
-    dtNascimento: '1996-07-27',
-    tipoEntidade: 'Pessoa Física',
-    escolaridade: 'Superior Cursando',
-    endereco: {
-      id: 1,
-      logradouro: 'Rua Principal, s/n',
-      cep: '72610000',
-      cidade: 'Brasília',
-      estado: 'Brasília',
-      complemento: null,
-      numero: null,
-    },
-    doacoes: [],
-    user: {
-      id: 2,
-      nomeCompleto: 'Gabriel',
-      email: 'gabriel',
-      phoneNumber: '61333333333',
-      userRoles: [],
-    },
-  };
-
+  public formIsReady = false;
+  public donationToLoad: any;
   public formFieldsByCategory: any = {
     serviços: [
       'descricao',
@@ -81,17 +49,16 @@ export class DonationModalComponent implements OnInit {
     ],
   };
 
-  public formIsReady = false;
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<DonationModalComponent>,
     private donationService: DonationService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
-    console.log('Data Modal: ', this.data);
+    this.donationToLoad = this.data.donate;
 
     this.loadCategories();
   }
@@ -115,7 +82,7 @@ export class DonationModalComponent implements OnInit {
         '',
         this.fieldIsRequired(category.nome, 'descricao')
       ),
-      preco: new FormControl('', this.fieldIsRequired(category.nome, 'preco')),
+      preco: new FormControl(0),
       quantidade: new FormControl(
         '',
         this.fieldIsRequired(category.nome, 'quantidade')
@@ -170,7 +137,6 @@ export class DonationModalComponent implements OnInit {
     this.donationService.getCategories().subscribe({
       next: (res: Category[]) => {
         this.categories = res;
-
         let initialCategory = this.categories[0];
         this.mountDonationFields(initialCategory);
       },
@@ -178,13 +144,29 @@ export class DonationModalComponent implements OnInit {
         this.toastr.error('Erro ao carregar categorias.', 'Erro');
       },
       complete: () => {
-        console.log('Complete');
+        if (this.donationToLoad) {
+          this.loadDonation(this.donationToLoad);
+        }
       },
     });
   }
 
+  loadDonation(donation: any) {
+    this.donationForm.controls['categoria'].disable();
+
+    let indexCategory = this.categories.findIndex(
+      (category) => category.nome === donation.categoria.nome
+    );
+
+    this.donationForm.patchValue(donation);
+
+    this.donationForm.controls['categoria'].setValue(
+      this.categories[indexCategory]
+    );
+  }
+
   send(): void {
-    // this.spinner.show();
+    this.spinner.show();
 
     let formValue = this.donationForm.getRawValue();
 
@@ -217,6 +199,9 @@ export class DonationModalComponent implements OnInit {
         },
         error: () => {
           this.toastr.error('Não foi possível adicionar a doação');
+        },
+        complete: () => {
+          this.dialogRef.close();
         },
       })
       .add(() => this.spinner.hide());
