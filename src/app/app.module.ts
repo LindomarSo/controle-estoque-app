@@ -12,6 +12,8 @@ import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtInterceptor } from './core/interceptors/jwt/jwt.interceptor';
 import { NgChartsModule } from 'ng2-charts';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { PaginationTranslate } from './core/config/pagination-translate';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +39,7 @@ import { NgChartsModule } from 'ng2-charts';
     ToastrService,
     NgxSpinnerService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: MatPaginatorIntl, useClass: PaginationTranslate },
   ],
   bootstrap: [AppComponent],
 })
