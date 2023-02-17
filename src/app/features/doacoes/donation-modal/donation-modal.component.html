@@ -5,10 +5,10 @@
       <span>{{ donationToLoad ? "Detalhes da doação" : "Nova doação" }}</span>
     </div>
     <div class="close-button">
-
-      <mat-icon class="material-icons-outlined" mat-dialog-close>close</mat-icon>
+      <mat-icon class="material-icons-outlined" mat-dialog-close
+        >close</mat-icon
+      >
     </div>
-
   </mat-card-title>
   <loading-container *ngIf="!formIsReady" [height]="300"></loading-container>
   <mat-card-content *ngIf="formIsReady">
@@ -106,10 +106,7 @@
             <mat-form-field *ngIf="showField('unidade')" appearance="outline">
               <mat-label>Unidade</mat-label>
               <mat-select formControlName="unidade">
-                <mat-option
-                  *ngFor="let unity of ['Riacho Fundo II', 'Samambaia']"
-                  [value]="unity"
-                >
+                <mat-option *ngFor="let unity of unities" [value]="unity">
                   {{ unity }}
                 </mat-option>
               </mat-select>
@@ -162,11 +159,11 @@
       </button>
 
       <button
-        [disabled]="donationForm.invalid || !formIsReady"
+        [disabled]="donationForm.invalid || !formIsReady || isSending"
         mat-raised-button
         color="accent"
         (click)="send()"
-        cdkFocusInitial
+
       >
         {{ donationToLoad ? "Salvar" : "Cadastrar" }}
       </button>

@@ -16,6 +16,9 @@ export class DonationModalComponent implements OnInit {
   public turnoOptions: string[] = ['Manhã', 'Tarde', 'Noite'];
   public formIsReady = false;
   public donationToLoad: any;
+  public unities: string[] = [];
+  public isEditing = false;
+  public isSending = false;
   public formFieldsByCategory: any = {
     serviços: [
       'descricao',
@@ -59,7 +62,9 @@ export class DonationModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.donationToLoad = this.data.donate;
+    this.isEditing = !!this.donationToLoad;
 
+    this.loadUnities();
     this.loadCategories();
   }
 
@@ -153,6 +158,7 @@ export class DonationModalComponent implements OnInit {
 
   loadDonation(donation: any) {
     this.donationForm.controls['categoria'].disable();
+    this.donationForm.controls['quantidade'].disable();
 
     let indexCategory = this.categories.findIndex(
       (category) => category.nome === donation.categoria.nome
@@ -165,8 +171,20 @@ export class DonationModalComponent implements OnInit {
     );
   }
 
+  loadUnities(): void {
+    this.donationService.getUnties().subscribe({
+      next: (unities: string[]) => {
+        this.unities = unities;
+      },
+      error: () => {
+        this.toastr.error('Erro ao carregar unidades', 'Erro');
+      },
+    });
+  }
+
   send(): void {
     this.spinner.show();
+    this.isSending = true;
 
     let formValue = this.donationForm.getRawValue();
 
@@ -186,25 +204,43 @@ export class DonationModalComponent implements OnInit {
       sexta: formValue['sexta'],
       turno: formValue['turno'],
       categoriaId: formValue['categoria']['id'],
+      estoque: this.donationToLoad
+        ? this.donationToLoad.quantidade
+        : formValue['quantidade'],
     };
+
+    let service = this.isEditing
+      ? this.donationService.updateDonation(donation)
+      : this.donationService.createDonation([donation]);
 
     console.log('Doação: ', donation);
 
-    this.donationService
-      .createDonation([donation])
+    service
       .subscribe({
         next: () => {
-          this.toastr.success('Doação adicionada com sucesso');
+          this.toastr.success(
+            `Doação ${this.isEditing ? 'editada' : 'cadastrada'} com sucesso`
+          );
           // this.donations.clear();
         },
         error: () => {
-          this.toastr.error('Não foi possível adicionar a doação');
+          this.toastr.error(
+            `Não foi possível ${
+              this.isEditing ? 'editar' : 'cadastrar'
+            } a doação`
+          );
         },
         complete: () => {
           this.dialogRef.close();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
         },
       })
-      .add(() => this.spinner.hide());
+      .add(() => {
+        this.spinner.hide();
+        this.isSending = false;
+      });
   }
 
   resetForm() {
