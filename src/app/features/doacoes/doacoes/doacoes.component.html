@@ -125,7 +125,7 @@
             </span>
 
             <mat-menu #menu="matMenu">
-              <button (click)="openDonate(element)" mat-menu-item>
+              <button [routerLink]="['/doacoes/', element.id]" mat-menu-item>
                 <mat-icon>volunteer_activism</mat-icon>
                 <span>Ver detalhes da doação</span>
               </button>

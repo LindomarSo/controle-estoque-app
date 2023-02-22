@@ -18,8 +18,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-import { DonationDetailComponent } from './donation-detail/donation-detail.component';
-import { DonationViewComponent } from './donation-view/donation-view.component';
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -27,6 +25,10 @@ import { CoreModule } from 'src/app/core/core.module';
 import { DonationModalComponent } from './donation-modal/donation-modal.component';
 import { PipesModule } from 'src/app/utils/pipes/pipes.module';
 import { A11yModule } from '@angular/cdk/a11y';
+import { DonationViewComponent } from './donation-view/donation-view.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { DonationUpdatesComponent } from './donation-updates/donation-updates.component';
 export const customCurrencyMaskConfig = {
   align: 'left',
   allowNegative: true,
@@ -53,8 +55,10 @@ export const customCurrencyMaskConfig = {
     MatNativeDateModule,
     MatStepperModule,
     MatRadioModule,
+    MatExpansionModule,
     MatCheckboxModule,
     MatMenuModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     MatCardModule,
     MatDatepickerModule,
@@ -70,9 +74,9 @@ export const customCurrencyMaskConfig = {
   declarations: [
     DoacoesComponent,
     CreateDonationComponent,
-    DonationDetailComponent,
-    DonationViewComponent,
     DonationModalComponent,
+    DonationViewComponent,
+    DonationUpdatesComponent,
   ],
   exports: [DoacoesComponent, CreateDonationComponent],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }],
