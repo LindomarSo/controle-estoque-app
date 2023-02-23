@@ -13,7 +13,6 @@ import { ToastrService } from 'ngx-toastr';
 import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.service';
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 import { Voluntary } from 'src/app/shared/models/voluntary/voluntary.model';
-import { DonationDetailComponent } from '../../doacoes/donation-detail/donation-detail.component';
 
 @Component({
   selector: 'app-voluntary-detail',
@@ -88,9 +87,7 @@ export class VoluntaryDetailComponent implements OnInit {
 
   openDialog(donation: Donation) {
     donation.entidadeId = this.voluntaryId;
-    this.dialog.open(DonationDetailComponent, {
-      data: { donate: donation, voluntaryId: this.voluntaryId },
-    });
+
   }
 
   getDate(date: string): string {

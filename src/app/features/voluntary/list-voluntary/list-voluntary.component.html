@@ -42,7 +42,7 @@
 
     <div class="table">
       <div *ngIf="!voluntary.length" class="dont-have">
-        Nenhuma voluntário cadastrado ainda!
+        Nenhum voluntário cadastrado ainda!
       </div>
       <table
         *ngIf="voluntary.length"
@@ -102,9 +102,7 @@
             *matCellDef="let element"
           >
             <button [matMenuTriggerFor]="menu" class="button-btn">
-              <mat-icon class="material-icons-outlined">
-                more_vert
-              </mat-icon>
+              <mat-icon class="material-icons-outlined"> more_vert </mat-icon>
             </button>
 
             <mat-menu #menu="matMenu">

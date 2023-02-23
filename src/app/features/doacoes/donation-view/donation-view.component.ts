@@ -1,28 +1,71 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DonationDetailComponent } from '../donation-detail/donation-detail.component';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { DonationService } from 'src/app/core/services/donation/donation.service';
+import { Donation } from 'src/app/shared/models/voluntary/donation.model';
+import { DonationModalComponent } from '../donation-modal/donation-modal.component';
+import { DonationUpdatesComponent } from '../donation-updates/donation-updates.component';
 
 @Component({
   selector: 'app-donation-view',
   templateUrl: './donation-view.component.html',
-  styleUrls: ['./donation-view.component.scss']
+  styleUrls: ['./donation-view.component.scss'],
 })
-export class DonationViewComponent implements OnInit {
+export class DonationViewComponent {
+  dataSource: any;
+  displayedColumns: string[] = ['tipo', 'quantidade', 'data', 'responsavel'];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    private dialog: MatDialog) { }
+  donationId!: number;
+  donation: any;
+  panelOpenState = false;
+  checked = false;
+  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno'];
+
+  constructor(
+    private route: ActivatedRoute,
+    private donationService: DonationService,
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
+    this.donationId = +this.route.snapshot.params['id'];
+    this.getDonationById();
   }
 
-  getDate(date: string): string {
-    let data = date.substring(0, 10);
-    let dateArray = data.split('-');
-
-    return `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
+  get isFisicPerson(): boolean {
+    return true;
   }
 
-  editDonation(): void {
-    this.dialog.open(DonationDetailComponent, { data: this.data });
+  getDonationById(): void {
+    this.spinner.show();
+
+    this.donationService
+      .getDonationById(this.donationId)
+      .subscribe({
+        next: (donation: any) => {
+          this.donation = donation;
+          this.dataSource = donation.doacoesRetiradas;
+        },
+        error: () => {
+          this.toastr.error('Erro ao carregar voluntário');
+        },
+      })
+      .add(() => this.spinner.hide());
+  }
+
+  openDonate() {
+    this.dialog.open(DonationModalComponent, {
+      data: { donate: this.donation, donator: this.donation.entidade },
+    });
+  }
+
+  openUpdateModal() {
+    this.dialog.open(DonationUpdatesComponent, {
+      data: { donate: this.donation, donator: this.donation.entidade },
+    });
   }
 }

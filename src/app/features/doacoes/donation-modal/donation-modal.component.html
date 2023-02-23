@@ -1,7 +1,14 @@
 <mat-card class="donation-modal">
   <mat-card-title class="card-header">
-    <span>Nova doação</span>
-    <mat-icon class="material-icons-outlined">volunteer_activism</mat-icon>
+    <div class="title">
+      <mat-icon class="material-icons-outlined">volunteer_activism</mat-icon>
+      <span>{{ donationToLoad ? "Detalhes da doação" : "Nova doação" }}</span>
+    </div>
+    <div class="close-button">
+      <mat-icon class="material-icons-outlined" mat-dialog-close
+        >close</mat-icon
+      >
+    </div>
   </mat-card-title>
   <loading-container *ngIf="!formIsReady" [height]="300"></loading-container>
   <mat-card-content *ngIf="formIsReady">
@@ -99,10 +106,7 @@
             <mat-form-field *ngIf="showField('unidade')" appearance="outline">
               <mat-label>Unidade</mat-label>
               <mat-select formControlName="unidade">
-                <mat-option
-                  *ngFor="let unity of ['Riacho Fundo II', 'Samambaia']"
-                  [value]="unity"
-                >
+                <mat-option *ngFor="let unity of unities" [value]="unity">
                   {{ unity }}
                 </mat-option>
               </mat-select>
@@ -150,16 +154,19 @@
   </mat-card-content>
   <mat-card-footer>
     <div class="actions">
+      <button *ngIf="!donationToLoad" mat-button (click)="resetForm()">
+        Limpar
+      </button>
+
       <button
-        [disabled]="donationForm.invalid || !formIsReady"
+        [disabled]="donationForm.invalid || !formIsReady || isSending"
         mat-raised-button
         color="accent"
         (click)="send()"
+        
       >
-        Cadastrar
+        {{ donationToLoad ? "Salvar" : "Cadastrar" }}
       </button>
-
-      <button mat-button (click)="resetForm()">Limpar</button>
     </div>
   </mat-card-footer>
 </mat-card>

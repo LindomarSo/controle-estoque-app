@@ -1,11 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { DonationService } from 'src/app/core/services/donation/donation.service';
-import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.service';
-import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 
 @Component({
   selector: 'app-donation-modal',
@@ -14,40 +12,13 @@ import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 })
 export class DonationModalComponent implements OnInit {
   public donationForm: FormGroup = new FormGroup({});
-
-  public categories: any = [];
-
+  public categories: any[] = [];
   public turnoOptions: string[] = ['Manhã', 'Tarde', 'Noite'];
-
-  donator = {
-    id: 1,
-    nome: 'João Felipe',
-    telefone: '61333333333',
-    email: 'joaof@gmail.com',
-    documento: '73317403349',
-    habilidade: 'Comer e jogar bola.',
-    dtNascimento: '1996-07-27',
-    tipoEntidade: 'Pessoa Física',
-    escolaridade: 'Superior Cursando',
-    endereco: {
-      id: 1,
-      logradouro: 'Rua Principal, s/n',
-      cep: '72610000',
-      cidade: 'Brasília',
-      estado: 'Brasília',
-      complemento: null,
-      numero: null,
-    },
-    doacoes: [],
-    user: {
-      id: 2,
-      nomeCompleto: 'Gabriel',
-      email: 'gabriel',
-      phoneNumber: '61333333333',
-      userRoles: [],
-    },
-  };
-
+  public formIsReady = false;
+  public donationToLoad: any;
+  public unities: string[] = [];
+  public isEditing = false;
+  public isSending = false;
   public formFieldsByCategory: any = {
     serviços: [
       'descricao',
@@ -81,18 +52,19 @@ export class DonationModalComponent implements OnInit {
     ],
   };
 
-  public formIsReady = false;
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<DonationModalComponent>,
     private donationService: DonationService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
-    console.log('Data Modal: ', this.data);
+    this.donationToLoad = this.data.donate;
+    this.isEditing = !!this.donationToLoad;
 
+    this.loadUnities();
     this.loadCategories();
   }
 
@@ -115,7 +87,7 @@ export class DonationModalComponent implements OnInit {
         '',
         this.fieldIsRequired(category.nome, 'descricao')
       ),
-      preco: new FormControl('', this.fieldIsRequired(category.nome, 'preco')),
+      preco: new FormControl(0),
       quantidade: new FormControl(
         '',
         this.fieldIsRequired(category.nome, 'quantidade')
@@ -170,7 +142,6 @@ export class DonationModalComponent implements OnInit {
     this.donationService.getCategories().subscribe({
       next: (res: Category[]) => {
         this.categories = res;
-
         let initialCategory = this.categories[0];
         this.mountDonationFields(initialCategory);
       },
@@ -178,13 +149,42 @@ export class DonationModalComponent implements OnInit {
         this.toastr.error('Erro ao carregar categorias.', 'Erro');
       },
       complete: () => {
-        console.log('Complete');
+        if (this.donationToLoad) {
+          this.loadDonation(this.donationToLoad);
+        }
+      },
+    });
+  }
+
+  loadDonation(donation: any) {
+    this.donationForm.controls['categoria'].disable();
+    this.donationForm.controls['quantidade'].disable();
+
+    let indexCategory = this.categories.findIndex(
+      (category) => category.nome === donation.categoria.nome
+    );
+
+    this.donationForm.patchValue(donation);
+
+    this.donationForm.controls['categoria'].setValue(
+      this.categories[indexCategory]
+    );
+  }
+
+  loadUnities(): void {
+    this.donationService.getUnties().subscribe({
+      next: (unities: string[]) => {
+        this.unities = unities;
+      },
+      error: () => {
+        this.toastr.error('Erro ao carregar unidades', 'Erro');
       },
     });
   }
 
   send(): void {
-    // this.spinner.show();
+    this.spinner.show();
+    this.isSending = true;
 
     let formValue = this.donationForm.getRawValue();
 
@@ -204,22 +204,43 @@ export class DonationModalComponent implements OnInit {
       sexta: formValue['sexta'],
       turno: formValue['turno'],
       categoriaId: formValue['categoria']['id'],
+      estoque: this.donationToLoad
+        ? this.donationToLoad.quantidade
+        : formValue['quantidade'],
     };
+
+    let service = this.isEditing
+      ? this.donationService.updateDonation(donation)
+      : this.donationService.createDonation([donation]);
 
     console.log('Doação: ', donation);
 
-    this.donationService
-      .createDonation([donation])
+    service
       .subscribe({
         next: () => {
-          this.toastr.success('Doação adicionada com sucesso');
+          this.toastr.success(
+            `Doação ${this.isEditing ? 'editada' : 'cadastrada'} com sucesso`
+          );
           // this.donations.clear();
         },
         error: () => {
-          this.toastr.error('Não foi possível adicionar a doação');
+          this.toastr.error(
+            `Não foi possível ${
+              this.isEditing ? 'editar' : 'cadastrar'
+            } a doação`
+          );
+        },
+        complete: () => {
+          this.dialogRef.close();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
         },
       })
-      .add(() => this.spinner.hide());
+      .add(() => {
+        this.spinner.hide();
+        this.isSending = false;
+      });
   }
 
   resetForm() {

@@ -20,7 +20,7 @@ export class SideMenuComponent implements OnInit {
       link: 'doacoes',
     },
     {
-      label: 'Voluntários',
+      label: 'Doadores',
       icon: 'person_add',
       link: 'voluntarios',
     },

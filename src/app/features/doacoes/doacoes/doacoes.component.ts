@@ -11,7 +11,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.service';
 import { debounceTime, Subject } from 'rxjs';
-import { DonationDetailComponent } from '../donation-detail/donation-detail.component';
 import { DonationModalComponent } from '../donation-modal/donation-modal.component';
 
 @Component({
@@ -48,16 +47,13 @@ export class DoacoesComponent implements OnInit {
     private donationService: DonationService,
     private toastr: ToastrService,
     private voluntaryService: VoluntaryService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
     this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
     this.getAll();
     this.getTypePerson();
-    setTimeout(() => {
-      this.configPagination();
-    }, 0);
   }
 
   filterDonations(fillter: any): void {
@@ -122,31 +118,6 @@ export class DoacoesComponent implements OnInit {
     return `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
   }
 
-  configPagination(): void {
-    const portuguesRangeLabel = (
-      page: number,
-      pageSize: number,
-      length: number
-    ) => {
-      if (length === 0 || pageSize === 0) {
-        return `0 de ${length}`;
-      }
-
-      length = Math.max(length, 0);
-      const startIndex = page * pageSize;
-      const endIndex =
-        startIndex < length
-          ? Math.min(startIndex + pageSize, length)
-          : startIndex + pageSize;
-
-      return `${startIndex + 1} - ${endIndex} de ${length}`;
-    };
-    this.paginator._intl.itemsPerPageLabel = 'Doações por página';
-    this.paginator._intl.nextPageLabel = 'Próxima página';
-    this.paginator._intl.previousPageLabel = 'Página anterior';
-    this.paginator._intl.getRangeLabel = portuguesRangeLabel;
-  }
-
   openDonate(donate: Donation) {
     this.dialog.open(DonationModalComponent, {
       data: { donate: donate, donator: donate.entidade },
@@ -158,8 +129,8 @@ export class DoacoesComponent implements OnInit {
       next: (response: string[]) => {
         this.typePerson = response;
       },
-      error: (error: any) => {
-        this.toastr.error('Erro ao carregar pessoas');
+      error: () => {
+        this.toastr.error('Erro ao carregar tipo de doador');
       },
     });
   }
