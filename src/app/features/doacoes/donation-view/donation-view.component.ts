@@ -15,7 +15,13 @@ import { DonationUpdatesComponent } from '../donation-updates/donation-updates.c
 })
 export class DonationViewComponent {
   dataSource: any;
-  displayedColumns: string[] = ['tipo', 'quantidade', 'data', 'responsavel'];
+  displayedColumns: string[] = [
+    'tipo',
+    'quantidade',
+    'data',
+    'responsavel',
+    'cadastrado',
+  ];
   donationId!: number;
   donation: any;
 
