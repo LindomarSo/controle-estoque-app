@@ -11,6 +11,7 @@ import { HeaderNavComponent } from './components/header-nav/header-nav.component
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BackButtonComponent } from './components/back-button/back-button.component';
 @NgModule({
   declarations: [
     HeaderNavComponent,
@@ -18,9 +19,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     NotFoundComponent,
     SideMenuComponent,
     SideNavComponent,
+    BackButtonComponent,
   ],
   exports: [
     HeaderNavComponent,
+    BackButtonComponent,
     LoadingContainerComponent,
     NotFoundComponent,
     SideMenuComponent,
@@ -28,4 +31,4 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   imports: [CommonModule, MatIconModule, MatButtonModule, MatTooltipModule],
 })
-export class CoreModule { }
+export class CoreModule {}
