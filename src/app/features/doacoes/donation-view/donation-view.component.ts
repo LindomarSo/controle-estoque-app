@@ -16,12 +16,10 @@ import { DonationUpdatesComponent } from '../donation-updates/donation-updates.c
 export class DonationViewComponent {
   dataSource: any;
   displayedColumns: string[] = ['tipo', 'quantidade', 'data', 'responsavel'];
-
   donationId!: number;
   donation: any;
-  panelOpenState = false;
-  checked = false;
-  turnoOptions: string[] = ['Manhã', 'Tarde', 'Diurno'];
+
+  expanded = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,12 +30,8 @@ export class DonationViewComponent {
   ) {}
 
   ngOnInit(): void {
-    this.donationId = +this.route.snapshot.params['id'];
+    this.donationId = this.route.snapshot.params['id'];
     this.getDonationById();
-  }
-
-  get isFisicPerson(): boolean {
-    return true;
   }
 
   getDonationById(): void {

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateDonationComponent } from './create-donation.component';
+import { BackButtonComponent } from './back-button.component';
 
-describe('CreateDonationComponent', () => {
-  let component: CreateDonationComponent;
-  let fixture: ComponentFixture<CreateDonationComponent>;
+describe('BackButtonComponent', () => {
+  let component: BackButtonComponent;
+  let fixture: ComponentFixture<BackButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateDonationComponent ]
+      declarations: [ BackButtonComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CreateDonationComponent);
+    fixture = TestBed.createComponent(BackButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

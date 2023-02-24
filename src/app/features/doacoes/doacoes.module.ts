@@ -13,7 +13,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
-import { CreateDonationComponent } from './create-donation/create-donation.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCurrencyModule } from 'ngx-currency';
@@ -73,12 +72,11 @@ export const customCurrencyMaskConfig = {
   ],
   declarations: [
     DoacoesComponent,
-    CreateDonationComponent,
     DonationModalComponent,
     DonationViewComponent,
     DonationUpdatesComponent,
   ],
-  exports: [DoacoesComponent, CreateDonationComponent],
+  exports: [DoacoesComponent],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }],
 })
 export class DoacoesModule {}
