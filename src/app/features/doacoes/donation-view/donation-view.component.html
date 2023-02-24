@@ -1,7 +1,8 @@
 <section class="voluntary-detail" *ngIf="donation">
+  <back-button></back-button>
   <div class="top-container">
     <div class="expansion-panel">
-      <div class="collapsed">
+      <div class="box">
         <div class="header">
           <div class="title">
             <mat-icon class="material-symbols-outlined"
@@ -25,18 +26,40 @@
             </button>
           </div>
         </div>
-
         <mat-divider></mat-divider>
-
-        <div class="overview">
-          <div class="subtitle">
+        <div
+          class="overview"
+          [ngClass]="
+            expanded ? 'grid-template-expanded' : 'grid-template-collapsed'
+          "
+        >
+          <div class="subtitle doacao" *ngIf="!expanded || donation.materialDoado.length <= 40">
             <span class="label">Doação</span>
             <span class="info">
               {{ donation.materialDoado | ellipsis : 40 }}
             </span>
           </div>
 
-          <div class="subtitle">
+          <div
+            class="subtitle doacao"
+            *ngIf="expanded && donation.materialDoado.length > 40"
+          >
+            <span class="label">Doação</span>
+            <mat-form-field class="teste" appearance="outline">
+              <textarea
+                type="text"
+                readonly
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                matInput
+                [value]="donation.materialDoado"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="subtitle doador">
             <span class="label">Doador</span>
             <span class="info">
               <span class="name">
@@ -51,36 +74,59 @@
             </span>
           </div>
 
-          <div class="subtitle">
+          <div class="subtitle data">
             <span class="label">Data da Doação</span>
             <span class="info">
               {{ donation.dtEntrada | date : "dd/MM/YYYY" }}
             </span>
           </div>
 
-          <div class="subtitle" *ngIf="donation.quantidade">
+          <div class="subtitle quantidade">
             <span class="label">Quantidade Doada</span>
             <span class="info">
-              {{ donation.quantidade }}
+              {{ donation.quantidade ? donation.quantidade : "-" }}
             </span>
           </div>
 
-          <div class="subtitle" *ngIf="donation.estoque">
+          <div class="subtitle estoque">
             <span class="label">Estoque Atual</span>
             <span class="info">
-              {{ donation.estoque }}
+              {{ donation.estoque ? donation.estoque : "-" }}
             </span>
           </div>
 
-          <div class="subtitle">
+          <div class="subtitle cadastrada" *ngIf="expanded">
             <span class="label">Cadastrada por</span>
             <span class="info">
               {{ donation.user.nomeCompleto }}
             </span>
           </div>
+
+          <div class="subtitle destino" *ngIf="expanded">
+            <span class="label">Destino</span>
+            <span class="info">
+              {{ donation.destino ? donation.destino : "-" }}
+            </span>
+          </div>
+
+          <div class="subtitle tipo" *ngIf="expanded">
+            <span class="label">Tipo de Doação</span>
+            <span class="info">
+              {{ donation.categoria.nome }}
+            </span>
+          </div>
+
+          <div class="subtitle unidade" *ngIf="expanded">
+            <span class="label">Unidade</span>
+            <span class="info">
+              {{ donation.unidade }}
+            </span>
+          </div>
         </div>
       </div>
-      <div class="see">Ver mais detalhes</div>
+      <span class="see" (click)="expanded = !expanded">{{
+        expanded ? "Ver menos detalhes" : "Ver mais detalhes"
+      }}</span>
     </div>
   </div>
 

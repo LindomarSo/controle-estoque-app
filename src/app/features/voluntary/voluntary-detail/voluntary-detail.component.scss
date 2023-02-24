@@ -1,87 +1,89 @@
 .voluntary-detail {
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 30px 50px 20px 30px;
-  display: flex;
-  column-gap: 30px;
-
-  .voluntary-card {
-    width: 300px;
-
-    position: sticky;
-    top: 30px;
-
-    .voluntary-header {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .content-container {
-      p {
-        font-size: 15px;
-        font-weight: 500;
-
-        b {
-          font-weight: 700;
-        }
-
-        span {
-          color: #bdbdbd;
-          font-size: 13px;
-        }
-      }
-    }
-
-    .paragraph {
-      padding-top: 10px !important;
-    }
-  }
-
-  .donation-section {
+  .container {
+    height: 100%;
     width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    column-gap: 30px;
+    padding-top: 20px;
 
-    table {
-      width: 100%;
-      margin-bottom: 30px;
+    .voluntary-card {
+      width: 300px;
 
-      tr.donation-element-row:hover {
-        background: whitesmoke;
+      position: sticky;
+      top: 30px;
+
+      .voluntary-header {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
 
-      tr.donation-element-row:active {
-        background: #efefef;
-      }
+      .content-container {
+        p {
+          font-size: 15px;
+          font-weight: 500;
 
-      th {
-        font-weight: 700;
-        color: var(--font-color);
-        background-color: var(--secondary-color);
-        font-size: 14px;
-        &:not(:first-of-type) {
-          text-align: center;
+          b {
+            font-weight: 700;
+          }
+
+          span {
+            color: #bdbdbd;
+            font-size: 13px;
+          }
         }
       }
 
-      tr {
-        &:first {
-          text-align: left;
-        }
-      }
-
-      .mat-cell:not(:last-of-type) {
-        font-size: 14px;
-      }
-
-      .mat-cell:not(:first-of-type) {
-        text-align: center !important;
-        justify-content: center !important;
+      .paragraph {
+        padding-top: 10px !important;
       }
     }
 
-    .mat-mdc-form-field + .mat-mdc-form-field {
-      margin-left: 8px;
+    .donation-section {
+      width: 100%;
+
+      table {
+        width: 100%;
+        margin-bottom: 30px;
+
+        tr.donation-element-row:hover {
+          background: whitesmoke;
+        }
+
+        tr.donation-element-row:active {
+          background: #efefef;
+        }
+
+        th {
+          font-weight: 700;
+          color: var(--font-color);
+          background-color: var(--secondary-color);
+          font-size: 14px;
+          &:not(:first-of-type) {
+            text-align: center;
+          }
+        }
+
+        tr {
+          &:first {
+            text-align: left;
+          }
+        }
+
+        .mat-cell:not(:last-of-type) {
+          font-size: 14px;
+        }
+
+        .mat-cell:not(:first-of-type) {
+          text-align: center !important;
+          justify-content: center !important;
+        }
+      }
+
+      .mat-mdc-form-field + .mat-mdc-form-field {
+        margin-left: 8px;
+      }
     }
   }
 }

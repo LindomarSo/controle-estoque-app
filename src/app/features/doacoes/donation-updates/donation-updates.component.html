@@ -2,7 +2,7 @@
   <mat-card-title class="card-header">
     <div class="title">
       <mat-icon class="material-icons-outlined">volunteer_activism</mat-icon>
-      <span>Atualização da Doação</span>
+      <span>Atualização da doação</span>
     </div>
     <div class="close-button">
       <mat-icon class="material-icons-outlined" mat-dialog-close
@@ -10,12 +10,11 @@
       >
     </div>
   </mat-card-title>
-  <!-- <loading-container *ngIf="!formIsReady" [height]="300"></loading-container> -->
   <mat-card-content>
     <div class="content">
       <mat-divider></mat-divider>
       <form [formGroup]="donationForm" (ngSubmit)="sendDonationUpdate()">
-        <div class="top">
+        <div class="row">
           <mat-form-field appearance="outline">
             <mat-label>Tipo de Atualização</mat-label>
             <mat-select formControlName="tipo">
@@ -28,22 +27,48 @@
             </mat-select>
             <mat-error>O tipo de atualização é obrigatório.</mat-error>
           </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Data da atualização</mat-label>
+            <input
+              (click)="picker.open()"
+              matInput
+              [matDatepicker]="picker"
+              formControlName="data"
+              placeholder="Data da atualização"
+            />
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error> Data da atualização é obrigatória.</mat-error>
+          </mat-form-field>
         </div>
-        <mat-form-field class="date-picker-form" appearance="outline">
-          <mat-label>Data da atualização</mat-label>
-          <input
-            (click)="picker.open()"
-            matInput
-            [matDatepicker]="picker"
-            formControlName="data"
-            placeholder="Data da atualização"
-          />
-          <mat-datepicker #picker></mat-datepicker>
-          <mat-error> Data da atualização é obrigatória.</mat-error>
-        </mat-form-field>
+
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Realizado por</mat-label>
+            <input
+              matInput
+              formControlName="retiradoPor"
+              placeholder="Nome do realizador"
+            />
+            <mat-error> Nome do realizador é obrigatório.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Quantidade</mat-label>
+            <input matInput type="number" formControlName="quantidade" />
+            <mat-error> A quantidade deve ser um número.</mat-error>
+          </mat-form-field>
+        </div>
 
         <div class="actions">
-          <button mat-raised-button type="submit"  [disabled]="!donationForm.valid" color="accent">Salvar</button>
+          <button
+            mat-raised-button
+            type="submit"
+            [disabled]="!donationForm.valid"
+            color="accent"
+          >
+            Salvar
+          </button>
         </div>
       </form>
     </div>
