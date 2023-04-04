@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // urlBase: 'https://bluehour-api.azurewebsites.net/api/v1/',
-  urlBase: 'https://localhost:7197/api/v1/',
+  urlBase: 'https://bluehour-api.azurewebsites.net/api/v1/',
+  // urlBase: 'https://localhost:7197/api/v1/',
 };
 
 /*

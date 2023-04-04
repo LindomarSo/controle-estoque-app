@@ -21,6 +21,7 @@
               (click)="openUpdateModal()"
               class="highlight-button"
               color="accent"
+              *ngIf="seeNewAction()"
             >
               Nova atualização
             </button>
@@ -98,6 +99,19 @@
             </span>
           </div>
 
+          <div class="subtitle valor">
+            <span class="label">Valor</span>
+            <span class="info">
+              {{
+                donation.preco
+                  ? donation.preco === 0
+                    ? "Sem preço definido"
+                    : (donation.preco | currency : "BRL")
+                  : "-"
+              }}
+            </span>
+          </div>
+
           <div class="subtitle cadastrada" *ngIf="expanded">
             <span class="label">Cadastrada por</span>
             <span class="info">
@@ -125,9 +139,37 @@
               {{ donation.unidade }}
             </span>
           </div>
+
+          <div class="subtitle disponibilidade" *ngIf="expanded && seeAvailability()">
+            <span class="label">Disponibilidade</span>
+            <div class="info">
+              <mat-checkbox [checked]="donation.segunda" disabled
+                >Segunda</mat-checkbox
+              >
+              <mat-checkbox [checked]="donation.terca" disabled
+                >Terça</mat-checkbox
+              >
+              <mat-checkbox [checked]="donation.quarta" disabled
+                >Quarta</mat-checkbox
+              >
+              <mat-checkbox [checked]="donation.quinta" disabled
+                >Quinta</mat-checkbox
+              >
+              <mat-checkbox [checked]="donation.sexta" disabled
+                >Sexta</mat-checkbox
+              >
+            </div>
+          </div>
+
+          <div class="subtitle turno" *ngIf="expanded && seeAvailability()">
+            <span class="label">Turno</span>
+            <div class="info">
+              {{ donation.turno ? donation.turno : 'Não definido' }}
+            </div>
+          </div>
         </div>
       </div>
-      <span class="see" (click)="expanded = !expanded">{{
+      <span *ngIf="seeNewAction()" class="see" (click)="expanded = !expanded">{{
         expanded ? "Ver menos detalhes" : "Ver mais detalhes"
       }}</span>
     </div>

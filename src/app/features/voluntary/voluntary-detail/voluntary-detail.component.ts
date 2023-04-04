@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { VoluntaryService } from 'src/app/core/services/voluntary/voluntary.service';
 import { Donation } from 'src/app/shared/models/voluntary/donation.model';
 import { Voluntary } from 'src/app/shared/models/voluntary/voluntary.model';
+import { DonationModalComponent } from '../../doacoes/donation-modal/donation-modal.component';
 
 @Component({
   selector: 'app-voluntary-detail',
@@ -37,6 +38,7 @@ export class VoluntaryDetailComponent implements OnInit {
     'destino',
     'quantidade',
     'estoque',
+    'preco',
     'acoes',
   ];
 
@@ -85,11 +87,6 @@ export class VoluntaryDetailComponent implements OnInit {
     this.dataSource = this.voluntary.doacoes;
   }
 
-  openDialog(donation: Donation) {
-    donation.entidadeId = this.voluntaryId;
-
-  }
-
   getDate(date: string): string {
     let data = date.substring(0, 10);
     let dateArray = data.split('-');
@@ -113,5 +110,9 @@ export class VoluntaryDetailComponent implements OnInit {
     }
 
     return age + ' anos';
+  }
+
+  newDonation(donator: any) {
+    this.dialog.open(DonationModalComponent, { data: { donator: donator } });
   }
 }

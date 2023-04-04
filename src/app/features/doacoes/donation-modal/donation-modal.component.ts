@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { DonationService } from 'src/app/core/services/donation/donation.service';
@@ -57,7 +58,8 @@ export class DonationModalComponent implements OnInit {
     private dialogRef: MatDialogRef<DonationModalComponent>,
     private donationService: DonationService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -213,8 +215,6 @@ export class DonationModalComponent implements OnInit {
       ? this.donationService.updateDonation(donation)
       : this.donationService.createDonation([donation]);
 
-    console.log('Doação: ', donation);
-
     service
       .subscribe({
         next: () => {
@@ -233,8 +233,8 @@ export class DonationModalComponent implements OnInit {
         complete: () => {
           this.dialogRef.close();
           setTimeout(() => {
-            window.location.reload();
-          }, 1500);
+            this.router.navigate([`/doacoes`]);
+          }, 500);
         },
       })
       .add(() => {
