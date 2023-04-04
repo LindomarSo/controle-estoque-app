@@ -38,6 +38,7 @@ export class DoacoesComponent implements OnInit {
     'dataEntrada',
     'qtd',
     'estoque',
+    'preco',
     'acoes',
   ];
 
@@ -47,22 +48,22 @@ export class DoacoesComponent implements OnInit {
     private donationService: DonationService,
     private toastr: ToastrService,
     private voluntaryService: VoluntaryService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
+    this.pagination = { pageNumber: 1, itemsPerPage: 10 } as Pagination;
     this.getAll();
     this.getTypePerson();
   }
 
   filterDonations(fillter: any): void {
-    this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
+    this.pagination = { pageNumber: 1, itemsPerPage: 10 } as Pagination;
     if (this.termGetChanged.observers.length === 0) {
       this.termGetChanged.pipe(debounceTime(100)).subscribe((filtterBy) => {
         this.donationService
           .getAll(
-            this.pagination.currentPage,
+            this.pagination.pageNumber,
             this.pagination.itemsPerPage,
             filtterBy
           )
@@ -86,7 +87,7 @@ export class DoacoesComponent implements OnInit {
     this.isLoading = true;
     this.donationService
       .getAll(
-        this.pagination.currentPage,
+        this.pagination.pageNumber,
         this.pagination.itemsPerPage,
         term,
         type
@@ -96,6 +97,8 @@ export class DoacoesComponent implements OnInit {
           this.donation = response.result;
           this.dataSource.data = this.donation;
           this.pagination = response.pagination;
+
+          console.log('Respo: ', this.pagination);
         },
         error: (error: any) => {
           console.error(error);
@@ -106,8 +109,12 @@ export class DoacoesComponent implements OnInit {
   }
 
   setPagination(evento: PageEvent) {
+    debugger;
     this.pagination.itemsPerPage = evento.pageSize;
-    this.pagination.currentPage = evento.pageIndex + 1;
+    this.pagination.pageNumber = evento.pageIndex + 1;
+
+    console.log('Evento Página: ', evento);
+
     this.getAll();
   }
 
@@ -136,7 +143,7 @@ export class DoacoesComponent implements OnInit {
   }
 
   getByPersonSelected() {
-    this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
+    this.pagination = { pageNumber: 1, itemsPerPage: 10 } as Pagination;
     this.getAll('', this.personSelected);
   }
 

@@ -55,11 +55,22 @@
     </div>
 
     <div class="donation-section">
+      <div class="actions">
+        <button
+          mat-flat-button
+          color="accent"
+          class="highlight-button new-donation"
+          (click)="newDonation(voluntary)"
+        >
+          Nova doação
+        </button>
+      </div>
+
       <div *ngIf="voluntary.doacoes?.length" class="open-panel-section">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
           <!-- Position Column -->
           <ng-container matColumnDef="materialDoado">
-            <th mat-header-cell *matHeaderCellDef>Material Doado</th>
+            <th mat-header-cell *matHeaderCellDef>Descrição</th>
             <td mat-cell *matCellDef="let element">
               {{ getTitle(element.materialDoado) | ellipsis : 40 }}
             </td>
@@ -75,7 +86,7 @@
           <ng-container matColumnDef="destino">
             <th mat-header-cell *matHeaderCellDef>Destino</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.destino ? element.destino : "-" }}
+              {{ element.destino ? (element.destino | ellipsis : 40 ) : "-" }}
             </td>
           </ng-container>
 
@@ -101,12 +112,24 @@
             </td>
           </ng-container>
 
+          <ng-container matColumnDef="preco">
+            <th mat-header-cell *matHeaderCellDef>Valor (R$)</th>
+            <td mat-cell *matCellDef="let element">
+              {{
+                element.preco
+                  ? element.preco === 0
+                    ? "Sem preço definido"
+                    : (element.preco | currency : "BRL")
+                  : "-"
+              }}
+            </td>
+          </ng-container>
+
           <!-- Symbol Column -->
           <ng-container matColumnDef="acoes">
             <th mat-header-cell *matHeaderCellDef></th>
             <td
               matTooltip="Ver página da doação"
-              (click)="openDialog(element)"
               matTooltipPosition="left"
               mat-cell
               *matCellDef="let element"

@@ -68,4 +68,24 @@ export class DonationViewComponent {
       data: { donate: this.donation, donator: this.donation.entidade },
     });
   }
+
+  seeNewAction() {
+    if (
+      this.donation.categoria.nome !== 'Dinheiro' &&
+      this.donation.categoria.nome !== 'Serviços'
+    ) {
+      return true;
+    }
+
+    this.expanded = true;
+    return false;
+  }
+
+  seeAvailability() {
+    if (this.donation.categoria.nome == 'Serviços') {
+      return true;
+    }
+
+    return false;
+  }
 }

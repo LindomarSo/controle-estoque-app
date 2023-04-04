@@ -28,16 +28,19 @@
             <mat-error>O tipo de atualização é obrigatório.</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field (click)="picker.open()" appearance="outline">
             <mat-label>Data da atualização</mat-label>
             <input
-              (click)="picker.open()"
               matInput
               [matDatepicker]="picker"
               formControlName="data"
               placeholder="Data da atualização"
             />
             <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
             <mat-error> Data da atualização é obrigatória.</mat-error>
           </mat-form-field>
         </div>

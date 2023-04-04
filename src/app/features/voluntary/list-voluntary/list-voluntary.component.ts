@@ -49,13 +49,13 @@ export class ListVoluntaryComponent implements OnInit {
   }
 
   filterEntities(fillter: any): void {
-    this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
+    this.pagination = { pageNumber: 1, itemsPerPage: 10 } as Pagination;
     if (this.termGetChanged.observers.length === 0) {
       this.termGetChanged.pipe(debounceTime(500)).subscribe((filtterBy) => {
         this.voluntaryService
           .getAll(
             'fisica',
-            this.pagination.currentPage,
+            this.pagination.pageNumber,
             this.pagination.itemsPerPage,
             filtterBy
           )
@@ -76,11 +76,11 @@ export class ListVoluntaryComponent implements OnInit {
   }
 
   getAll(): void {
-    this.pagination = { currentPage: 1, itemsPerPage: 10 } as Pagination;
+    this.pagination = { pageNumber: 1, itemsPerPage: 10 } as Pagination;
     this.voluntaryService
       .getAll(
         'fisica',
-        this.pagination.currentPage,
+        this.pagination.pageNumber,
         this.pagination.itemsPerPage
       )
       .subscribe({
@@ -103,7 +103,7 @@ export class ListVoluntaryComponent implements OnInit {
 
   setPagination(evento: PageEvent) {
     this.pagination.itemsPerPage = evento.pageSize;
-    this.pagination.currentPage = evento.pageIndex + 1;
+    this.pagination.pageNumber = evento.pageIndex + 1;
     this.getAll();
   }
 

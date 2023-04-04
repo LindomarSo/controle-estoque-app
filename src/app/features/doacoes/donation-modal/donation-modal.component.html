@@ -82,16 +82,23 @@
             </mat-form-field>
 
             <div *ngIf="showField('dtEntrada')" class="date-field">
-              <mat-form-field class="date-picker-form" appearance="outline">
+              <mat-form-field
+                (click)="picker.open()"
+                class="date-picker-form"
+                appearance="outline"
+              >
                 <mat-label>Data de entrada</mat-label>
                 <input
-                  (click)="picker.open()"
                   matInput
                   [matDatepicker]="picker"
                   formControlName="dtEntrada"
                   placeholder="Data de entrada"
                 />
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
                 <mat-error> Data de entrada é obrigatória </mat-error>
               </mat-form-field>
               <!-- <mat-datepicker-toggle
@@ -163,7 +170,6 @@
         mat-raised-button
         color="accent"
         (click)="send()"
-        
       >
         {{ donationToLoad ? "Salvar" : "Cadastrar" }}
       </button>

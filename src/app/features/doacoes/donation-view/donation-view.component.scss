@@ -83,13 +83,14 @@
           gap: 30px;
 
           &.grid-template-collapsed {
-            grid-template-areas: "doacao doador data quantidade estoque";
+            grid-template-areas: "doacao doador data quantidade estoque valor";
           }
 
           &.grid-template-expanded {
             grid-template-areas:
-              "doacao doador data quantidade estoque"
-              "doacao tipo unidade destino cadastrada";
+              "doacao doador data quantidade estoque cadastrada"
+              "doacao tipo unidade destino valor cadastrada"
+              ". disponibilidade disponibilidade turno turno .";
           }
         }
 
@@ -117,6 +118,20 @@
         }
         .unidade {
           grid-area: unidade;
+        }
+        .valor {
+          grid-area: valor;
+        }
+        .disponibilidade {
+          grid-area: disponibilidade;
+
+          > .info {
+            display: flex;
+            gap: 10px;
+          }
+        }
+        .turno {
+          grid-area: turno;
         }
       }
 
