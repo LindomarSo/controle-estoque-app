@@ -15,7 +15,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxCurrencyModule } from 'ngx-currency';
+// import { NgxCurrencyModule } from 'ngx-currency';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { MatRadioModule } from '@angular/material/radio';
@@ -62,7 +62,7 @@ export const customCurrencyMaskConfig = {
     MatCardModule,
     MatDatepickerModule,
     MatDividerModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    // NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     CommonModule,
     PipesModule,
     UtilsModule,

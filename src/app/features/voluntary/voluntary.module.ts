@@ -23,7 +23,6 @@ import { DefaultComponent } from './default/default.component';
 import { ListPartnerComponent } from './list-partner/list-partner.component';
 import { DoacoesModule } from '../doacoes/doacoes.module';
 import { MatNativeDateModule } from '@angular/material/core';
-import { NgxMaskModule } from 'ngx-mask'
 import { VoluntaryDetailComponent } from './voluntary-detail/voluntary-detail.component';
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { MatRadioModule } from '@angular/material/radio';
@@ -31,6 +30,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CoreModule } from 'src/app/core/core.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { PipesModule } from 'src/app/utils/pipes/pipes.module';
+import { NgxMaskDirective } from 'ngx-mask';
 
 
 @NgModule({
@@ -63,7 +63,7 @@ import { PipesModule } from 'src/app/utils/pipes/pipes.module';
     MatCardModule,
     MatDatepickerModule,
     MatMenuModule,
-    NgxMaskModule.forRoot(),
+    NgxMaskDirective,
     DoacoesModule,
     FormsModule,
     UtilsModule,
