@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlBase: 'https://bluehour-api.azurewebsites.net/api/v1/',
+  urlBase: 'https://bluehouse-api-hml.azurewebsites.net/api/v1/',
 };

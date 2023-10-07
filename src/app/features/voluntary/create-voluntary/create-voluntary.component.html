@@ -11,7 +11,7 @@
         <form class="section-form" [formGroup]="form">
           <div class="form-group">
             <div class="wrapper-form">
-              <mat-form-field class="form-control-custom" appearance="outline">
+              <mat-form-field class="form-control-custom">
                 <mat-label>{{ name }}</mat-label>
                 <input
                   matInput
@@ -25,7 +25,7 @@
             </div>
 
             <div class="wrapper-form">
-              <mat-form-field class="form-control-custom" appearance="outline">
+              <mat-form-field class="form-control-custom">
                 <mat-label>{{ documentType }}</mat-label>
                 <input
                   [mask]="documentMask"
@@ -40,7 +40,7 @@
 
               <mat-form-field
                 class="form-control form-control-custom"
-                appearance="outline"
+
               >
                 <mat-label>Email</mat-label>
                 <input
@@ -58,7 +58,7 @@
 
               <mat-form-field
                 class="form-control form-control-custom"
-                appearance="outline"
+
               >
                 <mat-label>Telefone</mat-label>
                 <input
@@ -77,7 +77,7 @@
               <mat-form-field
                 *ngIf="isPersonFisic"
                 class="form-control-custom"
-                appearance="outline"
+
               >
                 <mat-label>Data de Nascimento</mat-label>
                 <input
@@ -97,7 +97,7 @@
               <mat-form-field
                 *ngIf="isPersonFisic"
                 class="form-control-custom"
-                appearance="outline"
+
               >
                 <mat-label>Escolaridade</mat-label>
                 <mat-select formControlName="escolaridade">
@@ -114,7 +114,7 @@
               <mat-form-field
                 *ngIf="isPersonFisic"
                 class="form-control-textarea"
-                appearance="outline"
+
               >
                 <mat-label>Habilidades</mat-label>
                 <textarea
@@ -124,8 +124,11 @@
                   cdkAutosizeMinRows="4"
                   cdkAutosizeMaxRows="4"
                   formControlName="habilidade"
+                  maxlength="700"
+                  #textarea
                   matInput
                 ></textarea>
+                <mat-hint align="end">{{textarea.value.length}} / {{textarea.maxLength}} </mat-hint>
               </mat-form-field>
             </div>
           </div>
@@ -144,7 +147,7 @@
 
         <div class="section-form">
           <form class="form-group" [formGroup]="enderecos">
-            <mat-form-field class="form-control-custom" appearance="outline">
+            <mat-form-field class="form-control-custom">
               <mat-label>Endereço</mat-label>
               <input
                 matInput
@@ -153,7 +156,7 @@
               />
             </mat-form-field>
 
-            <mat-form-field class="form-control-custom" appearance="outline">
+            <mat-form-field class="form-control-custom">
               <mat-label>Cidade</mat-label>
               <input
                 matInput
@@ -163,38 +166,42 @@
             </mat-form-field>
 
             <div class="wrapper-form">
-              <mat-form-field class="form-control-custom" appearance="outline">
+              <mat-form-field class="form-control-custom">
                 <mat-label>Estado</mat-label>
                 <input
                   class="input-form"
                   matInput
+                  maxlength="2"
                   formControlName="estado"
+                  placeholder="DF"
                 />
-                <mat-error *ngIf=""></mat-error>
               </mat-form-field>
 
-              <mat-form-field class="form-control-custom" appearance="outline">
+              <mat-form-field class="form-control-custom">
                 <mat-label>CEP</mat-label>
                 <input
                   mask="00.000-000"
                   matInput
                   formControlName="cEP"
+                  placeholder="Ex: 72.894-323"
                 />
               </mat-form-field>
 
-              <mat-form-field class="form-control-custom" appearance="outline">
+              <mat-form-field class="form-control-custom">
                 <mat-label>Complemento</mat-label>
                 <input
                   matInput
                   formControlName="complemento"
+                  placeholder="Ex: Casa"
                 />
               </mat-form-field>
 
-              <mat-form-field class="form-control-custom" appearance="outline">
+              <mat-form-field class="form-control-custom">
                 <mat-label>Numero</mat-label>
                 <input
                   matInput
                   formControlName="numero"
+                  placeholder="Ex: 30"
                 />
               </mat-form-field>
             </div>

@@ -72,7 +72,7 @@ const routes: Routes = [
       fullPage: false,
       title: 'Volunatariado',
     },
-  },
+  }
 ];
 
 @NgModule({

@@ -1,8 +1,12 @@
-<section class="voluntary-table">
+<loading-container *ngIf="!isLoading" [height]="500"></loading-container>
+<section *ngIf="isLoading" class="voluntary-table">
   <div id="scrollTitle">
     <div class="section-search">
       <div class="form-group">
-        <mat-form-field class="input-search" appearance="outline">
+        <mat-form-field
+          class="input-search"
+          appearance="outline"
+        >
           <mat-label>Procurar empresa</mat-label>
           <input
             id="search"
@@ -23,89 +27,151 @@
           </div>
         </button>
       </div>
-      <mat-form-field class="add-user" appearance="outline">
-        <mat-label class="button-group">
-          <mat-icon class="material-icons-outlined">person_add_alt</mat-icon>
-          <span>Adicionar</span>
-        </mat-label>
-        <mat-select>
-          <mat-option [routerLink]="['criar-voluntario', 'fisica']" value="one"
-            >Pessoa Física</mat-option
-          >
-          <mat-option
-            [routerLink]="['criar-voluntario', 'juridica']"
-            value="two"
-            >Pessoa Jurídica</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
+
+      <button
+        [routerLink]="['criar-voluntario', 'juridica']"
+        mat-raised-button
+        color="primary"
+      >
+        <mat-icon>add_circle</mat-icon> Adicionar Empresa
+      </button>
+
     </div>
 
-    <div class="table">
-      <div *ngIf="!voluntary.length" class="dont-have">
+    <div class="table mat-elevation-z3">
+      <div
+        *ngIf="!voluntary.length"
+        class="dont-have"
+      >
         Nenhuma empresa cadastrada ainda!
       </div>
       <table
         *ngIf="voluntary.length"
         mat-table
         [dataSource]="dataSource"
-        class="mat-elevation-z8"
       >
         <ng-container matColumnDef="Empresa">
-          <th mat-header-cell *matHeaderCellDef>Empresa</th>
-          <td mat-cell *matCellDef="let element">{{ element.nome }}</td>
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            Empresa
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+          >
+            {{ element.nome }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="Telefone">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>
+          <th
+            class="center-content"
+            mat-header-cell
+            *matHeaderCellDef
+          >
             Telefone
           </th>
-          <td class="center-content" mat-cell *matCellDef="let element">
+          <td
+            class="center-content"
+            mat-cell
+            *matCellDef="let element"
+          >
             {{ element.telefone | PhoneFormatPipe }}
           </td>
         </ng-container>
         <ng-container matColumnDef="CNPJ">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>CNPJ</th>
-          <td class="center-content" mat-cell *matCellDef="let element">
+          <th
+            class="center-content"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            CNPJ
+          </th>
+          <td
+            class="center-content"
+            mat-cell
+            *matCellDef="let element"
+          >
             {{ element.documento | cnpjFormat }}
           </td>
         </ng-container>
         <ng-container matColumnDef="Endereco">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>
+          <th
+            class="center-content"
+            mat-header-cell
+            *matHeaderCellDef
+          >
             Endereço
           </th>
-          <td class="center-content" mat-cell *matCellDef="let element">
+          <td
+            class="center-content"
+            mat-cell
+            *matCellDef="let element"
+          >
             {{ getAddress(element.endereco) }}
           </td>
         </ng-container>
         <ng-container matColumnDef="quem_cadastrou">
-          <th class="center-content" mat-header-cell *matHeaderCellDef>
+          <th
+            class="center-content"
+            mat-header-cell
+            *matHeaderCellDef
+          >
             Quem cadastrou
           </th>
-          <td class="center-content" mat-cell *matCellDef="let element">
+          <td
+            class="center-content"
+            mat-cell
+            *matCellDef="let element"
+          >
             {{ element.user.nomeCompleto }}
           </td>
         </ng-container>
         <ng-container matColumnDef="acoes">
-          <th class="center-content" mat-header-cell *matHeaderCellDef></th>
-          <td class="center-content" mat-cell *matCellDef="let element">
-            <button [matMenuTriggerFor]="menu" class="button-btn">
+          <th
+            class="center-content"
+            mat-header-cell
+            *matHeaderCellDef
+          ></th>
+          <td
+            class="center-content"
+            mat-cell
+            *matCellDef="let element"
+          >
+            <button
+              [matMenuTriggerFor]="menu"
+              class="button-btn"
+            >
               <mat-icon class="material-icons-outlined"> more_vert </mat-icon>
             </button>
 
             <mat-menu #menu="matMenu">
-              <button (click)="newDonation(element)" mat-menu-item>
+              <button
+                (click)="newDonation(element)"
+                mat-menu-item
+              >
                 <mat-icon>volunteer_activism</mat-icon>
                 <span>Nova doação</span>
               </button>
-              <button [routerLink]="['detalhe', element.id]" mat-menu-item>
+              <button
+                [routerLink]="['detalhe', element.id]"
+                mat-menu-item
+              >
                 <mat-icon>person</mat-icon>
                 <span>Ver perfil</span>
               </button>
             </mat-menu>
           </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
       </table>
       <mat-paginator
         *ngIf="voluntary.length"

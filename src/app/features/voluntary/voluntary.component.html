@@ -1,0 +1,28 @@
+<div class="content">
+  <nav
+    ngClass="tabs"
+    mat-tab-nav-bar
+    [tabPanel]="tabPanel"
+    mat-stretch-tabs="false"
+  >
+    <a
+      mat-tab-link
+      routerLinkActive="mdc-tab--active"
+      routerLink="pessoa-fisica"
+    >
+      <mat-icon>wallet</mat-icon>Voluntários
+    </a>
+    <a
+      mat-tab-link
+      routerLinkActive="mdc-tab--active"
+      routerLink="pessoa-juridica"
+    >
+      <mat-icon>corporate_fare</mat-icon>
+      Empresas
+    </a>
+  </nav>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>

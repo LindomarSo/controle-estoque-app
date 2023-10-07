@@ -42,7 +42,7 @@ export class CreateVoluntaryComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,
-  ) { }
+  ) {  }
 
   get enderecos() {
     return this.form.get('endereco') as FormGroup;
@@ -90,7 +90,7 @@ export class CreateVoluntaryComponent implements OnInit {
       this.voluntaryService.post(this.form.value).subscribe({
         next: () => {
           this.toastr.success('Voluntário adicionado com sucesso!');
-          this.router.navigate(['/voluntarios']);
+          this.router.navigateByUrl('/voluntarios');
         },
         error: () => {
           this.toastr.error('Erro ao adicionar voluntário');

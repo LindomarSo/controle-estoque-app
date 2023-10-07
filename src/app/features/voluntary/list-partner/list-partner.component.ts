@@ -22,6 +22,7 @@ export class ListPartnerComponent implements OnInit {
   dataSource = new MatTableDataSource<Voluntary>();
   @ViewChild(MatPaginator, { static: true })
   paginator!: MatPaginator;
+  isLoading = false;
   pagination = {} as Pagination;
   voluntary: Voluntary[] = [];
   displayedColumns: string[] = [
@@ -90,7 +91,7 @@ export class ListPartnerComponent implements OnInit {
           console.error(error);
           this.toastr.error('Erro ao carregar empresas');
         },
-      });
+      }).add(() => this.isLoading = true);
   }
 
   getAddress(address: Address): string {
