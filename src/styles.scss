@@ -27,6 +27,12 @@ body {
   }
 }
 
+.content{
+  padding: 20px;
+  background-color: var(--background-light);
+  border-radius: 5px;
+}
+
 :root {
   --primary-color: #1a3972;
   --secondary-color: #4682b4;
@@ -34,4 +40,5 @@ body {
   --highlight-button: #1f9b93;
   --font-color: white;
   --background-color: #f5f6f8;
+  --background-light: #fff;
 }

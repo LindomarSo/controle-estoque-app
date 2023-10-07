@@ -1,7 +1,7 @@
 .donation-table {
   height: 100%;
   box-sizing: border-box;
-  padding-bottom: 50px;
+  padding-bottom: 10px;
 
   .page-title {
     font-weight: 600 !important;
@@ -15,7 +15,7 @@
 
     .form-group {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       width: 60%;
       column-gap: 10px;
 
@@ -28,12 +28,6 @@
     .add-user {
       width: 100%;
       max-width: 250px;
-
-      .button-group {
-        display: flex;
-        padding-left: 10px;
-        column-gap: 10px;
-      }
     }
   }
 

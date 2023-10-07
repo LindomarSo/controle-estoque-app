@@ -41,6 +41,6 @@ import { PaginationTranslate } from './core/config/pagination-translate';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: MatPaginatorIntl, useClass: PaginationTranslate },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, ],
 })
 export class AppModule {}
